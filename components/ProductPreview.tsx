@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, Star, ShoppingCart, Download, LockOpen, Zap, ChevronDown, HelpCircle, Trophy, ListChecks, Trash2, GripVertical, Plus, ExternalLink, Info, Layers, Layout, Package, Smile, Sparkles, DownloadCloud, Wand2, RefreshCw } from 'lucide-react';
 import { AiSuggestion, Product, HeadlineType, ButtonIconType, ContentBlock, ShadowStyle, ButtonStyle, StylePreset } from '../types';
 import { useStore } from '../store';
@@ -13,6 +13,7 @@ import SplitText from './reactbits/SplitText';
 import DitherBackground from './reactbits/DitherBackground';
 import PricingTiersSection from './canvas/PricingTiersSection';
 import ThreeTierPricingGuide from './canvas/ThreeTierPricingGuide';
+import notionTemplateHtml from '../notion-template-html/index.html?raw';
 
 interface Props {
   product: Product;
@@ -31,6 +32,9 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
     heroSplitTitleEnabled,
     heroGradientTitleEnabled,
     heroGlareCtaEnabled,
+    notionHtmlPreviewEnabled,
+    setNotionHtmlPreviewEnabled,
+    toggleNotionHtmlPreviewEnabled,
     addContentBlock, removeContentBlock, updateContentBlock, updateProduct, addLog
   } = useStore();
   
@@ -56,6 +60,16 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
 
   const [aiSuggestions, setAiSuggestions] = useState<AiSuggestion[]>([]);
   const [showRecommendations, setShowRecommendations] = useState<string | null>(null);
+
+  // Hydrate persisted Notion HTML preview preference (client-only)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('gg_notionHtmlPreviewEnabled');
+      if (raw === 'true' || raw === 'false') setNotionHtmlPreviewEnabled(raw === 'true');
+    } catch {
+      // ignore
+    }
+  }, [setNotionHtmlPreviewEnabled]);
 
   const currentPresetForAi: StylePreset = useMemo(() => ({
     name: 'Current',
@@ -857,10 +871,37 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
             <h3 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-4 text-slate-300">
               <Layers className="w-8 h-8" /> Content Topology
             </h3>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
+              <button
+                type="button"
+                onClick={toggleNotionHtmlPreviewEnabled}
+                className={`px-3 py-2 rounded-xl border-2 border-black text-[9px] font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-colors ${
+                  notionHtmlPreviewEnabled ? 'bg-black text-white' : 'bg-white text-black'
+                }`}
+                title="Toggle embedded Notion HTML preview"
+              >
+                {notionHtmlPreviewEnabled ? 'Hide Notion Preview' : 'Show Notion Preview'}
+              </button>
               <div className="bg-white border-2 border-black p-2 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">Asset Node v4.1</div>
             </div>
           </div>
+
+          {notionHtmlPreviewEnabled && (
+            <div className="p-4 md:p-6 bg-white border-2 border-black rounded-[2rem] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Notion Template Preview (HTML)</div>
+              <div className="rounded-2xl overflow-hidden border-2 border-black">
+                <iframe
+                  title="Notion Template Preview"
+                  className="w-full h-[680px] bg-white"
+                  srcDoc={notionTemplateHtml}
+                  sandbox="allow-scripts allow-forms"
+                />
+              </div>
+              <div className="mt-3 text-[10px] font-bold text-slate-500">
+                This is an in-app preview only. The real deliverable is built in Notion via OAuth + API.
+              </div>
+            </div>
+          )}
 
           {/* AI Suggestions (from last MCP insert) */}
           {aiSuggestions.length > 0 && (
