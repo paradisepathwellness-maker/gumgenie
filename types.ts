@@ -180,6 +180,9 @@ export interface AppState {
   chatMode: ChatMode;
   chatDashboardCollapsed: boolean;
 
+  // Notion template preview (local interactive HTML embed)
+  notionHtmlPreviewEnabled: boolean;
+
   // MCP tool discovery cache (for chat)
   mcpStdioServersCache: { servers: { id: string; label: string }[]; fetchedAt: number } | null;
   mcpStdioToolsCache: Record<string, { tools: unknown; fetchedAt: number }>;
@@ -233,6 +236,10 @@ export interface AppState {
   setChatMode: (mode: ChatMode) => void;
   setChatDashboardCollapsed: (collapsed: boolean) => void;
   toggleChatDashboardCollapsed: () => void;
+
+  // Notion template preview actions
+  setNotionHtmlPreviewEnabled: (enabled: boolean) => void;
+  toggleNotionHtmlPreviewEnabled: () => void;
 
   // MCP tool discovery actions
   fetchMcpStdioServers: (opts?: { force?: boolean }) => Promise<void>;
