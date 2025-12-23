@@ -46,7 +46,13 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
     return jsonResponse(errEnvelope({ runId, startedAt, error: 'missing_session' }), { status: 400 });
   }
 
-  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+  const toBase64 = (s: string) => {
+    // Cloudflare Workers runtime does not provide Node's Buffer.
+    // Encode UTF-8 safely before base64.
+    return btoa(unescape(encodeURIComponent(s)));
+  };
+
+  const basic = toBase64(`${clientId}:${clientSecret}`);
   const body = new URLSearchParams();
   body.set('grant_type', 'authorization_code');
   body.set('code', code);
