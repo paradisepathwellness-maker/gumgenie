@@ -1,0 +1,32 @@
+Cloudflare Pages Env Vars (no values)
+=================================
+
+Gumroad
+- GUMROAD_PRODUCT_PERMALINK
+- (optional) GUMROAD_ACCESS_TOKEN
+
+Notion (for template generation)
+- NOTION_CLIENT_ID
+- NOTION_CLIENT_SECRET
+- NOTION_REDIRECT_URI
+
+Security / storage
+- (KV binding) GG_LICENSE_KV   # KV Namespace binding for one-time redemption (used:<licenseKey>)
+- (KV binding) GG_SESSION_KV   # KV Namespace binding for session/token storage (sid:<sid>:notionToken)
+- (D1 binding, later)          # optional, for audit/analytics
+
+Cloudflare quotas (official docs; source of truth)
+===============================================
+Pages Functions pricing (Workers request quota):
+- https://developers.cloudflare.com/pages/functions/pricing/
+
+Workers KV limits:
+- https://developers.cloudflare.com/kv/platform/limits/
+
+D1 pricing:
+- https://developers.cloudflare.com/d1/platform/pricing/
+
+Free-tier notes (verify against docs; quotas can change)
+- Pages Functions requests count toward Workers Free plan: 100,000 requests/day (resets at midnight UTC)
+- KV Free plan: 100,000 reads/day; 1,000 writes/day to different keys; 1 GB storage
+- D1 Free plan: 5M rows read/day; 100k rows written/day; 5 GB storage

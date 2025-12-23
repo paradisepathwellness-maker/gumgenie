@@ -1,0 +1,80 @@
+[
+  {
+    "name": "pricing",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium 3-tier pricing section (Starter, Pro, Ultimate) for an AI prompts collection. Features: clear differentiation, value anchoring, and premium CTA buttons. Include placeholder numbers and social proof. Style: Minimalist premium. Category: AI_PROMPTS."
+      },
+      "targetBlockType": "pricing",
+      "rationale": "Using 21st_magic_component_builder to generate a custom 3-tier pricing section that perfectly aligns with the user's specific tier names, AI_PROMPTS category, and minimalist premium aesthetic."
+    },
+    "usedFallback": false
+  },
+  {
+    "name": "features",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Minimalist premium feature grid for AI_PROMPTS. 8-12 bullets focused on transformation and outcomes like '10x productivity' and '$2k monthly savings'. High-converting, clean UI."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "Generating a custom feature grid component specifically for AI Prompts using a minimalist premium style to ensure the component matches the specific conversion and styling requirements of the user's Gumroad listing."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "faq",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium FAQ section for an AI_PROMPTS Gumroad product. Include 6-8 Q&A items covering objections, refund policy (14-day), delivery (instant access), and who it is for. Use high-contrast typography and subtle dividers. Include stats like 'Used by 500+ creators' in the answers."
+      },
+      "targetBlockType": "faq",
+      "rationale": "I am using the magic component builder to generate a high-quality, minimalist FAQ section specifically tailored to the user's requirements for content and style."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "testimonials",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium testimonial section for a product called AI_PROMPTS. Generate 4-6 testimonials with high-credibility details, including names, roles like 'Growth Lead' or 'Founder', and specific results like '30% time reduction' or '10x output'. The style should be clean, modern, and high-end."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The 21st_magic_component_builder is ideal for generating high-quality UI sections with specific content and styling as requested by the user."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "credibility",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "A minimalist premium technical credibility and proof section for an AI Prompts product. Include measurable claims: 50+ hours saved per month, 100% compatibility with GPT-4 and Claude 3.5, and a large stat highlight for 99.9% output reliability. Use a clean layout with plenty of whitespace."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "To create a custom-designed proof and credibility section with specific measurable claims and a stat highlight, the 21st-dev component builder is the most effective tool for generating a minimalist premium UI that fits the product category."
+    },
+    "usedFallback": false
+  },
+  {
+    "name": "framework",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "A minimalist premium framework checklist component for an AI Prompt System Workflow. Features numbered steps, clean typography, and a sophisticated monochromatic aesthetic. Includes sections for System Architecture, Variable Injection, and Validation Logic. Category: AI_PROMPTS."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The user needs a structured checklist for a prompt system workflow. The component builder is the best tool to create a custom, high-end visual representation of this framework for a Gumroad listing."
+    },
+    "usedFallback": true
+  }
+]

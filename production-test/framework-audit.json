@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2025-12-22T04:08:21.619Z",
+  "claims": [
+    {
+      "id": "delivery-zip",
+      "claim": "Buyers prefer a single ZIP / “download all” convenience and get frustrated by multi-file downloads.",
+      "status": "Unknown",
+      "evidence": [],
+      "recommendedChange": "Default delivery: Full_Package.zip + Start Here page; keep individual files optional."
+    },
+    {
+      "id": "setup-friction",
+      "claim": "Setup friction is a common reason for dissatisfaction; products need “Start Here” onboarding.",
+      "status": "Unknown",
+      "evidence": [],
+      "recommendedChange": "Require Start Here page + 3-step quickstart + app/tool-specific import guidance."
+    },
+    {
+      "id": "licensing",
+      "claim": "Licensing clarity is a frequent buyer concern (especially design templates).",
+      "status": "Unknown",
+      "evidence": [],
+      "recommendedChange": "Always include License page + license.txt; include allowed/not allowed checklist."
+    }
+  ],
+  "beforeAfter": {
+    "before": [
+      "Validation based primarily on assumptions + general best practices.",
+      "Copy and delivery decisions not explicitly tied to extracted objections."
+    ],
+    "after": [
+      "Validation uses Apify+SerpAPI signals to ground copy, FAQ, and delivery structure.",
+      "Quality gate includes “must-have” sections derived from real objections (download, setup, license).",
+      "Delivery default: ZIP + Start Here + Pages + folders; category-specific import/duplicate guidance."
+    ]
+  }
+}

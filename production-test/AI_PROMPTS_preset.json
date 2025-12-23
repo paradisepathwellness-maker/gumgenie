@@ -1,0 +1,15 @@
+{
+  "name": "modern",
+  "gradientIndex": 0,
+  "layoutType": "centered",
+  "headlineType": "benefit",
+  "buttonStyle": "pill",
+  "buttonIcon": "zap",
+  "shadowStyle": "subtle",
+  "accentOpacity": 85,
+  "titleWeight": "bold",
+  "descWeight": "normal",
+  "fontFamily": "sans",
+  "containerStyle": "glass",
+  "backgroundTexture": "mesh"
+}

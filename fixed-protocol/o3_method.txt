@@ -1,0 +1,49 @@
+O3 METHOD (Optimal Order of Operations)
+=====================================
+
+Purpose
+- A repeatable operating guideline for integrating external systems (OAuth/MCP/3rd party APIs)
+  without guessing protocol behavior or breaking the repo.
+
+O3-0: Official Docs First
+1) Read the vendor’s official docs for the integration.
+2) Record canonical links (Overview / Setup / Auth / Tool surface / Limits).
+3) Identify auth requirements (OAuth vs PKCE vs API key), headers, token formats, and rate limits.
+
+O3-1: External Validation First (MCP Inspector)
+4) Validate the integration in isolation BEFORE wiring the app:
+   - Can the server initialize?
+   - Can tools list?
+   - Can you call a safe read tool (e.g., get-self)?
+   - Can you call a safe write tool (e.g., create-page) in a sandbox workspace?
+5) If auth fails, diagnose here first (browser authorize URL, PKCE, token format).
+
+O3-2: Implement Minimal Code Wiring
+6) Implement the thinnest adapter layer that matches the observed tool surface:
+   - route(s) for server discovery
+   - route(s) for tools list
+   - route(s) for tool call
+   - minimal typed wrapper helpers (best-effort)
+7) Add guardrails:
+   - no secrets in logs
+   - timeouts
+   - clear error messages (authorization_required vs server_error)
+
+O3-3: Repo Gate (lint → typecheck → test → confirm)
+8) After EVERY change:
+   - npm run lint
+   - npm run typecheck
+   - npm test
+   - confirm results explicitly in the session output
+
+O3-4: App Smoke
+9) Run deterministic smoke calls for key endpoints.
+10) Ensure JSON parses, status codes are correct, and no secrets are returned.
+
+O3-5: Iterate (Fail-fast)
+11) If the failure is protocol/auth/tool mismatch → return to O3-0/O3-1.
+12) If the failure is code correctness → fix and rerun O3-3 and O3-4.
+
+Notes
+- MCP Inspector is a validation tool; lint/typecheck/test is a repo quality gate.
+- Use both: Inspector prevents coding to assumptions; repo gates prevent regressions.

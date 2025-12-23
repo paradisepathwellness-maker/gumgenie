@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2025-12-22T04:27:20.624Z",
+  "maxCompetitors": 30,
+  "concurrency": 10,
+  "actors": {
+    "search": "easyapi/gumroad-search-scraper",
+    "detail": "easyapi/gumroad-product-detail-scraper",
+    "reviews": "easyapi/gumroad-reviews-scraper"
+  },
+  "detailResults": [
+    {
+      "category": "AI_PROMPTS",
+      "count": 1
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "count": 1
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "count": 1
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "count": 1
+    }
+  ],
+  "reviewResults": [
+    {
+      "category": "AI_PROMPTS",
+      "count": 30
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "count": 30
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "count": 30
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "count": 30
+    }
+  ]
+}

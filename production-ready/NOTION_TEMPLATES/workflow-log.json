@@ -1,0 +1,80 @@
+[
+  {
+    "name": "pricing",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium 3-tier pricing section (Starter, Pro, Ultimate) for Notion Templates. Include clear differentiation between tiers, value anchoring, a premium CTA button for the Pro/Ultimate tiers, and social proof indicators such as '1,000+ happy customers'. Use a clean, whitespace-heavy design suitable for a high-end digital product."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The 21st_magic_component_builder is the most effective tool for generating a custom, aesthetically specific UI layout like a 3-tier pricing table based on a descriptive prompt, ensuring the 'minimalist premium' style is maintained."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "features",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "description": "Create a minimalist premium conversion-optimized feature grid for a Notion template. Include 8-12 bullet points focused on outcomes, transformation, and statistical proof (e.g. 2.5x productivity, 40+ hours saved)."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The 21st_magic_component_builder is ideal for generating a tailored, high-conversion UI component with specific content requirements like minimalist styling and outcome-driven bullet points for a Notion template."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "faq",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium FAQ section for a Notion Template Gumroad listing. Include 7 Q&A pairs covering objections, refund policy (30-day guarantee), instant delivery details, target audience (entrepreneurs and students), customization, support, and lifetime updates. Use numbers and proof elements. Style: Minimalist, clean, high-end typography."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The user requested a specific set of FAQ content with a particular style. The magic component builder is the most effective tool to generate a custom-tailored UI component that incorporates the requested text and minimalist premium aesthetic in one step."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "testimonials",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium testimonial section for a Notion Template product. Include 6 high-credibility testimonials with specific metrics like 'Saved 15 hours per week' or '200% increase in workflow efficiency'. Use a clean, sophisticated design with proof-oriented context."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The user requires specific, high-credibility testimonial content with a minimalist premium aesthetic. The 21st_magic_component_builder is the most effective tool for generating a custom component that incorporates both the specific text content and the desired visual style in one step."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "database-showcase",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium showcase section for a Notion database including views, relations, rollups, and automated workflows. Include placeholder numbers and proof of efficacy."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The user requires a specific, high-quality layout showcasing technical Notion features. The 21st_magic_component_builder allows for the generation of a tailored section that adheres to the minimalist premium aesthetic while incorporating the requested content points."
+    },
+    "usedFallback": true
+  },
+  {
+    "name": "setup",
+    "recommendation": {
+      "serverId": "magic",
+      "toolName": "21st_magic_component_builder",
+      "args": {
+        "prompt": "Create a minimalist premium onboarding checklist for a Notion template. Must include 3-5 numbered steps demonstrating a 'setup in 10 minutes' workflow with proof of simplicity."
+      },
+      "targetBlockType": "feature-grid",
+      "rationale": "The 21st_magic_component_builder is best suited to generate a custom, styled UI component that combines the requested minimalist premium aesthetic with specific content like the 10-minute onboarding proof."
+    },
+    "usedFallback": true
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "generatedAt": "2025-12-22T06:38:54.855Z",
+  "maxCompetitors": 30,
+  "concurrency": 10,
+  "chunkSize": 10,
+  "actors": {
+    "search": "easyapi/gumroad-search-scraper",
+    "detail": "easyapi/gumroad-product-detail-scraper",
+    "reviews": "easyapi/gumroad-reviews-scraper"
+  },
+  "detailResults": [
+    {
+      "category": "AI_PROMPTS",
+      "batch": 1,
+      "count": 2,
+      "datasetId": "zW0FiSBHoDzZIZW6N"
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "batch": 1,
+      "count": 1,
+      "datasetId": "W42QHxhV9Ax59viJZ"
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "batch": 1,
+      "count": 4,
+      "datasetId": "J0mggaaXo4HZ6ulME"
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "batch": 1,
+      "count": 0,
+      "datasetId": "H32XTcBzX8NH1LM8T"
+    }
+  ],
+  "reviewResults": [
+    {
+      "category": "AI_PROMPTS",
+      "batch": 1,
+      "count": 0,
+      "datasetId": "error"
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "batch": 1,
+      "count": 0,
+      "datasetId": "error"
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "batch": 1,
+      "count": 0,
+      "datasetId": "error"
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "batch": 1,
+      "count": 0,
+      "datasetId": "error"
+    }
+  ]
+}

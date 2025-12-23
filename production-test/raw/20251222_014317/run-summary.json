@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2025-12-22T06:44:30.732Z",
+  "maxCompetitors": 30,
+  "concurrency": 10,
+  "chunkSize": 10,
+  "actors": {
+    "search": "easyapi/gumroad-search-scraper",
+    "detail": "easyapi/gumroad-product-detail-scraper",
+    "reviews": "easyapi/gumroad-reviews-scraper"
+  },
+  "detailResults": [
+    {
+      "category": "AI_PROMPTS",
+      "batch": 1,
+      "count": 1,
+      "datasetId": "vAWrobIlLkKwoZLRt"
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "batch": 1,
+      "count": 1,
+      "datasetId": "TlA2L710hTV6CQo2N"
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "batch": 1,
+      "count": 8,
+      "datasetId": "e6OMEB9hA3C3kj5ja"
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "batch": 1,
+      "count": 0,
+      "datasetId": "VuizwpewHKj6VbGUK"
+    }
+  ],
+  "reviewResults": [],
+  "reviewsEnabled": false,
+  "reviewsDisabledReason": "Apify run failed (403) for easyapi/gumroad-reviews-scraper: {\n  \"error\": {\n    \"type\": \"actor-is-not-rented\",\n    \"message\": \"You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/b56mefOrTveFWVYjx\"\n  }\n}"
+}

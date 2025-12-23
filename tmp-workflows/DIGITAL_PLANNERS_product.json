@@ -1,0 +1,48 @@
+{
+  "title": "ZenithOS: The Ultimate Digital Productivity System 🚀",
+  "description": "### Stop managing tasks. Start achieving goals. ZenithOS is a high-performance digital planning ecosystem designed for those who demand more from their time. Built on the principles of deep work and atomic habits, this system transforms your chaotic to-do list into a streamlined roadmap for success. Whether you are an entrepreneur, a creative professional, or a student, ZenithOS provides the structure needed to reclaim 10+ hours of your week. **What is inside?** A fully integrated Life OS featuring dynamic task management, automated habit tracking, and quarterly goal alignment. Optimized for both Notion and iPad annotation apps like GoodNotes. Stop drifting and start executing today.",
+  "price": 29,
+  "features": [
+    "Dynamic Life Dashboard for a 360-degree view of your commitments",
+    "Automated Habit Persistence Tracker with streak visualization",
+    "Deep Work Timer and Priority Matrix for focused execution",
+    "Quarterly Review System to align daily actions with long-term goals",
+    "Resource Library for organizing notes, bookmarks, and assets"
+  ],
+  "callToAction": "Get Instant Access ⚡️",
+  "emojiSet": [
+    "⚡️",
+    "🚀",
+    "📅",
+    "🎯",
+    "🛠️",
+    "🧘",
+    "📈",
+    "💎"
+  ],
+  "extraComponents": [
+    {
+      "type": "checklist",
+      "title": "What You Will Get",
+      "items": [
+        "ZenithOS Digital Planner Files",
+        "15+ Custom Notion Templates",
+        "Video Implementation Guide",
+        "Lifetime Free Updates",
+        "Exclusive Productivity Discord Access"
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Common Questions",
+      "items": [
+        "Does this work on mobile? Yes, it is fully responsive on iOS and Android.",
+        "Is this a one-time purchase? Yes, no recurring subscriptions.",
+        "Can I customize the colors? Absolutely, the layout is fully modular."
+      ]
+    }
+  ],
+  "category": "DIGITAL_PLANNERS",
+  "coverImage": "https://picsum.photos/seed/planner/1200/800",
+  "contentBlocks": []
+}

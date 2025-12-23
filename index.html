@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GumGenie AI — Product Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+          --gumroad-pink: #ff90e8;
+        }
+        body { 
+          font-family: 'Plus Jakarta Sans', sans-serif; 
+          background-color: #f8f8f4;
+          color: #1a1a1a;
+          scroll-behavior: smooth;
+          -webkit-font-smoothing: antialiased;
+        }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'Fira Code', monospace; }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #f8f8f4; }
+        ::-webkit-scrollbar-thumb { 
+          background: #000; 
+          border: 4px solid #f8f8f4; 
+          border-radius: 12px; 
+        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gumroad-pink); }
+        
+        .bg-dot-grid {
+          background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+          background-size: 32px 32px;
+        }
+        
+        .premium-blur {
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "express": "https://esm.sh/express@^5.2.1",
+    "cors": "https://esm.sh/cors@^2.8.5",
+    "zustand": "https://esm.sh/zustand@^5.0.9",
+    "@prisma/client": "https://esm.sh/@prisma/client@^7.2.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-[#f8f8f4] text-[#1a1a1a] bg-dot-grid">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

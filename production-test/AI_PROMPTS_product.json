@@ -1,0 +1,47 @@
+{
+  "title": "Prompt Architect Pro: The Ultimate AI Engineering Suite 🤖⚡",
+  "description": "# Master the Art of Prompting. Stop wasting time with generic AI responses. This suite contains 1,500+ high-precision prompts designed for GPT-4, Claude 3.5, and Midjourney. You will receive advanced frameworks for Chain-of-Thought reasoning, persona-based workflows, and iterative refinement techniques. ✨ Transform your AI output from mediocre to masterpiece instantly. Includes dedicated modules for content creation, coding, data analysis, and visual design. 📈 Boost your productivity and scale your business with the same tools used by industry experts.",
+  "price": 49,
+  "features": [
+    "1,500+ Expertly Crafted Prompt Templates",
+    "Dynamic Persona Building Framework",
+    "Chain-of-Thought (CoT) Logical Structures",
+    "Multi-Modal Optimization for Images and Text",
+    "Lifetime Updates and Community Access"
+  ],
+  "callToAction": "Unlock Your AI Potential",
+  "emojiSet": [
+    "🤖",
+    "⚡",
+    "🧠",
+    "✨",
+    "📈",
+    "🚀",
+    "💎"
+  ],
+  "extraComponents": [
+    {
+      "type": "checklist",
+      "title": "What's Inside the Pack",
+      "items": [
+        "500+ Marketing & Copywriting Prompts",
+        "300+ Coding & Scripting Automations",
+        "200+ Midjourney & DALL-E 3 Style Guides",
+        "Prompt Version Control Templates",
+        "Advanced Negative Prompting Library"
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Frequently Asked Questions",
+      "items": [
+        "Is this compatible with free AI versions? Yes, but best results are seen with GPT-4 and Claude 3.5.",
+        "Do I get updates? Yes, every new prompt added is free for existing customers.",
+        "Can I use these for commercial projects? Absolutely, you have full commercial rights."
+      ]
+    }
+  ],
+  "category": "AI_PROMPTS",
+  "coverImage": "https://picsum.photos/seed/prompt/1200/800",
+  "contentBlocks": []
+}

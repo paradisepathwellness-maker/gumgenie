@@ -1,0 +1,23 @@
+{
+  "source": "serpapi",
+  "generatedAt": "2025-12-22T07:01:26.179Z",
+  "maxCompetitors": 30,
+  "categories": {
+    "AI_PROMPTS": {
+      "query": "site:gumroad.com (prompt pack OR prompts bundle OR ai prompts) gumroad",
+      "competitorCount": 30
+    },
+    "NOTION_TEMPLATES": {
+      "query": "site:gumroad.com (notion template OR notion system) gumroad",
+      "competitorCount": 30
+    },
+    "DIGITAL_PLANNERS": {
+      "query": "site:gumroad.com (digital planner OR goodnotes planner OR ipad planner) gumroad",
+      "competitorCount": 30
+    },
+    "DESIGN_TEMPLATES": {
+      "query": "site:gumroad.com (figma template OR design template OR UI kit) gumroad",
+      "competitorCount": 30
+    }
+  }
+}

@@ -1,0 +1,213 @@
+[
+  {
+    "productUrl": "https://ohneisstudio.gumroad.com/l/ultimateBundle",
+    "scrapedAt": "2025-12-22T06:44:19.422Z",
+    "detail": {
+      "id": "EZM25KCw14BiJmTZA5MM-A==",
+      "permalink": "tdubl",
+      "name": "Ultimate Prompt Collection Vol. 1-7 — All 7 Packs (ChatGPT + Sora Hybrid)",
+      "seller": {
+        "id": "2113270544349",
+        "name": "ohneis",
+        "avatar_url": "https://public-files.gumroad.com/2f6s9lf4c5cpz6etrasu4rr3ps7o",
+        "profile_url": "https://ohneisstudio.gumroad.com/"
+      },
+      "collaborating_user": null,
+      "covers": [
+        {
+          "url": "https://public-files.gumroad.com/lz5r9nczak7en7sr1vgzogh68fmk",
+          "original_url": "https://public-files.gumroad.com/4fq6lcdy1vxz4mmzwwd4gokba5kp",
+          "thumbnail": null,
+          "id": "bb5a4e6c1e53e8ab8728bfa0993c78d9",
+          "type": "image",
+          "filetype": "jpg",
+          "width": 670,
+          "height": 376,
+          "native_width": 1280,
+          "native_height": 720
+        }
+      ],
+      "main_cover_id": "bb5a4e6c1e53e8ab8728bfa0993c78d9",
+      "thumbnail_url": null,
+      "quantity_remaining": null,
+      "long_url": "https://ohneisstudio.gumroad.com/l/ultimateBundle",
+      "is_sales_limited": false,
+      "ratings": {
+        "count": 0,
+        "average": 0,
+        "percentages": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "custom_button_text_option": null,
+      "is_compliance_blocked": false,
+      "is_published": true,
+      "is_stream_only": false,
+      "streamable": false,
+      "sales_count": null,
+      "summary": "The complete ohneis prompt system. 7 premium packs covering still and motion, from micrographics to fashion photography to cinematic Sora workflows.",
+      "attributes": [],
+      "description_html": "<p>This is the <strong>definitive AI prompt collection</strong> from ohneis — all seven advanced packs combined into one creative toolkit.</p><p>You get structured, high-precision prompts for image generation in ChatGPT and ChatGPT-like tools, plus hybrid motion prompts built for Sora. From photorealistic product visuals to editorial fashion, macro realism, stylized gadgets, plush toys, cinematic cats, and now full still-to-motion workflows — this bundle covers it all.</p><p>– 7 full prompt packs (PDFs)<br>– 20+ Master Prompts for image generation<br>– 60+ complete scene prompts<br>– 3 Sora-integrated categories with hybrid image + motion logic<br>– Styling tips, lighting direction, format setup, and keyword sets<br>– Built for creatives, designers, prompt engineers, and storytellers</p>",
+      "currency_code": "usd",
+      "price_cents": 9999,
+      "rental_price_cents": null,
+      "pwyw": {
+        "suggested_price_cents": 10499
+      },
+      "eligible_for_installment_plans": true,
+      "allow_installment_plan": false,
+      "installment_plan": null,
+      "is_legacy_subscription": false,
+      "is_tiered_membership": false,
+      "is_physical": false,
+      "custom_view_content_button_text": null,
+      "is_multiseat_license": false,
+      "hide_sold_out_variants": false,
+      "native_type": "bundle",
+      "preorder": null,
+      "duration_in_months": null,
+      "rental": null,
+      "is_quantity_enabled": false,
+      "free_trial": null,
+      "recurrences": null,
+      "options": [],
+      "analytics": {
+        "google_analytics_id": null,
+        "facebook_pixel_id": null,
+        "free_sales": true
+      },
+      "has_third_party_analytics": false,
+      "ppp_details": null,
+      "can_edit": false,
+      "refund_policy": null,
+      "bundle_products": [
+        {
+          "id": "jGXmep44If36YeRy7-0SMg==",
+          "name": "Photography Prompt Pack Vol. 4 - 3 Styles / 9 Prompts",
+          "ratings": {
+            "count": 10,
+            "average": 4.5
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/photos",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "Y4XoVakb6Jdgp4ca_OxJUQ==",
+          "name": "UI, Micrographics & Retro Logos Prompt Pack Vol. 1 - 3 Styles / 9 Prompts",
+          "ratings": {
+            "count": 4,
+            "average": 5
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/ohneisstudio",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "5BvaukN8K3nnPaBpI7k2Ig==",
+          "name": "Sora Prompt Pack Vol. 2 – 3 Prompts",
+          "ratings": {
+            "count": 5,
+            "average": 3.4
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/sora",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "j9KmPAti8CwOUKQTNqoFjg==",
+          "name": "Mixed Prompt Pack Vol. 6 – Luxury Objects, Red Bars, Transparent Tech & Cars",
+          "ratings": {
+            "count": 4,
+            "average": 3.5
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/lbcvmy",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "CCbLW9B7cVV8quCgMj3Jhg==",
+          "name": "Illustration Prompt Pack Vol. 3 – 4 Styles / 12 Prompts",
+          "ratings": {
+            "count": 3,
+            "average": 3.7
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/illustrations",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "SpL8HV7-EQIDwEystXU8PQ==",
+          "name": "Enhanced Prompting Guideline Pack – Build Better Prompts for AI Image Generators",
+          "ratings": {
+            "count": 6,
+            "average": 2.7
+          },
+          "price": 999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/promptguidelines",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "SBsphGIccXkP42_PG4JBNQ==",
+          "name": "3D Prompt Pack Vol. 5 - 4 Styles / 12 Prompts",
+          "ratings": {
+            "count": 2,
+            "average": 5
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/wbgrrc",
+          "quantity": 1,
+          "variant": null
+        },
+        {
+          "id": "Bi0n3YZlWAJTbCFkDU4v6Q==",
+          "name": "Advanced Prompt Pack Vol. 7 – Adventure Sports, Fashion & Lifestyle Photography with Sora Integration",
+          "ratings": {
+            "count": 4,
+            "average": 3.3
+          },
+          "price": 2999,
+          "currency_code": "usd",
+          "thumbnail_url": null,
+          "native_type": "digital",
+          "url": "https://ohneisstudio.gumroad.com/l/prompttosora",
+          "quantity": 1,
+          "variant": null
+        }
+      ],
+      "public_files": [],
+      "audio_previews_enabled": true
+    }
+  }
+]

@@ -1,0 +1,360 @@
+{
+  "category": "NOTION_TEMPLATES",
+  "generatedAt": "2025-12-23T04:36:31.529Z",
+  "source": "production-test/merged-detail",
+  "competitors": {
+    "preview": [
+      {
+        "name": "Headquarters Notion Productivity Template",
+        "url": "https://productivesetups.gumroad.com/l/headquarters",
+        "currency": "aud",
+        "price": 79,
+        "ratingsCount": 171,
+        "ratingsAvg": 5,
+        "sellerName": "Productive Setups"
+      },
+      {
+        "name": "Ultimate Notion Dashboard | Build Your Own Digital World!",
+        "url": "https://wesleyanna.gumroad.com/l/ultimate-notion-dashboard",
+        "currency": "usd",
+        "price": 38,
+        "ratingsCount": 17,
+        "ratingsAvg": 4.8,
+        "sellerName": "Wesley Anna"
+      },
+      {
+        "name": "Notion Life OS - Ultimate Second Brain Life Operating System",
+        "url": "https://heyhash.gumroad.com/l/notion-life-os",
+        "currency": "usd",
+        "price": 49,
+        "ratingsCount": 3,
+        "ratingsAvg": 5,
+        "sellerName": "Hashim | Notion4Management"
+      },
+      {
+        "name": "Task and Project Management System - Notion Template",
+        "url": "https://notioneverything.gumroad.com/l/project-management-template",
+        "currency": "usd",
+        "price": 49,
+        "ratingsCount": 15,
+        "ratingsAvg": 4.7,
+        "sellerName": "Notion Everything"
+      },
+      {
+        "name": "Notion Ultimate Productivity System",
+        "url": "https://pathpages.gumroad.com/l/notion-ultimate-productivity-system",
+        "currency": "usd",
+        "price": 47,
+        "ratingsCount": 21,
+        "ratingsAvg": 4.9,
+        "sellerName": "Pathpages"
+      },
+      {
+        "name": "2025 Dream Life Planner ♡ Simple & Aesthetic Notion Template",
+        "url": "https://slowcozykelly.gumroad.com/l/2025notionplanner",
+        "currency": "usd",
+        "price": 18,
+        "ratingsCount": 620,
+        "ratingsAvg": 5,
+        "sellerName": "slow cozy kelly"
+      },
+      {
+        "name": "Productivity Notion System (Notion Template)",
+        "url": "https://jesseshowalter.gumroad.com/l/notionproductivity",
+        "currency": "usd",
+        "price": 14.99,
+        "ratingsCount": 1,
+        "ratingsAvg": 1,
+        "sellerName": "Jesse Showalter"
+      },
+      {
+        "name": "Notion Life OS",
+        "url": "https://pathpages.gumroad.com/l/notion-life-os",
+        "currency": "usd",
+        "price": 103,
+        "ratingsCount": 2,
+        "ratingsAvg": 2.5,
+        "sellerName": "Pathpages"
+      },
+      {
+        "name": "Notion Content System",
+        "url": "https://eazypath.gumroad.com/l/notion-content-system",
+        "currency": "usd",
+        "price": 59,
+        "ratingsCount": 49,
+        "ratingsAvg": 5,
+        "sellerName": "Eazypath"
+      },
+      {
+        "name": "Notion Bundle",
+        "url": "https://chrisnotion.gumroad.com/l/notionbundle",
+        "currency": "usd",
+        "price": 225,
+        "ratingsCount": 34,
+        "ratingsAvg": 4.9,
+        "sellerName": "Chris"
+      },
+      {
+        "name": "Design Studio Suite (Notion System)",
+        "url": "https://brandingboard.gumroad.com/l/design-studio-suite-notion-templates",
+        "currency": "usd",
+        "price": 15,
+        "ratingsCount": 19,
+        "ratingsAvg": 5,
+        "sellerName": "Branding Board"
+      },
+      {
+        "name": "A Simplified Notion: Life OS Version 2",
+        "url": "https://bettercreating.gumroad.com/l/asimplifiednotion2022",
+        "currency": "gbp",
+        "price": 30,
+        "ratingsCount": 10,
+        "ratingsAvg": 4.7,
+        "sellerName": "Better Creating"
+      },
+      {
+        "name": "Publish OS: Notion Content Creator Template",
+        "url": "https://productivesetups.gumroad.com/l/PublishOS",
+        "currency": "aud",
+        "price": 59,
+        "ratingsCount": 9,
+        "ratingsAvg": 5,
+        "sellerName": "Productive Setups"
+      },
+      {
+        "name": "RIA Reading System - Notion Template ",
+        "url": "https://indiedevkristen.gumroad.com/l/RIAReadingSystem",
+        "currency": "usd",
+        "price": 20,
+        "ratingsCount": 0,
+        "ratingsAvg": 0,
+        "sellerName": "Kristen"
+      }
+    ]
+  },
+  "stats": {
+    "competitorCount": 14,
+    "currencies": [
+      "aud",
+      "gbp",
+      "usd"
+    ],
+    "priceStats": {
+      "aud": {
+        "min": 59,
+        "median": 69,
+        "max": 79,
+        "count": 2
+      },
+      "gbp": {
+        "min": 30,
+        "median": 30,
+        "max": 30,
+        "count": 1
+      },
+      "usd": {
+        "min": 14.99,
+        "median": 47,
+        "max": 225,
+        "count": 11
+      }
+    },
+    "priceBands": {
+      "aud": {
+        "51-100": 2
+      },
+      "gbp": {
+        "26-50": 1
+      },
+      "usd": {
+        "26-50": 4,
+        "11-25": 4,
+        "101-200": 1,
+        "51-100": 1,
+        "200+": 1
+      }
+    },
+    "ratings": {
+      "totalCount": 971,
+      "averageWeighted": 4.97384140061792
+    },
+    "topKeywords": [
+      {
+        "keyword": "content",
+        "count": 76
+      },
+      {
+        "keyword": "system",
+        "count": 68
+      },
+      {
+        "keyword": "can",
+        "count": 48
+      },
+      {
+        "keyword": "amp",
+        "count": 48
+      },
+      {
+        "keyword": "tasks",
+        "count": 47
+      },
+      {
+        "keyword": "life",
+        "count": 45
+      },
+      {
+        "keyword": "projects",
+        "count": 43
+      },
+      {
+        "keyword": "what",
+        "count": 41
+      },
+      {
+        "keyword": "productivity",
+        "count": 39
+      },
+      {
+        "keyword": "use",
+        "count": 35
+      },
+      {
+        "keyword": "more",
+        "count": 34
+      },
+      {
+        "keyword": "have",
+        "count": 34
+      },
+      {
+        "keyword": "all",
+        "count": 34
+      },
+      {
+        "keyword": "get",
+        "count": 32
+      },
+      {
+        "keyword": "any",
+        "count": 31
+      },
+      {
+        "keyword": "manage",
+        "count": 29
+      },
+      {
+        "keyword": "plan",
+        "count": 29
+      },
+      {
+        "keyword": "time",
+        "count": 28
+      },
+      {
+        "keyword": "dashboard",
+        "count": 27
+      },
+      {
+        "keyword": "project",
+        "count": 25
+      },
+      {
+        "keyword": "track",
+        "count": 25
+      },
+      {
+        "keyword": "goals",
+        "count": 24
+      },
+      {
+        "keyword": "our",
+        "count": 24
+      },
+      {
+        "keyword": "personal",
+        "count": 22
+      },
+      {
+        "keyword": "one",
+        "count": 22
+      },
+      {
+        "keyword": "help",
+        "count": 22
+      },
+      {
+        "keyword": "need",
+        "count": 20
+      },
+      {
+        "keyword": "headquarters",
+        "count": 19
+      },
+      {
+        "keyword": "work",
+        "count": 19
+      },
+      {
+        "keyword": "notes",
+        "count": 19
+      }
+    ],
+    "topSellers": [
+      {
+        "name": "Productive Setups",
+        "count": 2,
+        "url": "https://productivesetups.gumroad.com/"
+      },
+      {
+        "name": "Pathpages",
+        "count": 2,
+        "url": "https://pathpages.gumroad.com/"
+      },
+      {
+        "name": "Wesley Anna",
+        "count": 1,
+        "url": "https://wesleyanna.gumroad.com/"
+      },
+      {
+        "name": "Hashim | Notion4Management",
+        "count": 1,
+        "url": "https://heyhash.gumroad.com/"
+      },
+      {
+        "name": "Notion Everything",
+        "count": 1,
+        "url": "https://notioneverything.gumroad.com/"
+      },
+      {
+        "name": "slow cozy kelly",
+        "count": 1,
+        "url": "https://slowcozykelly.gumroad.com/"
+      },
+      {
+        "name": "Jesse Showalter",
+        "count": 1,
+        "url": "https://jesseshowalter.gumroad.com/"
+      },
+      {
+        "name": "Eazypath",
+        "count": 1,
+        "url": "https://eazypath.gumroad.com/"
+      },
+      {
+        "name": "Chris",
+        "count": 1,
+        "url": "https://chrisnotion.gumroad.com/"
+      },
+      {
+        "name": "Branding Board",
+        "count": 1,
+        "url": "https://brandingboard.gumroad.com/"
+      }
+    ]
+  },
+  "notes": [
+    "Derived deterministically from the latest production-test/raw/<run>/merged/<CATEGORY>.detail.json.",
+    "Prices are bucketed per currency without FX normalization."
+  ]
+}

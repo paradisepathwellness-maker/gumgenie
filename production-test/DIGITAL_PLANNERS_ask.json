@@ -1,0 +1,12 @@
+{
+  "executed": false,
+  "recommendation": {
+    "serverId": "magic",
+    "toolName": "21st_magic_component_builder",
+    "args": {
+      "prompt": "aesthetic gallery section concept for digital planners featuring lifestyle benefits and iPad optimization"
+    },
+    "targetBlockType": "feature-grid",
+    "rationale": "The 21st_magic_component_builder is the most suitable tool for generating a custom, high-fidelity gallery concept from a detailed prompt that includes specific device optimization and lifestyle elements."
+  }
+}

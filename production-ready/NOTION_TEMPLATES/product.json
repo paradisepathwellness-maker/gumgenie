@@ -1,0 +1,47 @@
+{
+  "title": "Architect OS: The Ultimate Executive Notion Dashboard 🏢⚡",
+  "description": "### Transform your digital chaos into a high-performance engine. \n\n**Architect OS** is a premium Notion ecosystem designed for entrepreneurs, creators, and high-achievers who demand more from their workspace. Most templates are just lists; this is a comprehensive **operating system** for your life and business.\n\n#### Why Architect OS?\nBuilt on the principles of Second Brain and GTD, this dashboard eliminates the friction of switching between fragmented apps. Manage your projects, finances, and knowledge in a single, unified interface that scales with your growth.\n\n#### What's inside:\n- **Command Center:** A centralized hub for daily focus and high-level strategy.\n- **The Project Matrix:** Advanced task management with automated progress tracking.\n- **Knowledge Vault:** A curated space for storing and synthesizing information.\n- **Financial Nexus:** Real-time revenue and expense tracking for digital creators.\n- **Reflection Engine:** Automated weekly and monthly review protocols to ensure constant improvement.",
+  "price": 49,
+  "features": [
+    "Unified Command Center for daily focus",
+    "Advanced Project Matrix with automated progress bars",
+    "Comprehensive Finance Tracking and Reporting",
+    "Life-Sync Knowledge Management System",
+    "Integrated Habit and Wellness Tracker"
+  ],
+  "callToAction": "Upgrade Your Workflow Now",
+  "emojiSet": [
+    "🏢",
+    "⚡",
+    "💎",
+    "📈",
+    "🧠",
+    "🛠️",
+    "🎯"
+  ],
+  "extraComponents": [
+    {
+      "type": "checklist",
+      "title": "Everything Included in the Package",
+      "items": [
+        "Full Architect OS Notion Template",
+        "Exclusive Onboarding Video Tutorial",
+        "Custom Icon and Cover Image Pack",
+        "Lifetime Updates and New Modules",
+        "Priority Support Community Access"
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Common Questions",
+      "items": [
+        "Does this work with a free Notion account? Yes, perfectly.",
+        "Can I customize the layout? Absolutely, it is fully modular.",
+        "Are future updates included? Yes, you get lifetime updates for free."
+      ]
+    }
+  ],
+  "category": "NOTION_TEMPLATES",
+  "coverImage": "https://picsum.photos/seed/notion/1200/800",
+  "contentBlocks": []
+}

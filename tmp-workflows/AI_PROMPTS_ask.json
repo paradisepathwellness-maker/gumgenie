@@ -1,0 +1,12 @@
+{
+  "executed": false,
+  "recommendation": {
+    "serverId": "magic",
+    "toolName": "21st_magic_component_builder",
+    "args": {
+      "prompt": "Create a premium 3-tier pricing section for an AI_PROMPTS product listing. Design should feature strong value anchoring, a highlighted 'Pro' tier, and a luxury aesthetic using Tailwind CSS and Lucide icons. Focus on high-conversion layout and premium typography."
+    },
+    "targetBlockType": "feature-grid",
+    "rationale": "The 21st_magic_component_builder is best suited to generate a custom, high-quality pricing section that meets the user's specific requirements for a premium tone and value anchoring strategy in the AI_PROMPTS category."
+  }
+}

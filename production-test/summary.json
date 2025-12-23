@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2025-12-22T04:09:22.749Z",
+  "categories": [
+    {
+      "category": "AI_PROMPTS",
+      "ok": true,
+      "recommendation": {
+        "serverId": "magic",
+        "toolName": "21st_magic_component_builder",
+        "args": {
+          "prompt": "Create a premium 3-tier pricing section for an AI_PROMPTS product listing. Design should feature strong value anchoring, a highlighted 'Pro' tier, and a luxury aesthetic using Tailwind CSS and Lucide icons. Focus on high-conversion layout and premium typography."
+        },
+        "targetBlockType": "feature-grid",
+        "rationale": "The 21st_magic_component_builder is best suited to generate a custom, high-quality pricing section that meets the user's specific requirements for a premium tone and value anchoring strategy in the AI_PROMPTS category."
+      },
+      "blockType": "feature-grid",
+      "usedFallback": false,
+      "errors": [],
+      "marketSources": []
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "ok": true,
+      "recommendation": {
+        "serverId": "magic",
+        "toolName": "21st_magic_component_builder",
+        "args": {
+          "prompt": "A modern database showcase section for a Notion template landing page highlighting views, relations, rollups, and quick setup using a clean bento grid layout and Tailwind CSS."
+        },
+        "targetBlockType": "feature-grid",
+        "rationale": "I am using the magic component builder to generate a specific, high-quality UI section tailored to the user's request for showcasing Notion database features."
+      },
+      "blockType": "feature-grid",
+      "usedFallback": false,
+      "errors": [],
+      "marketSources": []
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "ok": true,
+      "recommendation": {
+        "serverId": "magic",
+        "toolName": "21st_magic_component_builder",
+        "args": {
+          "prompt": "aesthetic gallery section concept for digital planners featuring lifestyle benefits and iPad optimization"
+        },
+        "targetBlockType": "feature-grid",
+        "rationale": "The 21st_magic_component_builder is the most suitable tool for generating a custom, high-fidelity gallery concept from a detailed prompt that includes specific device optimization and lifestyle elements."
+      },
+      "blockType": "feature-grid",
+      "usedFallback": false,
+      "errors": [],
+      "marketSources": []
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "ok": true,
+      "recommendation": {
+        "serverId": "magic",
+        "toolName": "21st_magic_component_builder",
+        "args": {
+          "prompt": "Create an agency ROI calculator section that shows time saved and client value, styled for a Gumroad landing page."
+        },
+        "targetBlockType": "feature-grid",
+        "rationale": "The user wants a specific, functional ROI calculator component. The 21st_magic_component_builder is the best tool to generate a custom component based on these specific functional requirements."
+      },
+      "blockType": "feature-grid",
+      "usedFallback": false,
+      "errors": [],
+      "marketSources": []
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "title": "Zenith OS: The All-In-One High Performance Notion Workspace 🧠⚡",
+  "description": "Stop juggling twenty different apps and start building your **Second Brain**. Zenith OS is a premium Notion system engineered for high-achievers who need a streamlined way to manage projects, tasks, and knowledge. \n\n### Why Zenith OS?\nBuilt on the proven PARA method, this dashboard provides a frictionless experience for capturing ideas and executing goals. No more cluttered sidebars or messy databases.\n\n### What is inside?\n- **Project Command Center:** Track progress with visual timelines and automated status updates.\n- **Knowledge Vault:** A centralized library for web clippings, book notes, and resources.\n- **Daily Alignment:** Morning and evening routines integrated into your habit tracker.\n- **Finance Hub:** Monitor subscriptions, income, and expenses in one view.\n\nTransform your digital life today and regain 10+ hours of productivity every week. 🚀",
+  "price": 59,
+  "features": [
+    "Advanced Project & Task Management with Gantt Views",
+    "Integrated Finance & Subscription Tracker",
+    "Dynamic Habit Tracking with Progress Visualization",
+    "The Ultimate Knowledge Hub & Resource Library",
+    "Automated Weekly & Monthly Review Cycles"
+  ],
+  "callToAction": "Download Zenith OS Now",
+  "emojiSet": [
+    "🧠",
+    "⚡",
+    "🚀",
+    "📅",
+    "✅",
+    "📈",
+    "💎",
+    "🖋️"
+  ],
+  "extraComponents": [
+    {
+      "type": "checklist",
+      "title": "Everything You Get",
+      "items": [
+        "Lifetime access to all future updates",
+        "Comprehensive video onboarding guide",
+        "Custom icon set for Notion",
+        "Exclusive access to the Discord community",
+        "Mobile-optimized dashboard layouts"
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Frequently Asked Questions",
+      "items": [
+        "Do I need a Notion Plus account? No, the free version works perfectly.",
+        "Is this template difficult to set up? Not at all. It comes with a 10-minute setup guide.",
+        "Can I customize the colors? Yes, every element is fully customizable in Notion.",
+        "Will I get updates? Yes, all customers get lifetime access to new versions."
+      ]
+    }
+  ],
+  "category": "NOTION_TEMPLATES",
+  "coverImage": "https://picsum.photos/seed/notion/1200/800",
+  "contentBlocks": []
+}

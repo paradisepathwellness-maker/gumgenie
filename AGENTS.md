@@ -1,0 +1,1005 @@
+# AGENTS.md
+
+> **⚠️ Integration Rule (Official Docs First):** Before implementing or debugging any integration (OAuth, MCP servers, third-party APIs), **always consult the official vendor documentation first** and record the canonical source link(s) in your notes/PR. This repo has already hit issues caused by assuming auth/token behavior.
+> 
+> **Canonical Notion MCP docs (official):**
+> - Overview: https://developers.notion.com/docs/mcp
+> - Connecting: https://developers.notion.com/docs/get-started-with-mcp
+> - Supported tools: https://developers.notion.com/docs/mcp-supported-tools
+
+> **✅ Change Protocol (lint → typecheck → test → confirm):** After **every** file modification or system configuration change, run:
+> 1) `npm run lint`
+> 2) `npm run typecheck`
+> 3) `npm test` (not yet configured — **must be added later**, see session todo)
+> 4) Confirm results explicitly in the session log/output.
+
+> **🌐 Hosting Plan (current):**
+> - **Application:** https://www.gumgenie.com
+> - **Product hosting/domain:** https://www.agelessinsights.ca
+> 
+> Keep activation links, QR codes, and docs aligned to this plan.
+
+> **🎯 Product principle (quality-first UX):**
+> - Prioritize **outcome quality** (results + consistency + publish-ready deliverables) over convenience.
+> - Then streamline the UX to reduce friction (activation, connect, generate) as a second-order optimization.
+> - Protocols must be grounded in **real market/API data** when available (see Session Log notes).
+
+
+## Project overview
+
+## Agent Squad Architecture (V2.3) — “The Squad & The Researcher”
+
+### Executive Summary
+- **Goal:** Replace monolithic generation with a **resilient multi-agent architecture**.
+- **Mode A (Researcher / Apify Agent):** asynchronous market intelligence pipeline that scrapes Gumroad (Apify actors) and writes **static snapshots**.
+- **Mode B (Daily Swarm / Squad):** real-time **parallel agent swarm** that generates Gumroad-ready product listings using snapshots as ground truth.
+- **Key upgrade in V2.3:** add a lightweight **Orchestrator Agent** to enforce coherence across the swarm and reduce contradictions.
+
+### Agents (all agents should read this AGENTS.md)
+These are the canonical agent roles used across the codebase and by collaborating agents:
+
+1) **Orchestrator Agent** (Director)
+- **Purpose:** Creates a single **Unified Brief** (persona, voice, constraints, success criteria) shared by all agents.
+- **Output:** `brief: { persona, usp, constraints, mustInclude, vibe }`
+
+2) **Strategist Agent** (`marketAgent`)
+- **Purpose:** Positioning, target audience avatar, SEO keywords, competitive gap.
+- **Inputs:** `category` + `ResearchData` (if available) + `brief`
+- **Outputs:** `strategy: { targetAudience, corePainPoint, mechanismName, uniqueSellingProp, seoKeywords }`
+
+3) **Monetization Agent** (`monetizationAgent`)
+- **Purpose:** 3-tier pricing, bonuses, guarantee.
+- **Inputs:** `category` + `strategy` + `ResearchData.stats`
+- **Outputs:** `monetization: { tiers[3], bonuses[2], guaranteePolicy }`
+
+4) **Copy Agent** (`copyAgent`)
+- **Purpose:** High-conversion Gumroad copy (PAS), features, FAQs, CTA.
+- **Inputs:** `category` + `strategy.seoKeywords` + `brief`
+- **Outputs:** `content: { productTitle, hookHeadline, descriptionMarkdown, features[], faq[], callToAction }`
+
+5) **Visual Agent** (`visualAgent`)
+- **Purpose:** Style preset + emoji set + canvas settings + MCP component recommendations.
+- **Inputs:** `category` + `brief.vibe`
+- **Outputs:** `visuals: { stylePreset, emojiSet, canvasSettings, recommendedMcpComponents }`
+
+6) **Researcher Agent** (`apifyAgent`)
+- **Purpose:** Deep market truth via Apify (search → detail → reviews) + Gemini summarization.
+- **Trigger:** manual or scheduled
+- **Outputs:** `backend/data/snapshots/<category>.json` (ResearchData)
+
+### Daily workflow (Mode B): “Specialist Swarm”
+- Run on every user “Generate” click.
+- Flow:
+  1) Load snapshot (if exists) and cache in-memory.
+  2) Orchestrator generates `UnifiedBrief`.
+  3) Run 4 agents in parallel via `Promise.allSettled`.
+  4) Merge JSON partials into master Product.
+  5) Enforce deterministic quality gate + contradiction checks.
+  6) Return a valid Product **100% of the time** (fallbacks for failed agents).
+
+### Periodic workflow (Mode A): “Market Validator / Researcher”
+- Run manually or on schedule.
+- Flow:
+  1) Cache check (TTL; default 24h).
+  2) Apify scrape (Gumroad actors: search → detail → reviews).
+  3) Sanitize/dedupe.
+  4) Gemini summarization into `ResearchData`.
+  5) Save `backend/data/snapshots/<category>.json`.
+
+### Resilience requirements
+- Use **`Promise.allSettled`** for the swarm.
+- Each agent has:
+  - strict JSON schema validation
+  - retry once
+  - safe default fallback output
+- Merge should record provenance metadata:
+  - agent versions, fallback flags, timing
+
+### Proposed backend structure (V2.3)
+```
+backend/
+  agents/
+    definitions/
+      prompts.ts
+      schemas.ts
+    runners/
+      dailySwarm.ts
+      apifyAgent.ts
+    utils/
+      merger.ts
+      snapshots.ts
+  routes/
+    agentRoutes.ts
+  data/
+    snapshots/
+```
+
+### API contracts (V2.3)
+- `POST /api/agents/generate`
+  - Body: `{ category: "NOTION_TEMPLATES" | ... }`
+  - Response: `{ product: Product, preset: StylePreset, meta?: {...} }`
+
+- `POST /api/agents/research`
+  - Body: `{ category: "NOTION_TEMPLATES" | ..., force?: boolean }`
+  - Response: `{ status: "updated" | "cached", snapshotPath: string, snapshot: ResearchData }`
+
+### Implementation checklist (V2.3)
+1) Finalize V2.3 architecture decisions (Orchestrator + optional final consistency pass)
+2) Define Orchestrator prompt + strict JSON schema (Unified Brief)
+3) Define 4 Squad prompts + strict JSON schemas (Strategist/Monetization/Copy/Visual)
+4) Expand ResearchData schema (delivery expectations, differentiation gaps, citations)
+5) Implement backend agent folder structure
+6) Implement Apify Agent runner (TTL → scrape → sanitize → summarize → save)
+7) Implement snapshot loader + in-memory cache
+8) Implement Daily Swarm (`Promise.allSettled` + retry + fallback + merge)
+9) Implement deterministic quality gate + contradiction checks
+10) Implement merger utility + provenance metadata
+11) Add backend routes (`/api/agents/generate`, `/api/agents/research`, optional snapshot status)
+12) Wire frontend store to `/api/agents/generate`
+13) Update Sidebar UI (Generate + Market Data badge + Refresh)
+14) Update chat/dashboard docs if needed
+15) Update AGENTS.md runbook for V2.3 (this section)
+16) Verify research pipeline (snapshot saved/loaded; TTL/force)
+17) Verify daily swarm (<8s target; 100% valid Product; citations used)
+18) Regression check (UI flows; build/lint)
+
+## Project overview
+- **App name:** GumGenie Pro AI – Advanced Architect (see `metadata.json`)
+- **Purpose:** Generate high-converting Gumroad-style digital product listings + visual style presets using **Google Gemini**.
+- **Frontend:** React + TypeScript powered by **Vite**.
+- **State management:** Zustand (`store.ts`).
+- **UI:** Tailwind CSS loaded via CDN in `index.html` (no Tailwind build pipeline).
+- **Backend (optional / mock):** Express + Prisma in `backend/`.
+
+## Tech stack
+- **Language:** TypeScript
+- **Frontend framework:** React (`react`, `react-dom`)
+- **Build tooling:** Vite (`vite.config.ts`)
+- **Linting:** ESLint (`.eslintrc.json`)
+- **AI SDK:** `@google/genai` (`services/geminiService.ts`)
+- **Backend libs:** `express`, `cors`, `@prisma/client`
+
+## Repo layout (important files & directories)
+- `index.html` — Vite entry HTML, Tailwind CDN, fonts, global styles, importmap.
+- `index.tsx` — React root mount.
+- `App.tsx` — Main page layout and the “generate” orchestration (logs + product generation).
+- `types.ts` — Shared domain types (`Product`, `StylePreset`, `TemplateCategory`, etc.).
+- `store.ts` — Zustand store + actions (generation, customization, content blocks, publishing mocks).
+- `components/` — UI components:
+  - `Sidebar.tsx` — Control panel (category selection, customization, integrations, publishing).
+  - `ProductPreview.tsx` — Main product preview / editable content display.
+  - `TemplateGrid.tsx` — Category selection.
+  - `TerminalWindow.tsx` — Log view.
+  - `DynamicIcon.tsx` — Maps emojis/names to `lucide-react` icons.
+- `services/geminiService.ts` — Gemini prompts + response schema parsing.
+- `backend/` — Optional server side:
+  - `server.ts` — Express routes (mock simulation + mock Gumroad publish proxy).
+  - `schema.prisma` — Prisma schema (currently empty/placeholder).
+
+## Getting started
+- **Prereqs:** Node.js (see `README.md`).
+- Install deps:
+  - `npm install`
+- Create local env file:
+  - Set `GEMINI_API_KEY` in `.env.local`
+- Run frontend dev server:
+  - `npm run dev`
+- Build / preview:
+  - `npm run build`
+  - `npm run preview`
+- Lint:
+  - `npm run lint`
+  - `npm run lint:fix`
+
+## Environment variables
+- `.env.local`
+  - `GEMINI_API_KEY` — Google Gemini API key.
+
+**How the key is wired today**
+- `vite.config.ts` injects the key at build/dev time as:
+  - `process.env.API_KEY`
+  - `process.env.GEMINI_API_KEY`
+- `services/geminiService.ts` uses `process.env.API_KEY`.
+
+> Security note: this repo currently calls Gemini from the browser, which means the API key is exposed to clients. If you need to harden this, move Gemini calls to `backend/` (or a serverless function) and proxy requests.
+
+## Development conventions observed
+- **Type-first:** shared types live in `types.ts`; components and store import from there.
+- **Path alias:** `@/*` maps to repo root (configured in `tsconfig.json` + `vite.config.ts`).
+- **State updates:** prefer `useStore()` actions (e.g., `setProduct`, `applyPreset`, `addLog`) instead of mutating objects directly.
+- **IDs:** ephemeral IDs are generated via `Math.random().toString(36)...` for UI-only entities (logs/content blocks).
+- **Styling:** Tailwind utility classes directly in JSX; no CSS modules in repo.
+
+## AI prompting / response handling
+- `generateProductContent(category)` uses Gemini with a **JSON response schema** (via `responseMimeType: "application/json"` and `responseSchema`).
+- Keep the output aligned with `types.ts`:
+  - `Product` requires `title`, `description`, `price`, `features`, `callToAction`, `emojiSet`, `extraComponents`.
+  - `StylePreset` requires the set of fields listed in `types.ts`.
+- If you change the schema/prompt:
+  - Update both `types.ts` and the `responseSchema` in `services/geminiService.ts`.
+  - Ensure the UI (`Sidebar`, `ProductPreview`) still renders new/changed fields.
+
+## Backend notes (Express)
+- Backend lives in `backend/` and runs separately from Vite.
+- **Default ports:**
+  - Frontend (Vite): `http://localhost:3110`
+  - Backend (Express): `http://localhost:4000`
+- Run backend:
+  - `npm run backend:dev`
+  - Or run both: `npm run dev:full`
+
+### One-command dev workflow
+- `npm run dev:full` starts:
+  - frontend (Vite) on `http://localhost:3110`
+  - backend (Express) on `http://localhost:4000`
+- It runs a preflight that kills any processes holding ports `3110` and `4000` (see `scripts/kill_ports.mjs`).
+
+**Dev port hygiene**
+- `npm run dev:full` runs a preflight that kills any processes listening on ports `3110` and `4000` to avoid "port already in use" errors on Windows.
+- Manual fallback (Windows):
+  - `netstat -ano | findstr :3110`
+  - `taskkill /PID <pid> /F`
+
+### Environment variables (backend)
+- See `.env.example` for the full list.
+- Backend loads `.env.local` automatically via `dotenv`.
+
+### CORS / dev connectivity
+- In internal dev mode, the backend CORS middleware allows **any** `http(s)://<host>:3110` origin (to support `localhost` + LAN IP URLs printed by Vite).
+- If you hit `TypeError: Failed to fetch` in the browser, make sure:
+  - frontend is running on port **3110**
+  - backend is running on **4000**
+  - you are visiting a URL that ends with `:3110` (Local or Network)
+- For production hardening later, replace this with a strict allowlist.
+
+  - On Windows/PowerShell, you can still set env vars in the session before running backend if needed.
+
+**Expected env var keys (no values):**
+- `PORT`
+- `FRONTEND_URL`
+- `GEMINI_API_KEY`
+- `GUMROAD_CLIENT_ID`
+- `GUMROAD_CLIENT_SECRET`
+- `GUMROAD_REDIRECT_URI`
+- `GUMROAD_ACCESS_TOKEN` (optional)
+- `MAGIC_API_KEY` (required for `@21st-dev/magic` MCP)
+- `MCP_UNFRAMER_SSE_URL` (required for Unframer SSE MCP)
+
+**Quick verification (PowerShell):**
+- Backend reachable:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/mcp-stdio/servers" | ConvertTo-Json -Depth 5`
+- Gumroad auth status:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/gumroad/status" | ConvertTo-Json`
+- MCP stdio tool listing (example):
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-stdio/tools" -ContentType "application/json" -Body '{"serverId":"magicui"}' | ConvertTo-Json -Depth 10`
+  - If tool listing fails, the API may return `diagnostics.stderrTail` (last ~12 stderr lines) to help identify missing env vars or `npx`/network issues.
+
+**Known working stdio servers** (internal dev)
+- `shadcn` — registry browsing/install helpers (React Bits compatible)
+- `magicui` — Magic UI component library tools (e.g., backgrounds, buttons, components)
+- `magic` — 21st.dev Magic tools (component builder/refiner)
+
+### AI formatting helpers (MCP → Canvas)
+- `POST /api/ai/format-mcp-output` converts raw MCP output text into a structured `ContentBlock` (pricing, FAQ, feature grid, etc.).
+  - Used by the Library “MCP Component Preview” flow to create usable blocks instead of inserting raw code.
+
+### Reliability & Performance (production-ready)
+- **Hard timeouts** (to avoid multi-minute hangs):
+  - AI formatting (`POST /api/ai/format-mcp-output`) has a **20s hard timeout**.
+  - MCP stdio tool calls (`POST /api/mcp-stdio/call`) support per-call **`timeoutMs`** (forwarded to the underlying stdio tool call).
+- **Retry logic**:
+  - AI formatting retries **once** (small backoff) for transient failures.
+- **Fallback blocks**:
+  - If AI formatting fails or times out, we immediately return a safe fallback block so Preview/Insert never dead-ends.
+  - Pricing fallback: a usable **3-tier pricing block** (rendered via the existing canvas pricing section) under a feature-grid.
+- **Progress logs**:
+  - Workflow progress is streamed into the Terminal feed (step-by-step), including formatting start, warnings on failures, and "preview ready" success messages.
+- **Quality standards**:
+  - **100-point quality rubric** established (4 dimensions × 25 points each).
+  - **80+ point threshold** required for launch-ready products.
+  - All template categories transformed to premium positioning (average 77→88 quality score).
+- **Performance monitoring**:
+  - Comprehensive audit plan with latency targets, caching strategies.
+  - Web Vitals tracking: <2s LCP, <100ms FID, <0.1 CLS targets.
+  - API response targets: <6s generation, <20s AI formatting, <30s MCP calls.
+
+### Gumroad OAuth + publishing (real)
+- OAuth endpoints:
+  - `GET /api/gumroad/oauth/start` — redirects to Gumroad authorize
+  - `GET /api/gumroad/oauth/callback` — exchanges code for token then redirects back to `FRONTEND_URL`
+  - `GET /api/gumroad/status` — returns `{ connected: boolean }`
+  - `POST /api/gumroad/products` — creates a real Gumroad product
+- Required env vars (see `.env.example`):
+  - `GUMROAD_CLIENT_ID`
+  - `GUMROAD_CLIENT_SECRET`
+  - `GUMROAD_REDIRECT_URI` (recommended local: `http://localhost:4000/api/gumroad/oauth/callback`)
+  - `FRONTEND_URL` (recommended local: `http://localhost:3110`)
+
+### Market signals (MVP)
+- `POST /api/market-brief` accepts `{ query, category? }` and returns a best-effort market snapshot (competitor links + keywords).
+
+### MCP integrations (component libraries)
+The app supports multiple MCP transport modes:
+
+**Official docs**
+- shadcn MCP: https://ui.shadcn.com/docs/mcp
+- Magic UI MCP: https://magicui.design/docs/mcp
+- Magic UI MCP server repo (manual config + tools list): https://github.com/magicuidesign/mcp
+
+**Debugging MCP stdio (PowerShell)**
+- List available local servers:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/mcp-stdio/servers" | ConvertTo-Json`
+- List tools for magic:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-stdio/tools" -ContentType "application/json" -Body '{"serverId":"magic"}' | ConvertTo-Json -Depth 10`
+- List tools for Magic UI:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-stdio/tools" -ContentType "application/json" -Body '{"serverId":"magicui"}' | ConvertTo-Json -Depth 10`
+- Call a tool:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-stdio/call" -ContentType "application/json" -Body '{"serverId":"magic","toolName":"<tool>","args":{}}' | ConvertTo-Json -Depth 10`
+
+If stdio calls fail, the API returns a `diagnostics.stderrTail` snippet (last ~12 stderr lines) to help identify missing env vars or `npx`/network issues.
+
+- **Local MCP (stdio)** (backend spawns process):
+  - `shadcn` — official config: `npx shadcn@latest mcp` (we run `cmd /c npx -y shadcn@latest mcp` on Windows to avoid interactive prompts)
+  - `magicui` — official manual config: `npx -y @magicuidesign/mcp@latest` (we run `cmd /c npx -y @magicuidesign/mcp@latest` on Windows)
+  - `magic` — `npx -y @21st-dev/magic@latest` (requires `MAGIC_API_KEY`)
+  - Endpoints:
+    - `GET /api/mcp-stdio/servers`
+    - `POST /api/mcp-stdio/tools` `{ serverId }`
+    - `POST /api/mcp-stdio/call` `{ serverId, toolName, args }`
+- **Hosted MCP (SSE)**:
+  - `unframer` — requires `MCP_UNFRAMER_SSE_URL`
+  - Endpoints:
+    - `GET /api/mcp-sse/servers`
+    - `POST /api/mcp-sse/tools` `{ serverId }`
+    - `POST /api/mcp-sse/call` `{ serverId, toolName, args }`
+
+- **Local MCP (HTTP via adapter)**:
+  - `gemini-image` — Gemini image generation via local container (REST) exposed through an MCP JSON-RPC adapter.
+  - Required (non-secret) env vars (see `.env.example`):
+    - `GEMINI_IMAGE_MCP_BASE_URL` (default: `http://localhost:3102`)
+    - `MCP_ADAPTER_BASE_URL` (optional; default: `http://localhost:4000`)
+  - Adapter endpoint (backend):
+    - `POST /api/mcp-http-adapter/gemini-image` (MCP JSON-RPC: `initialize`, `tools/list`, `tools/call`)
+  - Registry endpoints (same as other HTTP MCP servers):
+    - `GET /api/mcp-http/servers` (should include `gemini-image`)
+    - `POST /api/mcp-http/tools` `{ serverId: "gemini-image" }`
+    - `POST /api/mcp-http/call` `{ serverId: "gemini-image", toolName, args }`
+  - Tools exposed (v1):
+    - `gemini_image.list_models`
+    - `gemini_image.list_images`
+    - `gemini_image.generate`
+  - Safety:
+    - The adapter **never returns base64** image blobs (only ids/urls/metadata).
+    - Avoid logging raw image payloads.
+
+- **Remote MCP (WebSocket)** (experimental):
+  - Endpoints:
+    - `POST /api/mcp/tools` `{ serverUrl }`
+    - `POST /api/mcp/generate-block` `{ serverUrl, toolName, prompt, blockType? }`
+
+### Prisma status
+- Prisma is **not configured** yet in this repo (`backend/schema.prisma` is empty). The backend uses in-memory mocks where needed.
+
+## Testing & CI
+- No test runner is configured in `package.json` yet.
+- If you add tests, prefer adding a single lightweight runner first (e.g., Vitest) and wire it into CI later.
+
+## Template specifications (V2 architecture)
+- **Quality-driven approach**: All categories follow unified V2 specification format:
+  - **Market Strategy & Positioning**: Target audience analysis, competitive positioning, value proposition framework
+  - **Monetization Architecture**: 3-tier pricing structure, social proof strategy, value anchoring, ecosystem planning
+  - **Content Blueprint**: Information architecture, content block specifications, technical requirements
+  - **Visual System Layer**: Design foundation, category-specific optimization, platform requirements  
+  - **Assets Pipeline**: Production workflow, deliverable specifications, support infrastructure
+- **Quality benchmarks**: 
+  - **Notion Templates V2**: 91→93/100 (enhanced social proof + niche positioning)
+  - **AI Prompts V2**: 83→88/100 (framework-based approach + technical credibility) 
+  - **Digital Planners V2**: 77→86/100 (aesthetic lifestyle + Instagram-worthy design)
+  - **Design Templates V2**: 76→85/100 (agency-grade + professional ROI focus)
+- **Implementation docs**:
+  - `templates/*_V2.md` - Complete V2 specifications for each category
+  - `QUALITY_CRITERIA.md` - 100-point scoring rubric and launch thresholds
+  - `VISUAL_SYSTEM_SPEC.md` - Conversion-optimized presets and performance budgets
+  - `COMPONENT_LIBRARY_INTEGRATION.md` - Category-specific MCP workflow mappings
+
+## Common workflows
+- **Add a new template category:**
+  - Update `TemplateCategory` in `types.ts`
+  - Create V2 specification following `TEMPLATE_SPEC_V2_FORMAT.md`
+  - Add category-specific components in `COMPONENT_LIBRARY_INTEGRATION.md`  
+  - Update category names + image seeds in `services/geminiService.ts`
+  - Update UI list in `components/TemplateGrid.tsx` and Components tab in `Sidebar.tsx`
+- **Add a new style preset field:**
+  - Update `StylePreset` in `types.ts`
+  - Update the Gemini `responseSchema` + prompt in `services/geminiService.ts`
+  - Update `store.ts` `applyPreset()` and any UI bindings
+  - Add preset specifications to `VISUAL_SYSTEM_SPEC.md` if needed
+
+### Canvas modules (premium visuals)
+- The **Theme → Canvas Modules** panel controls hero visual modules live:
+  - `heroBackgroundEffect`: `none` | `lightrays` | `dither`
+  - `heroDitherIntensity` slider
+  - `heroGradientTitleEnabled`, `heroSplitTitleEnabled`, `heroGlareCtaEnabled`
+
+### Components tab: Curated MCP workflows
+- The **Components** tab provides category-specific component buttons that trigger optimized MCP workflows:
+  - **AI Prompts**: Framework Showcase, Technical Credibility, Developer Testimonials, 3-Tier Pricing
+  - **Notion Templates**: Database Showcase, Productivity Benefits, Setup Simplicity, Professional Testimonials  
+  - **Digital Planners**: Aesthetic Gallery, Lifestyle Benefits, App Compatibility, Creative Community
+  - **Design Templates**: Agency ROI Calculator, Platform Compatibility, Professional Testimonials, Commercial License
+- Each button uses curated prompts aligned with category positioning and target audience
+- Components integrate seamlessly with the existing MCP preview → insert workflow
+
+### AI recommendation system
+- **Smart suggestions** appear on hover over editable content (title, description, content blocks)
+- **Category-aware recommendations** provide 3 contextual alternatives based on:
+  - Selected template category and target audience
+  - V2 specification positioning (framework-based, aesthetic lifestyle, agency-grade, etc.)
+  - Conversion-optimized messaging with specific value propositions
+- **One-click application** replaces content instantly, with full undo support
+
+### Chat with AI integration (production-ready)
+- **Interactive AI chat** with context-aware suggestions and component generation
+
+#### UX: Two access patterns
+1) **Chat modal** (existing): user clicks chat button → modal opens
+2) **Chat Control Dashboard** (new, always visible): fixed bottom-docked dashboard that keeps the LLM accessible at all times
+
+#### Chat Control Dashboard (always-visible)
+- Full-width, fixed-position panel docked to the bottom of the app
+- Compact by default and **height-adjustable** (resizable handle)
+- The existing **“Add Section (MCP)”** UI remains **unchanged** and continues to function as the deterministic/manual workflow
+- Layout safety: `App.tsx` reserves bottom space equal to the dashboard height so content is never hidden
+
+#### Ask / Turbo modes (tool automation)
+- **Ask mode**: assistant proposes the MCP server/tool + args and waits for confirmation
+- **Turbo mode**: assistant selects tools/args and executes automatically (visually “lit” in UI)
+- **Guardrail (v1):** single-tool-per-message execution (prevents spam + keeps runs deterministic)
+
+#### Category workflow buttons (routed through chat)
+- Dashboard includes dedicated button groups for:
+  - **AI Prompts**
+  - **Notion Templates**
+  - **Digital Planners**
+  - **Design Templates**
+- Clicking a workflow button sends a **structured prompt into the chatbot** (no direct MCP call from the button)
+- Chat can run a guided micro-flow (e.g., style follow-ups like Glassmorphic / Minimalist / 3D animated) via clickable option buttons
+
+#### MCP tool awareness + formatting pipeline
+- MCP stdio servers are discovered via backend endpoints:
+  - `GET /api/mcp-stdio/servers`
+  - `POST /api/mcp-stdio/tools` `{ serverId }`
+  - `POST /api/mcp-stdio/call` `{ serverId, toolName, args, timeoutMs? }`
+- Tool outputs are converted into Canvas-ready content via:
+  - `POST /api/ai/format-mcp-output` (raw MCP output → structured `ContentBlock`)
+
+#### Chat orchestration (implemented)
+- The intended “agentic” flow is consolidated behind a single endpoint:
+  - `POST /api/chat/orchestrate`
+- Contract intent:
+  - Input: `{ message, context, mode, product?, preset? }`
+  - Output (Ask): `{ executed: false, recommendation: { serverId, toolName, args, targetBlockType, rationale } }`
+  - Output (Turbo): `{ executed: true, recommendation: {...}, mcpText, formatted: { formattedBlock, suggestions } }`
+- Performance note: tool catalog is cached in-memory (server list + tools list) and refreshed on demand
+
+##### `/api/chat/orchestrate` examples (PowerShell)
+- Ask mode (recommend only):
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/chat/orchestrate" -ContentType "application/json" -Body '{"message":"Create a 3-tier pricing section","mode":"ask","context":{"category":"AI_PROMPTS"}}' | ConvertTo-Json -Depth 10`
+- Turbo mode (exec + format → ContentBlock)
+  - Requires `product` + `preset` so formatting can return a Canvas-ready block:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/chat/orchestrate" -ContentType "application/json" -Body '{"message":"Create a 3-tier pricing section","mode":"turbo","context":{"category":"AI_PROMPTS"},"product":{...},"preset":{...}}' | ConvertTo-Json -Depth 10`
+
+##### Debugging the dashboard
+- Add `?debugChat` to the frontend URL to log orchestration timing + chosen args into the chat transcript.
+
+---
+
+## Production-test exports (reports + zips + market snapshot)
+
+### What this is
+- A repeatable export pipeline that produces **team-reviewable artifacts** under `production-test/`:
+  - `report.html` — interactive report (tabs per category)
+  - `report.md` — comprehensive overview + strategic analysis + key insights + actionable steps
+  - `market-data.json` — Apify-based market snapshot (structured)
+  - `combined.json` — all artifacts + market data in one file
+  - `summary.json` — quick scan index
+  - `individual-files.zip` — raw per-category artifacts
+  - `full-assembly.zip` — combined + summary + reports + market + artifacts
+
+### Generate exports
+1) Ensure `.env.local` contains:
+   - `GEMINI_API_KEY`
+   - `APIFY_TOKEN`
+   - (optional) `APIFY_SERP_ACTOR_ID`
+2) Run:
+   - `npm run export:production-test`
+
+### Notes / troubleshooting
+- If market data is empty, confirm `APIFY_TOKEN` is valid and the default actor exists.
+- You can override the actor via `APIFY_SERP_ACTOR_ID`.
+- `tmp-workflows/` is treated as scratch; the export command copies any existing workflow artifacts into `production-test/` before generating reports.
+
+---
+
+## Market validation (Apify + SerpAPI) — rapid niche validation
+
+### Recommended usage (offline insights layer)
+- **Recommended:** run market validation as an **offline insights layer** that improves copy quality and delivery decisions.
+- It is **not required** for the runtime app experience.
+- Use outputs to:
+  - refine prompts (feature list, objections, proof points)
+  - tighten pricing/tier strategy
+  - confirm delivery expectations (ZIP, Start Here, duplicate links, import guides)
+  - update the quality gate checklist (must-have sections)
+
+### When to integrate into the live app (optional)
+- Only integrate into runtime if you want continuously refreshed market signals and automated prompt adjustments.
+- Default approach: keep it offline for deterministic builds and lower complexity.
+
+### What this is
+A repeatable validation pipeline that extracts **real market signals** per niche (AI Prompts, Notion templates, Digital planners, Design templates):
+- competitor positioning + headlines
+- pricing bands and tier patterns (where visible)
+- recurring buyer pain points (from reviews when available)
+- delivery expectations (ZIP, Start Here, duplicate links, import guides, licensing clarity)
+- keyword clusters + “People Also Ask” questions (SerpAPI enrichment)
+
+### Data sources (recommended pipeline)
+- **Apify Gumroad Search Scraper** → discovers competitor products
+- **Apify Gumroad Product Detail Scraper** → extracts listing copy + metadata
+- **Apify Gumroad Reviews Scraper** → extracts real customer pain points and complaints
+- **SerpAPI** (optional) → adds PAA/related query signals for broader demand and objections
+
+### Required env
+- `.env.local`:
+  - `APIFY_TOKEN` (required)
+  - `APIFY_GUMROAD_SEARCH_ACTOR_ID` (recommended)
+  - `APIFY_GUMROAD_DETAIL_ACTOR_ID` (recommended)
+  - `APIFY_GUMROAD_REVIEWS_ACTOR_ID` (recommended)
+  - `SERPAPI_KEY` (optional; used to augment Apify results with PAA/related queries)
+
+### Tuning knobs (cost/time vs signal quality)
+- Recommended sample size: **20 competitor products per category**
+- If you’re iterating fast: start with 10, then scale to 30 for deeper audits
+
+### Expected outputs
+Under `production-test/`:
+- `market-validation.json` — raw normalized validation dataset (queries, results, extracted phrases)
+- `framework-audit.json` — claim-by-claim audit: **Supported / Weakly supported / Contradicted**, plus recommended changes
+- `report.md` — includes a Market Validation section summarizing key pain points + recommended delivery format per product type
+
+### Commands (recommended)
+- Run validation:
+  - `npm run validate:market`
+- Audit the framework against extracted signals:
+  - `npm run audit:framework`
+- Run everything and export:
+  - `npm run validate:all`
+
+### How to use the results (team checklist)
+- Treat **paid intent** signals as highest value: pricing pages, purchase language, checkout screenshots.
+- Treat “download all / zip / import steps / duplicate link confusion” as delivery-critical requirements.
+- Use the dataset to:
+  1) choose a niche (or micro-niche)
+  2) choose a delivery format (ZIP + Start Here + Pages)
+  3) write Gumroad copy that directly addresses discovered objections
+
+### Recommended decision gates
+- If top results are mostly “free” and buyers complain about paid alternatives → tighten differentiation.
+- If competitors repeatedly highlight one feature (e.g., Goodnotes tabs, Notion onboarding) → it’s table-stakes.
+- If licensing questions appear frequently in results → include a license page + clear checklist.
+
+#### Component architecture
+- `components/ui/chat-with-ai.tsx`
+  - `ChatControlDashboard` (fixed dock)
+  - `ChatWithAI` (modal)
+  - Workflow button rendering + follow-up option buttons
+- `App.tsx`
+  - Mounts `ChatControlDashboard` and reserves bottom padding
+- `store.ts`
+  - Persists dashboard height + Ask/Turbo mode (localStorage)
+  - Caches MCP server list/tool list metadata for responsiveness
+
+#### Developer runbook (quick-start)
+- Install deps:
+  - `npm install`
+- Start full stack dev (recommended):
+  - `npm run dev:full`
+  - Frontend: `http://localhost:3110`
+  - Backend: `http://localhost:4000`
+
+##### Required env
+- `.env.local`:
+  - `GEMINI_API_KEY` (required for formatting + chat)
+  - `MAGIC_API_KEY` (required only if using `@21st-dev/magic` stdio MCP server)
+
+##### Verifying MCP tool discovery (PowerShell)
+- List servers:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/mcp-stdio/servers" | ConvertTo-Json -Depth 5`
+- List tools:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-stdio/tools" -ContentType "application/json" -Body '{"serverId":"magicui"}' | ConvertTo-Json -Depth 10`
+- Call tool:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-stdio/call" -ContentType "application/json" -Body '{"serverId":"magicui","toolName":"<tool>","args":{},"timeoutMs":20000}' | ConvertTo-Json -Depth 10`
+
+##### Verifying formatting (PowerShell)
+- `POST /api/ai/format-mcp-output` expects:
+  - `text`, `targetBlockType`, `product`, `preset`
+- If formatting fails/timeouts, backend returns safe fallback blocks (never dead-end)
+
+##### Team conventions for extending orchestration safely
+- Keep contracts typed (add interfaces in `backend/mcpSchemas.ts` and `types.ts` as needed)
+- Never log secrets (API keys) in backend logs or frontend UI
+- When adding a new block type: update `types.ts` + formatter schema + renderer
+- Prefer stdio-first MCP integration for local reliability; add SSE only once stdio paths are stable
+
+### Library tab: MCP preview → insert workflow  
+- The **Library → MCP Component Preview** panel can generate a section via local MCP stdio servers:
+  - `magicui` (layout-focused)
+  - `magic` (21st.dev, requires `MAGIC_API_KEY`)
+  - `shadcn`
+- Flow:
+  1) Select server + tool
+  2) Provide a prompt + block type
+  3) Click **Generate preview**
+  4) A **Canvas Preview** card appears in the canvas (`ProductPreview`) with **Insert** / **Dismiss**
+
+### Add new React Bits components
+- Place TS-CSS components under `components/reactbits/`
+- Import and wire them in `components/ProductPreview.tsx` (hero is the current integration point)
+- If a component requires a runtime dependency (e.g., `ogl` for `LightRays`), add it to `package.json` and run `npm install`
+
+## Sentinel Agent (V2) — local quality guardian
+
+### What this is
+Sentinel is a deterministic, scope-aware quality guard intended to run **locally** during development.
+It enforces a “green state” by running checks in a fail-fast sequence.
+
+### Temp file hygiene
+- Use `tmp_rovodev_sentinel_` as the prefix for any temporary files created by Sentinel.
+
+### Scope rules
+- **Frontend scope** (changes isolated to `components/`, `services/`, `App.tsx`):
+  - Run: `npm run lint` → `npm run typecheck`
+  - Skip build unless explicitly requested
+- **Backend/core scope** (changes touching `backend/`, `types.ts`, `store.ts`, routes):
+  - Run: `npm run lint` → `npm run typecheck` → `npm run build` → smoke
+
+### Fail-fast execution sequence (stop on failure)
+1) **Lint:** `npm run lint`
+2) **Typecheck:** `npm run typecheck` (fallback: `npx tsc --noEmit`)
+3) **Build:** `npm run build`
+4) **Smoke (backend changes only):**
+   - `GET /api/mcp-stdio/servers`
+   - `POST /api/chat/orchestrate` (ask mode)
+   - If Gumroad routes changed: `GET /api/gumroad/status`
+
+### Output schema (Sentinel reports)
+1. CHECKS RUN
+2. RESULT (PASS/FAIL)
+3. FAILURES (summarized)
+4. ROOT CAUSE
+5. FIX PLAN (minimal)
+6. VERIFICATION (commands)
+
+---
+
+## Debug Trace (Agent Execution Tracker) — development mode
+
+### Purpose
+Enable **full visibility during development** into:
+- agent timings, retries, fallbacks
+- tool calls and formatting outcomes
+- schema validation and quality gate results
+
+### Feature flags
+- `AGENT_TRACE_ENABLED=true|false`
+  - Enables trace capture and the Debug UI tab.
+- `AGENT_TRACE_VERBOSE=true|false`
+  - When true (dev-only): includes verbose payloads (sanitized), truncated for size.
+
+### Storage
+- Trace files are written under: `production-test/logs/<traceId>.json`
+
+### UI integration (Chat)
+- The Debug Trace viewer lives inside the Chat UI (Dashboard) as a **Debug** tab.
+- Each agentic generation response returns `meta.traceId`.
+- The Debug tab can load and render the trace timeline for analysis.
+
+---
+
+## Chat Control Dashboard behavior (scroll-threshold)
+
+### Desired UX
+- **Compact sticky chatbar** is always available (minimal input).
+- The full dashboard (workflow buttons/tool browser/debug) becomes visible **only after scrolling past the end of the main preview column**.
+- When the user scrolls back above the threshold, the dashboard collapses back to compact mode.
+
+### Implementation approach
+- Use an `IntersectionObserver` sentinel placed at the end of the main preview column.
+- **Chat UX:** the chat UI uses a **compact sticky chatbar** by default, and auto-expands into the full dashboard (buttons/tool browser/debug) only after the user scrolls past the preview sentinel.
+- **Debug Trace UI:** the trace viewer is available inside the chat dashboard as a **Debug** tab when `AGENT_TRACE_ENABLED=true` (optional `AGENT_TRACE_VERBOSE=true`).
+
+---
+
+## Outstanding tasks (team checklist)
+
+### High priority
+- Implement scroll-threshold Chat UI (compact sticky bar → auto-expand below preview)
+- Implement backend trace logging + `GET /api/traces/:traceId` (dev-only)
+- Implement Debug Trace tab in chat UI
+
+### Agent Squad (V2.3)
+- Implement Orchestrator (brief + final consistency pass)
+- Implement Daily Swarm (`Promise.allSettled` + retry + fallback + merge)
+- Implement Researcher (Apify → Gemini → snapshots) + snapshot injection
+- Add quality gate + contradiction checks + provenance metadata
+
+### Verification
+- `npm run lint`, `npm run typecheck`, `npm run build`
+- Smoke endpoints after route changes
+
+---
+
+## Session Log
+- 2025-12-22: Deep-dive extraction stabilized (SerpAPI discovery + muhammetakkurtt/gumroad-scraper detail; up to 30 competitors/category; reviews skipped unless APIFY_GUMROAD_REVIEWS_ACTOR_ID is rented).
+- 2025-12-22: V2.3 Agent Squad implemented: backend endpoints `/api/agents/generate` + `/api/agents/research` (snapshot placeholder initially).
+- 2025-12-22: Frontend wired to Agent Squad: generation uses `/api/agents/generate`; Sidebar includes Market Data status + Refresh.
+- 2025-12-22: Output quality + dev UX upgrades: per-agent swarm timings fixed; merger now populates `product.contentBlocks` + safer preset/emoji handling; `/api/agents/research` now generates deterministic snapshots from latest `production-test/raw/<run>/merged/<CATEGORY>.detail.json`; added `/api/health` + deterministic `/api/version` (fs+JSON parse with cache); ProductPreview renders `pricing` content blocks via `PricingTiersSection` (no duplicate pricing section); Chat dashboard manual collapse/expand persisted (`gg_chatDashboardCollapsed`). Verified via lint/typecheck/build + full API smoke + one generation per category.se/expand persisted (`gg_chatDashboardCollapsed`). Verified via lint/typecheck/build + full API smoke + one generation per category.se/expand persisted (`gg_chatDashboardCollapsed`). Verified via lint/typecheck/build + full API smoke + one generation per category.
+- 2025-12-22: Added reusable 3-tier pricing component `components/canvas/ThreeTierPricingGuide.tsx` and updated pricing content blocks in `components/ProductPreview.tsx` to render with it (decoy pricing based on product.price). Verified via typecheck + sample generation (NOTION_TEMPLATES).
+- 2025-12-22: Notion MCP integration (Streamable HTTP) + full OAuth added.
+- 2025-12-22: Notion template creation workflow started: introduced `NotionTemplateBlueprint` schema (pages/databases/properties/views/seed) in `backend/agents/definitions/schemas.ts` as the deterministic plan for the upcoming Notion MCP build runner.
+- 2025-12-22: Notion blueprint generators added for NOTION_TEMPLATES: deterministic baseline + optional Gemini mode (env `NOTION_BLUEPRINT_MODE=gemini`, fallback to deterministic). `/api/agents/generate` now returns `meta.notionBlueprintMode` + `meta.notionBlueprint` (5 DBs, 2 pages in baseline). Verified via lint/typecheck and smoke generate.
+- 2025-12-22: Notion template build runner v1 (MCP stdio via `mcp-remote`) is working end-to-end: added GumGenie-branded stdio server (`serverId: gumgenie`) bridging to `https://mcp.notion.com/mcp`; improved stdio error handling to fail fast on id:null errors; added dev endpoint `POST /api/notion/build-template` that creates a full template skeleton (root page + Start Here + Dashboard + 5 databases) and returns created URLs/IDs.
+- 2025-12-22: Hosting plan updated: application hosted on https://www.gumgenie.com and product hosting/domain on https://www.agelessinsights.ca. Ensure activation links/QR codes and docs reflect this.
+- 2025-12-22: Cloudflare free-tier/storage assessment (official docs): confirmed Pages Functions requests count toward Workers Free plan quota (100k requests/day). KV limits confirmed (100k reads/day, 1k writes/day on Free) and D1 free limits confirmed (5M rows read/day, 100k rows written/day, 5GB). Recommended v1: KV-only for one-time license redemption; add D1 later for audit/analytics. Sources: https://developers.cloudflare.com/pages/functions/pricing/ ; https://developers.cloudflare.com/kv/platform/limits/ ; https://developers.cloudflare.com/d1/platform/pricing/
+- 2025-12-22: Market-signal grounding (local scraped dataset): when deciding deliverables and protocol UX/copy (e.g., Start Here page content, setup flow, objections), ground decisions in the repo’s scraped Gumroad/market dataset when available. Evidence paths used: production-test/market-validation.summary.json (NOTION_TEMPLATES: setup confusion), production-test/NOTION_TEMPLATES_product.json (common FAQ/objection patterns).
+- 2025-12-22: gumgenie-app Phase 1 progress (Cloudflare Pages app): added KV-backed customer Notion OAuth connect flow (`/api/notion/oauth/start`, `/api/notion/oauth/callback`, `/api/notion/status`) using `GG_SESSION_KV`. Upgraded `POST /api/generate` (gumgenie-app) to build a NOTION_TEMPLATES v1 skeleton via Notion REST API (2025-09-03) (root page + 5 databases + Start Here + Dashboard) and mark the Gumroad key used in `GG_LICENSE_KV` only after full success. Added Start Here + Dashboard block children insertion via Notion Blocks API. Added `variant: "standard" | "premium"` option to control onboarding depth. children insertion via Notion Blocks API. Added `variant: "standard" | "premium"` option to control onboarding depth.
+- 2025-12-23: Option B (Wrangler-first) deployment work: authenticated Wrangler (`wrangler whoami`), created Pages project `gumgenie-generator`, deployed multiple times while debugging Pages Functions routing. Key finding: `wrangler pages deploy .` (repo root) serves static HTML for `/api/*` because `/functions` is not at repo root; preferred approach is deploying a build output containing `_worker.js` + `_routes.json` (or setting Pages project root to `gumgenie-app`). Security hygiene: ensured `.env.example` has placeholders only, scrubbed any secrets from `wrangler.toml`, configured Pages secrets via `wrangler pages secret put`, and added temp deploy dirs to `.gitignore`. Tooling: enabled Docker MCP servers `ast-grep`, `semgrep`, and `git`; initialized local git repo via `git init`.`.env.example` has placeholders only, scrubbed any secrets from `wrangler.toml`, configured Pages secrets via `wrangler pages secret put`, and added temp deploy dirs to `.gitignore`. Tooling: enabled Docker MCP servers `ast-grep`, `semgrep`, and `git`; initialized local git repo via `git init`.children insertion via Notion Blocks API. Added `variant: "standard" | "premium"` option to control onboarding depth.velopes across gumgenie-app endpoints.
+
+Next developer handoff (Phase 1 → Phase 2 execution contract)
+
+### Phase separation rule (non-negotiable)
+- **Do not start Phase 2** until **Phase 1 is green for all 4 categories**.
+- “Green” means: activation → generate → publish → delivery verification passes **end-to-end**, with required quality gate satisfied.
+
+---
+
+## PHASE 1 — Production readiness (must ship all 4 categories)
+
+### P1.1 Activation gating (global)
+- Ensure `/api/verify` and `/api/generate` share stable `{ ok, reason, message }` semantics.
+- Retries must be safe (idempotent).
+- **Mark license used only after full success** across all categories.
+
+### P1.2 Observability/provenance (global)
+- Every endpoint returns `runId`, `startedAt`, and a consistent error envelope.
+- Logs are sanitized (no tokens/keys).
+
+### P1.3 Quality gate (global)
+- Required sections per category, no placeholders.
+- Category-aligned copy and delivery expectations.
+- MCP-generated sections must be formatted into valid Canvas blocks.
+- Target: **80+ quality rubric**.
+
+### P1.4 Category protocols (deliverables + variants)
+
+#### A) NOTION_TEMPLATES
+- Generation:
+  - Notion build: root page + Start Here + Dashboard + 5 DBs.
+  - Blocks API: Start Here + Dashboard block children insertion.
+  - **Variants:** `variant: "standard" | "premium"` (premium adds Quick Wins + Troubleshooting + Operating Rules).
+- Database polish (v1):
+  - Views/filters (e.g., Inbox/Next/Done), basic relations (Tasks ↔ Projects).
+  - Minimal seed rows (1 project + 3 tasks) optional.
+- Acceptance checks:
+  - Both variants produce correct content in a real Notion workspace.
+  - No dead-ends: links work; onboarding is clear.
+
+#### B) AI_PROMPTS
+- Deliverable generator:
+  - ZIP with: `01_START_HERE`, `04_LICENSE`, `05_SUPPORT`, prompt packs, presets, quality checklist.
+  - (If applicable) multiple packs/variants (e.g., beginner vs pro).
+- Acceptance checks:
+  - ZIP opens and contents match listing promises.
+
+#### C) DIGITAL_PLANNERS
+- Deliverable generator:
+  - PDF/ZIP output (planner pages), Start Here + license + support.
+  - Variant expectations (standard vs premium) if offered.
+- Acceptance checks:
+  - Files render correctly; consistent branding.
+
+#### D) DESIGN_TEMPLATES
+- Deliverable generator:
+  - ZIP with source files + exports + Start Here + license + support.
+  - Variant expectations (standard vs premium) if offered.
+- Acceptance checks:
+  - Files open in target tools; licensing clarity.
+
+### P1.5 Gumroad publishing integration (global)
+- Create product, attach deliverables or links.
+- Pricing tiers (if implemented), redirects, and connected status.
+
+### P1.6 End-to-end production confirmation (hard gate)
+For **each category** (NOTION_TEMPLATES, AI_PROMPTS, DIGITAL_PLANNERS, DESIGN_TEMPLATES):
+- Activation → Generate → Publish
+- Deliverable verification:
+  - Notion: pages/dbs/blocks exist + URLs returned
+  - ZIP/PDF: file integrity + expected structure
+- Smoke checklist:
+  - No secrets in logs
+  - Quality gate satisfied
+
+### P1.7 Local Cloudflare deploy automation (Option B: Wrangler-first)
+Use this path to perfect output locally before moving to CI (Option A: GitHub Actions). Keep config/script-driven so B → A is copy/paste.
+
+**Official docs (canonical):**
+- Wrangler overview: https://developers.cloudflare.com/workers/wrangler/
+- Wrangler commands reference (includes `pages` subcommands): https://developers.cloudflare.com/workers/wrangler/commands/
+- Pages Functions get started: https://developers.cloudflare.com/pages/functions/get-started/
+- Workers KV get started: https://developers.cloudflare.com/kv/get-started/
+
+**Wrangler command syntax (official):**
+- `wrangler <COMMAND> <SUBCOMMAND> [PARAMETERS] [OPTIONS]`
+- Cloudflare recommends local install; run via `npx`:
+  - `npx wrangler <COMMAND> <SUBCOMMAND> [PARAMETERS] [OPTIONS]`
+
+**KV namespaces (one-time, per Cloudflare account):**
+- Create namespaces:
+  - `npx wrangler kv namespace create GG_SESSION_KV`
+  - `npx wrangler kv namespace create GG_LICENSE_KV`
+- Bind them to your Pages project runtime as KV bindings named exactly:
+  - `GG_SESSION_KV`
+  - `GG_LICENSE_KV`
+
+**Deploy (Pages):**
+- Wrangler provides a `pages` command group for Cloudflare Pages (see Commands docs). Common commands you will use:
+  - `npx wrangler pages deploy ...`
+  - `npx wrangler pages dev ...`
+  - `npx wrangler pages project create ...`
+  - `npx wrangler pages deployment list ...`
+  - `npx wrangler pages deployment tail ...`
+  - `npx wrangler pages secret put ...`
+
+**Post-deploy E2E smoke (NOTION_TEMPLATES variants):**
+1) Notion OAuth status:
+   - `GET <BASE_URL>/api/notion/status`
+   - If not connected, complete one-time OAuth connect:
+     - open `<BASE_URL>/api/notion/oauth/start` in browser → approve → confirm status is connected
+2) Generate Standard:
+   - `POST <BASE_URL>/api/generate` body: `{ "templateType":"NOTION_TEMPLATES", "variant":"standard", "licenseKey":"..." }`
+3) Generate Premium:
+   - `POST <BASE_URL>/api/generate` body: `{ "templateType":"NOTION_TEMPLATES", "variant":"premium", "licenseKey":"..." }`
+4) Acceptance checks in Notion UI:
+   - Root page + Start Here + Dashboard created
+   - Blocks inserted (onboarding present)
+   - 5 databases exist
+   - DB links open correctly
+
+**Pro tips (speed + reliability):**
+- Confirm Wrangler auth quickly (official CLI): `npx wrangler whoami`.
+- Prefer `npx wrangler ...` to avoid global version drift between machines/CI.
+- Use deployment logs for rapid debugging: `npx wrangler pages deployment tail ...` (see Wrangler Commands docs).
+- KV bindings are name-sensitive: bindings must be named exactly `GG_SESSION_KV` and `GG_LICENSE_KV`.
+- Keep secrets out of logs: never print access tokens, client secrets, or license keys.
+- Treat Notion OAuth as a one-time bootstrap per environment: once `/api/notion/status` shows connected, E2E runs can be fully automated.
+
+---
+
+## PHASE 2 — Automation & scale (only after Phase 1 is green)
+
+### P2.1 Auto-posting / automation
+- Scheduling, safe rate limits, hard gate enforcement, rollback.
+
+### P2.2 Scaling & caching
+- Snapshot TTL refresh, queues/workers, concurrency control, performance budgets.
+
+### P2.3 Advanced 3D AI experience
+- 3D hero + AI textures + progressive enhancement + deterministic fallbacks.
+
+### P2.4 Analytics & auditing
+- Audit logs, license usage analytics, conversion tracking, support telemetry.
+latform/limits/ ; https://developers.cloudflare.com/d1/platform/pricing/
+
+---
+
+## Next session start-here (handoff note)
+
+### Current state
+- Foreman Agent runner exists (`scripts/foreman.mjs`) and is wired in `package.json` (`npm run foreman`, `foreman:build`, `foreman:watch`).
+- Repo model selection is env-driven via `GEMINI_MODEL_DEFAULT` (recommended default: `gemini-3-flash-preview`).
+- Chat UX: compact sticky chatbar above preview, auto-expands below preview sentinel; Debug tab exists in chat.
+- Debug Trace: backend returns `meta.traceId` from `/api/chat/orchestrate` when `AGENT_TRACE_ENABLED=true`, traces stored under `production-test/logs/`.
+- Docker MCP Toolkit enabled servers (local): `ast-grep`, `semgrep`, `git` (in addition to existing core servers like `fetch`, `filesystem`, `playwright`).
+- Git repo initialized locally: `git init`.
+
+### Recent work completed (this session)
+1) **NOTION_TEMPLATES generation variants (gumgenie-app)**
+   - `POST /api/generate` now supports `variant: "standard" | "premium"`.
+   - Premium adds extra onboarding sections (Quick Wins + Troubleshooting + Operating Rules).
+   - Still deterministic and still preserves the safety rule: **mark license used only after full success**.
+
+2) **Gemini Image MCP integrated into backend MCP registry (via adapter)**
+   - `backend/mcpHttpServers.ts` now includes `gemini-image` in `/api/mcp-http/servers`.
+   - `backend/server.ts` added `POST /api/mcp-http-adapter/gemini-image` (MCP JSON-RPC over HTTP → calls local gemini-image-mcp REST server).
+   - `.env.example` now includes `GEMINI_IMAGE_MCP_BASE_URL` (default `http://localhost:3102`) and `MCP_ADAPTER_BASE_URL` (optional).
+   - Safety: adapter responses are text-only and should never include base64 image blobs.
+
+### Known remaining work (next agent)
+A) **Gemini Image MCP polish** (still in progress)
+- Tighten adapter output to always return a stable `id` and **absolute URLs** (service currently returns relative URLs like `/images/<id>`).
+- Add `gemini-image` into the **frontend Library MCP selector** (so UI can list tools/call it).
+- Run a sample workflow end-to-end (servers → tools → call generate → surface URL in UI).
+
+B) **NOTION_TEMPLATES end-to-end completion** (still in progress)
+- Confirm both variants produce the expected Notion page content (Start Here + Dashboard blocks) in real Notion accounts.
+
+### Live Session Todo List (Phase 1 / Phase 2)
+
+**PHASE 1 — Production readiness**
+- (in progress) Activation gating: verify+generate stable contracts; safe retries; mark-used only after full success.
+- (completed) Observability/provenance: runId envelopes + consistent error shapes.
+- (pending) Quality gate: required sections; no placeholders; 80+ rubric.
+- (in progress) NOTION_TEMPLATES: standard/premium variants; Notion build pages+dbs+blocks; E2E verification.
+- (pending) AI_PROMPTS: ZIP deliverable generator + publish-ready assets.
+- (pending) DIGITAL_PLANNERS: PDF/ZIP deliverable generator + publish-ready assets.
+- (pending) DESIGN_TEMPLATES: ZIP/assets deliverable generator + publish-ready assets.
+- (pending) Gumroad publishing integration: product create + attach deliverables.
+- (in progress) Gemini Image MCP: stable id/absolute URL + frontend selector + sample workflow.
+- (pending) End-to-end production confirmation: activation→generate→publish for all 4 categories (+ variants).
+
+**PHASE 1 — Option B (Wrangler-first) local deploy tasks**
+- (completed) Wrangler auth + project create + initial deploy.
+- (in progress) KV bindings + env vars configured in Pages project.
+- (blocked) Pages Functions routing via `wrangler pages deploy .` (repo root) — **do not use**; it serves static HTML for `/api/*`.
+- (in progress) Preferred approach: deploy a build output containing `_worker.js` + `_routes.json` so `/api/*` is routed correctly.
+
+**PHASE 2 — Automation & scale (blocked until Phase 1 green)**
+- Auto-posting/automation.
+- Scaling/caching.
+- Advanced 3D AI experience.
+- Analytics/auditing.
+
+### Immediate next actions
+1) Confirm `npm run foreman` is green (lint + typecheck).
+2) If backend/core changes are made, run `npm run foreman:build` and smoke:
+   - `GET /api/mcp-stdio/servers`
+   - `POST /api/chat/orchestrate` (ask)
+   - `POST /api/agents/generate`
+   - `POST /api/agents/research`
+3) For local Cloudflare deploy + E2E smoke (Option B), follow **P1.7 Local Cloudflare deploy automation (Wrangler-first)** in this doc.
+
+3) Gemini Image MCP smoke (backend)
+- Ensure the container is running:
+  - `docker ps | findstr gemini-image-mcp`
+- Start backend:
+  - `npm run backend:dev`
+- Validate registry includes `gemini-image`:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/mcp-http/servers" | ConvertTo-Json -Depth 6`
+- List tools:
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-http/tools" -ContentType "application/json" -Body '{"serverId":"gemini-image"}' | ConvertTo-Json -Depth 10`
+- Call generate (ensure response has **no** `data:image`):
+  - `Invoke-RestMethod -Method Post -Uri "http://localhost:4000/api/mcp-http/call" -ContentType "application/json" -Body '{"serverId":"gemini-image","toolName":"gemini_image.generate","args":{"prompt":"Minimal abstract gradient, no text","width":256,"height":256}}' | ConvertTo-Json -Depth 10`
+
+4) gumgenie-app NOTION_TEMPLATES variant usage (Cloudflare Pages Functions)
+- Standard:
+  - Body includes `"variant":"standard"`
+- Premium:
+  - Body includes `"variant":"premium"`
+
+5) Deep-dive market extraction (optional)
+- `npm run validate:deep` uses SerpAPI discovery + `muhammetakkurtt/gumroad-scraper` for detail (30 competitors/category).
+- Reviews are skipped unless `APIFY_GUMROAD_REVIEWS_ACTOR_ID` points to a rented reviews actor.
+
+6) Agent Squad (V2.3) status
+- Implemented: `/api/agents/generate` (Orchestrator + Strategist + Monetization + Copy + Visual via Gemini, merged output, fallbacks)
+- Implemented: `/api/agents/research` (snapshot load + placeholder; returns cached/missing)
+- Implemented: frontend uses `/api/agents/generate` for generation and Sidebar shows Market Data badge + Refresh (calls `/api/agents/research`).
+
+---
+
+## House rules for contributors
+- Keep changes small and typed; avoid introducing `any` unless necessary.
+- When modifying AI output shape, update: prompt → schema → types → UI.
+- Avoid putting secrets in committed files; `.env.local` is ignored.
+- Prefer running `npm run lint` before committing.

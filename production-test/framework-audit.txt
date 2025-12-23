@@ -1,0 +1,23 @@
+Framework audit generated at: 2025-12-22T04:08:21.619Z
+
+- delivery-zip: Unknown
+  Claim: Buyers prefer a single ZIP / “download all” convenience and get frustrated by multi-file downloads.
+  Evidence: none
+  Change: Default delivery: Full_Package.zip + Start Here page; keep individual files optional.
+- setup-friction: Unknown
+  Claim: Setup friction is a common reason for dissatisfaction; products need “Start Here” onboarding.
+  Evidence: none
+  Change: Require Start Here page + 3-step quickstart + app/tool-specific import guidance.
+- licensing: Unknown
+  Claim: Licensing clarity is a frequent buyer concern (especially design templates).
+  Evidence: none
+  Change: Always include License page + license.txt; include allowed/not allowed checklist.
+
+BEFORE:
+- Validation based primarily on assumptions + general best practices.
+- Copy and delivery decisions not explicitly tied to extracted objections.
+
+AFTER:
+- Validation uses Apify+SerpAPI signals to ground copy, FAQ, and delivery structure.
+- Quality gate includes “must-have” sections derived from real objections (download, setup, license).
+- Delivery default: ZIP + Start Here + Pages + folders; category-specific import/duplicate guidance.

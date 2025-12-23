@@ -1,0 +1,6 @@
+Apify run failed (403) for easyapi/gumroad-reviews-scraper: {
+  "error": {
+    "type": "actor-is-not-rented",
+    "message": "You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/b56mefOrTveFWVYjx"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "executed": false,
+  "recommendation": {
+    "serverId": "magic",
+    "toolName": "21st_magic_component_builder",
+    "args": {
+      "prompt": "Create an agency ROI calculator section that shows time saved and client value, styled for a Gumroad landing page."
+    },
+    "targetBlockType": "feature-grid",
+    "rationale": "The user wants a specific, functional ROI calculator component. The 21st_magic_component_builder is the best tool to generate a custom component based on these specific functional requirements."
+  }
+}

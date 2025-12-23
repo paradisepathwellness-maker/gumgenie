@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2025-12-22T06:43:17.735Z",
+  "categories": {
+    "AI_PROMPTS": {
+      "query": "ai prompts",
+      "sources": [],
+      "notes": "Apify run failed (403) for easyapi/gumroad-search-scraper: {\n  \"error\": {\n    \"type\": \"actor-is-not-rented\",\n    \"message\": \"You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/BxsDKUDVaEpqpKLdC\"\n  }\n} | input={\"queries\":\"ai prompts\",\"maxItems\":5}"
+    },
+    "NOTION_TEMPLATES": {
+      "query": "notion template",
+      "sources": [],
+      "notes": "Apify run failed (403) for easyapi/gumroad-search-scraper: {\n  \"error\": {\n    \"type\": \"actor-is-not-rented\",\n    \"message\": \"You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/BxsDKUDVaEpqpKLdC\"\n  }\n} | input={\"queries\":\"notion template\",\"maxItems\":5}"
+    },
+    "DIGITAL_PLANNERS": {
+      "query": "digital planner goodnotes",
+      "sources": [],
+      "notes": "Apify run failed (403) for easyapi/gumroad-search-scraper: {\n  \"error\": {\n    \"type\": \"actor-is-not-rented\",\n    \"message\": \"You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/BxsDKUDVaEpqpKLdC\"\n  }\n} | input={\"queries\":\"digital planner goodnotes\",\"maxItems\":5}"
+    },
+    "DESIGN_TEMPLATES": {
+      "query": "figma design templates commercial license",
+      "sources": [],
+      "notes": "Apify run failed (403) for easyapi/gumroad-search-scraper: {\n  \"error\": {\n    \"type\": \"actor-is-not-rented\",\n    \"message\": \"You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/BxsDKUDVaEpqpKLdC\"\n  }\n} | input={\"queries\":\"figma design templates commercial license\",\"maxItems\":5}"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2025-12-22T06:21:21.652Z",
+  "categories": {
+    "AI_PROMPTS": {
+      "query": "ai prompts",
+      "priceBand": {
+        "sampleSize": 0
+      },
+      "topPainPoints": [],
+      "topDelivery": [],
+      "exampleCompetitors": []
+    },
+    "NOTION_TEMPLATES": {
+      "query": "notion template",
+      "priceBand": {
+        "sampleSize": 0
+      },
+      "topPainPoints": [
+        {
+          "label": "setup confusion",
+          "count": 1,
+          "examples": [
+            "Headquarters Notion Productivity Template How to setup Headquarters · Step 1: Download the template (only 1 click) · Step 2: Add your Projects · Step 3: Now start adding your tasks, journaling, time ..."
+          ]
+        }
+      ],
+      "topDelivery": [],
+      "exampleCompetitors": []
+    },
+    "DIGITAL_PLANNERS": {
+      "query": "digital planner goodnotes",
+      "priceBand": {
+        "sampleSize": 0
+      },
+      "topPainPoints": [],
+      "topDelivery": [
+        {
+          "label": "planner app compatibility",
+          "count": 5,
+          "examples": [
+            "Ultimate Digital Planner for GoodNotes - Landscape This Ultimate Premium digital planner is designed to help you make the best of your whole year based on your priorities, purpose, and goals.",
+            "Digital Planner 2025-2026-2027 & Undated | Goodnotes, iPad ... 🗓️ Daily Planner Templates: Hourly schedules, top priorities, to-do lists, meals, hydration trackers, and reflective journaling space. Designed for maximum ...",
+            "Digital Planner - GoodNotes, iPad, Notability | Daily ... Our feature-rich Digital Planner 2024 is crafted for iPad users, seamlessly integrating with GoodNotes for a user-friendly planning experience.",
+            "Discover Notes Your go to place for high quality Digital Notes Templates! Digital Planner with Apple Calendar ・ 175+ Digital Paper for GoodNotes, ...",
+            "Digital Planner, Goodnotes Planner, iPad ... The interactive planner builder lets you mix and match your planner orientation, tab color, ring color, weekly pages, daily pages, and weekly start date! This ..."
+          ]
+        },
+        {
+          "label": "zip / download all",
+          "count": 1,
+          "examples": [
+            "Emma Studies — Free Printables I'm Emma, a digital creator & organiser enthusiast! Here you can download all my free content, or donate any amount"
+          ]
+        }
+      ],
+      "exampleCompetitors": []
+    },
+    "DESIGN_TEMPLATES": {
+      "query": "figma design templates commercial license",
+      "priceBand": {
+        "sampleSize": 0
+      },
+      "topPainPoints": [
+        {
+          "label": "licensing concerns",
+          "count": 5,
+          "examples": [
+            "Brand Guidelines Figma Template ... Figma's Auto Layout and responsive design features. Format: Figma (.fig) License: Personal & Commercial Use✉️ Questions or feedback? Don't hesitate to",
+            "The High-ROI Fashion Ad Template Bundle for Figma (Story & ... Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ...",
+            "Professional Resume Templates for UI Designers, UX ... License for personal or commercial use. Easy Exporting Steps: 1. Select the frame on Figma. 2. Click on Export in the right sidebar.",
+            "Modern UI/UX templates - Designs Unleashed This license is for personal use only. If you want to commercialize these designs, you can opt for a commercial license for a cost of $150. If the link ...",
+            "The High-Performance Fitness Ad Story Template for Figma Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ..."
+          ]
+        }
+      ],
+      "topDelivery": [
+        {
+          "label": "design tool compatibility",
+          "count": 5,
+          "examples": [
+            "Brand Guidelines Figma Template ... Figma's Auto Layout and responsive design features. Format: Figma (.fig) License: Personal & Commercial Use✉️ Questions or feedback? Don't hesitate to",
+            "The High-ROI Fashion Ad Template Bundle for Figma (Story & ... Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ...",
+            "Azura Figma Brand Template Non-commercial use only. Transform your branding—download now! Buy this. Following Figma Friday, now releasing the full work files.",
+            "Professional Resume Templates for UI Designers, UX ... License for personal or commercial use. Easy Exporting Steps: 1. Select the frame on Figma. 2. Click on Export in the right sidebar.",
+            "NextGen - NFT Marketplace Figma Website Design This template is completely free for both personal and commercial use. ... You can also use this great design template for other niches too. It has design ..."
+          ]
+        }
+      ],
+      "exampleCompetitors": []
+    }
+  }
+}

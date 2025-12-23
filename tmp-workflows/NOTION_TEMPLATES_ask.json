@@ -1,0 +1,12 @@
+{
+  "executed": false,
+  "recommendation": {
+    "serverId": "magic",
+    "toolName": "21st_magic_component_builder",
+    "args": {
+      "prompt": "A modern database showcase section for a Notion template landing page highlighting views, relations, rollups, and quick setup using a clean bento grid layout and Tailwind CSS."
+    },
+    "targetBlockType": "feature-grid",
+    "rationale": "I am using the magic component builder to generate a specific, high-quality UI section tailored to the user's request for showcasing Notion database features."
+  }
+}

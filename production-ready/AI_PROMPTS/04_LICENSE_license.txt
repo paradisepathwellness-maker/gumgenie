@@ -1,0 +1,3 @@
+LICENSE (placeholder)
+
+Add your license terms here.

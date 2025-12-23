@@ -1,0 +1,260 @@
+[
+  {
+    "productUrl": "https://goodsnooze.gumroad.com/l/macwhisper",
+    "scrapedAt": "2025-12-22T04:47:38.679Z",
+    "detail": {
+      "id": "gu82N0k4M8jl1waz-ttTAA==",
+      "permalink": "ivpqk",
+      "name": "🎙️ MacWhisper",
+      "seller": {
+        "id": "6875988407795",
+        "name": "Jordi Bruin",
+        "avatar_url": "https://public-files.gumroad.com/m9b262afk0t8uiwghka40wg6ek3f",
+        "profile_url": "https://goodsnooze.gumroad.com/"
+      },
+      "collaborating_user": null,
+      "covers": [
+        {
+          "url": "https://public-files.gumroad.com/no1tkd6fop0ben4z2gvznq4mezdy",
+          "original_url": "https://public-files.gumroad.com/m9hn7bj9ccmevmqcd5x1z4aqsf3i",
+          "thumbnail": null,
+          "id": "cd39a7e0c57c32e5a49f8c75e161bf99",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 376,
+          "native_width": 1920,
+          "native_height": 1080
+        },
+        {
+          "url": "https://public-files.gumroad.com/fwn473qs68tujcya4qec94e0jdny",
+          "original_url": "https://public-files.gumroad.com/53g1k9kp4o2epz95o28lknsphuod",
+          "thumbnail": null,
+          "id": "289603b1f8192307384a14d79143c53f",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 376,
+          "native_width": 1920,
+          "native_height": 1080
+        },
+        {
+          "url": "https://public-files.gumroad.com/1anlpahkzd1wsyokzemqd06wpyac",
+          "original_url": "https://public-files.gumroad.com/zg7y1n3n0wjmtfqzm4gc6ml1fhau",
+          "thumbnail": null,
+          "id": "b60558b8e16370e07287f18e7fe1682f",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 376,
+          "native_width": 1920,
+          "native_height": 1080
+        },
+        {
+          "url": "https://public-files.gumroad.com/mziny69ho4erc8r6z2y7el2z45rb",
+          "original_url": "https://public-files.gumroad.com/nywecb5olct3hlemu1d4ro18o215",
+          "thumbnail": null,
+          "id": "6accf21b68b9784fd16ce384641c0e7f",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 376,
+          "native_width": 1920,
+          "native_height": 1080
+        },
+        {
+          "url": "https://public-files.gumroad.com/y8lyoanwz3qtyyzabdk80n91n36o",
+          "original_url": "https://public-files.gumroad.com/pn3u5045eivh51s3kyfw943zf96h",
+          "thumbnail": null,
+          "id": "9ec6a869e7a9eceb8219ae8354392d96",
+          "type": "image",
+          "filetype": "jpeg",
+          "width": 670,
+          "height": 372,
+          "native_width": 2880,
+          "native_height": 1600
+        },
+        {
+          "url": "https://public-files.gumroad.com/qmvd7y2ixiei49gvgsvxs6o7ydzu",
+          "original_url": "https://public-files.gumroad.com/du7b11m2c2md7hlod9xzwc0fnfjq",
+          "thumbnail": null,
+          "id": "44a9a76c44b970cde868d51c05daae4f",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 430,
+          "native_width": 1971,
+          "native_height": 1267
+        },
+        {
+          "url": "https://public-files.gumroad.com/3mak1jurus3zuw5fy87q3yp4pjqs",
+          "original_url": "https://public-files.gumroad.com/3gzhuu4ubd01ih3kl4z62lk883l6",
+          "thumbnail": null,
+          "id": "9ef90993db64796031b83488456feaf1",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 430,
+          "native_width": 1971,
+          "native_height": 1267
+        },
+        {
+          "url": "https://public-files.gumroad.com/blek6zowlia41kh16bcklf7rq54a",
+          "original_url": "https://public-files.gumroad.com/gvf4f88pv20iovtem07ldei8pc70",
+          "thumbnail": null,
+          "id": "a3042e965748e2c50b3f2453207e075f",
+          "type": "image",
+          "filetype": "png",
+          "width": 670,
+          "height": 430,
+          "native_width": 1971,
+          "native_height": 1267
+        }
+      ],
+      "main_cover_id": "cd39a7e0c57c32e5a49f8c75e161bf99",
+      "thumbnail_url": "https://public-files.gumroad.com/mhoqmtj5d01on1wxj74zzeed9n8o",
+      "quantity_remaining": null,
+      "long_url": "https://goodsnooze.gumroad.com/l/macwhisper",
+      "is_sales_limited": false,
+      "ratings": {
+        "count": 1969,
+        "average": 4.6,
+        "percentages": [
+          7,
+          1,
+          3,
+          7,
+          82
+        ]
+      },
+      "custom_button_text_option": "i_want_this_prompt",
+      "is_compliance_blocked": false,
+      "is_published": true,
+      "is_stream_only": false,
+      "streamable": false,
+      "sales_count": 314166,
+      "summary": null,
+      "attributes": [
+        {
+          "name": "Supported OS",
+          "value": "Sequoia, Tahoe (15.0 and higher), for older versions of macOS see legacy support"
+        },
+        {
+          "name": "Recommended Hardware",
+          "value": "M-series Macs (also works on Intel Macs)"
+        },
+        {
+          "name": "One Time Payment",
+          "value": "No Subscription, unlimited transcriptions and access to all current and future updates"
+        },
+        {
+          "name": "Version",
+          "value": "13.9"
+        },
+        {
+          "name": "Legacy Support",
+          "value": "Monterey (2.22) and Ventura (10.9.2), Sonoma (12.18.1)"
+        },
+        {
+          "name": "MDM Deployment",
+          "value": "Deploy across your organisation via MDM providers such as JAMF"
+        }
+      ],
+      "description_html": "<h1><strong>MacWhisper</strong></h1><p>Quickly and easily transcribe audio files into text with OpenAI's state-of-the-art transcription technology Whisper as well as Nvidia Parakeet. Whether you're recording a meeting, lecture, or other important audio, MacWhisper quickly and accurately transcribes your audio files into text.</p><p><br></p><figure><img src=\"https://public-files.gumroad.com/5sm0b1rvnt79qth4o81v079oxizf\"><p class=\"figcaption\"></p></figure><p>📲 MacWhisper is now also available on iPhone and iPad, download it <a href=\"https://apps.apple.com/nl/app/whisper-transcription/id1668083311?l=en-GB&amp;mt=12\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a>.</p><p>🎁 Get 5 euros off until the end of the year by clicking <a href=\"https://goodsnooze.gumroad.com/l/macwhisper/december2025\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">this link.</a></p><h2><strong>Full Feature List</strong></h2><ul>\n<li>Easily record and transcribe audio files on your Mac</li>\n<li>Full text and speaker search through all your transcripts</li>\n<li>System wide dictation with Whisper to replace Apple's own dictation, even with the best Whisper models</li>\n</ul><ul>\n<li>Just drag and drop audio files to get a high quality transcription</li>\n<li>Automatically record meetings in Zoom, Teams, Webex, Skype, Chime, Discord and more.</li>\n<li>Record directly from your microphone or any other input device on your Mac</li>\n<li>All transcription is done on your device, <strong>no data leaves your machine. </strong>This makes MacWhisper a great app for sensitive audio such as interviews.</li>\n<li>Save or export your transcripts as a .whisper file, which includes the original audio and all your transcription edits for easy sharing</li>\n<li>.srt &amp; .vtt subtitles export as well as csv, dote, docx, pdf, markdown and html exports</li>\n<li>Metal and GPU support for extremely fast transcription</li>\n</ul><ul><li>Get accurate text transcriptions in seconds (up to ~30x realtime)</li></ul><ul>\n<li>Search the entire transcript and highlight words</li>\n<li>Audio playback synced to transcripts</li>\n<li>Supports 100 different languages</li>\n</ul><ul>\n<li>Copy the entire transcript or individual sections</li>\n<li>Star/Favorite segments</li>\n<li>Compact mode (hide timestamps)</li>\n<li>Automatically remove <em>ums</em>, <em>uhhs </em>and other similar filler words</li>\n<li>Drag and drop directly from Voice Memos</li>\n<li>Edit and delete segments from the transcript</li>\n<li>Add up to two speakers manually</li>\n<li>Inline Video Player</li>\n<li>Video playback synced to subtitles</li>\n<li>View multiple language subtitles at once in the videoplayer</li>\n<li>Select transcription language (or use auto detect)</li>\n<li>Change playback speed from 0.5 to 3.0x (audio &amp; video)</li>\n<li>Supported formats: mp3, wav, m4a, ogg, opus, mov and mp4 videos.</li>\n<li>Adjust whisper settings (beam search / greedy, beam size etc)</li>\n<li>Supports all Whisper models, some models are only fully available for Pro users</li>\n</ul><figure><img src=\"https://public-files.gumroad.com/o5lkgq5v549rade5p8b50irrqs41\"><p class=\"figcaption\"></p></figure><h2><strong>⭐️ MacWhisper Pro</strong></h2><ul>\n<li>All above features</li>\n<li>Support for Parakeet v2 (for up to 300x realtime transcription at the highest accuracy) on m-series Macs</li>\n<li>Automatic Speaker Recognition with local models (M-series Macs only) and with ElevenLabs and Deepgram</li>\n<li>Automatic spelling, punctuation and grammar improvement in dictation mode (requires AI Service to be setup)</li>\n<li>Batch Transcribe as many files one after the other. Useful if you want to add subtitles to an entire season of a show, or if you have a lot of interviews to go through</li>\n<li>Support for WhisperKit and Distilled models</li>\n<li>Integrations with Make.com, n8n, Zapier, custom webhooks and Obsidian to automatically forward your transcripts</li>\n<li>Transcribe YouTube videos</li>\n<li>Watch Folder support to automatically transcribe files when they are added to a directory of your choice. The files can automatically be transcribed into a variety of formats.</li>\n<li>Support for OpenAI (ChatGPT), Anthropic (Claude), Groq, Ollama, XAi, Deepseek, Custom OpenAI API endpoints and Azure AI models for easy prompting</li>\n<li>Support Cloud Transcriptions through OpenAI, ElevenLabs, Deepgram, Groq and custom Whisper servers</li>\n<li>Manually add speakers to your transcript for a cleaner export</li>\n<li>Menubar app for accessing Whisper anywhere from your Mac</li>\n<li>Global, access MacWhisper from anywhere in a spotlight type view for instant transcription and easy pasting into other apps</li>\n<li>ChatGPT integration (with your own API key)</li>\n<li>Ignore segments such as [SILENCE] from appearing in your transcripts</li>\n<li>Supports GPT4, GPT4 Turbo, GPT4o and GPT4o-mini as well as older models</li>\n<li>Anthropic Claude Integration (with your own API key)</li>\n<li>Record and transcribe system audio (to record meetings for example)</li>\n<li>Supports Tiny (English Only), Tiny, Base, Small, Medium and Large (V2 and V3) models</li>\n<li>Add your own custom GGML models</li>\n<li>Change the starting timestamp for the transcript</li>\n<li>Translate audio file into another language through Whisper (use the Medium or Large models, the results will not be perfect and I'm working on more advanced ways to do this)</li>\n<li>Translate the full transcript by adding your own (free) DeepL API key.</li>\n<li>Translate subtitles into different languages</li>\n<li>Inline and separate video player with subtitle and multiple translated subtitles support</li>\n<li>Transcribe podcasts by combining single track audio for each host (beta)</li>\n<li>One time payment, no subscription. Pay once and use forever.</li>\n<li>Higher priority support. I'll try to email you back as soon as possible if you run into anything.</li>\n<li>If you're a journalist, student or non-profit, send me an email at <a href=\"mailto:support@macwhisper.com\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">support@macwhisper.com</a> and tell me about your work to get 30% off 🙂</li>\n<li>If you purchase MacWhisper Pro and are not happy with it, let me know within 7 days what could be improved and I'll refund you.</li>\n<li>Support for OpenRouter</li>\n<li>Support for ElevenLabs Scribe and Deepgram Nova</li>\n</ul><p>After downloading MacWhisper you will have to fill in your license key to unlock all Pro features.</p><p>If you want to purchase more than 20 licenses, or if you're looking for an MDM deployment or something custom, please send an email to <a href=\"mailto:support@macwhisper.com\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">support@macwhisper.com</a> or check out the <a href=\"https://macwhisper.helpscoutdocs.com/article/27-deploying-macwhisper-with-mdm\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">MDM Documentation</a>.</p><h2><strong>100+ Supported Languages</strong></h2><p>MacWhisper can transcribe audio in the following languages:</p><p>English, Chinese, German, Spanish, Russian, Korean, French, Japanese, Portuguese, Turkish, Polish, Catalan, Dutch, Arabic, Swedish, Italian, Indonesian, Hindi, Finnish, Vietnamese, Hebrew, Ukrainian, Greek, Malay, Czech, Romanian, Danish, Hungarian, Tamil, Norwegian, Thai, Urdu, Croatian, Bulgarian, Lithuanian, Latin, Maori, Malayalam, Welsh, Slovak, Telugu, Persian, Latvian, Bengali, Serbian, Azerbaijani, Slovenian, Kannada, Estonian, Macedonian, Breton, Basque, Icelandic, Armenian, Nepali, Mongolian, Bosnian, Kazakh, Albanian, Swahili, Galician, Marathi, Punjabi, Sinhala, Khmer, Shona, Yoruba, Somali, Afrikaans, Occitan, Georgian, Belarusian, Tajik, Sindhi, Gujarati, Amharic, Yiddish, Lao, Uzbek, Faroese, Haitian Creole, Pashto, Turkmen, Nynorsk, Maltese, Sanskrit, Luxembourgish, Myanmar, Tibetan, Tagalog, Malagasy, Assamese, Tatar, Hawaiian, Lingala, Hausa, Bashkir, Javanese, Sundanese.</p><h3><strong>System Requirements</strong></h3><p>MacWhisper requires a lot of computer memory to work well. To use the Medium and Large models your Mac should have more than 8GB of RAM. Performance on older Intel based Macs can also be bad but I have not been able to test this properly.</p><p><a href=\"https://impresskit.net/press-release/f5537c9f-c2c1-42d9-a870-6cecd28a8c31\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Privacy Policy and Terms of Use</a></p><h2><strong>Reviews</strong></h2><review-card reviewid=\"_d2kC3I7E9lLUzhQntxejg==\"></review-card><review-card reviewid=\"lqGwXmQNI_lwvIliQyJagg==\"></review-card><review-card reviewid=\"_y5z050OnZWB1lupUO4MDQ==\"></review-card><review-card reviewid=\"4t3FvQx1qqLmrdI6fFYTwA==\"></review-card><p><br></p><p><br></p><hr><p><br></p><p>👨‍💻 <strong>Check out my other macOS utilities:</strong></p><p><a href=\"https://goodsnooze.gumroad.com/l/openai-bundle\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">OpenAI Bundle</a> - Get all my OpenAI apps at a discounted rate</p><p><a href=\"https://goodsnooze.gumroad.com/l/menugpt\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">MacGPT</a> - Use ChatGPT on your Mac and from your menubar</p><p><a href=\"https://goodsnooze.gumroad.com/l/detective\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Detective</a> - GPT Vision for macOS</p><p><a href=\"https://goodsnooze.gumroad.com/l/voices\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Voices</a> - High Quality Text to Speech with OpenAI</p><p><a href=\"https://goodsnooze.gumroad.com/l/textassistant\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Text Assistant</a> - Generate useful text and manage your prompts with GPT and your own OpenAPI key</p><p><a href=\"https://goodsnooze.gumroad.com/l/vivid\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Vivid</a> - Double the brightness of your MacBook Pro by always using HDR mode</p><p><a href=\"https://goodsnooze.gumroad.com/l/nASbe\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Forehead</a> - Hide the Notch and round your MacBook corners</p><p><a href=\"https://goodsnooze.gumroad.com/l/cooldown\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Cooldown</a> - Quickly toggle Low Power Mode from your menubar</p><p><a href=\"https://goodsnooze.gumroad.com/l/speedyapp\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Speedy</a> - Fast Speedtest in your menubar</p><p><a href=\"https://goodsnooze.gumroad.com/l/pippo\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Pippo</a> - Improve the Picture-in-Picture video player with seek controls</p><p>Whisper was made by building on top of all the hard work from Georgi Gerganov, check out his Whisper implementation here: <a href=\"https://github.com/ggerganov/whisper.cpp\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">https://github.com/ggerganov/whisper.cpp</a></p><p><br></p><p><br></p>",
+      "currency_code": "eur",
+      "price_cents": 0,
+      "rental_price_cents": null,
+      "pwyw": null,
+      "eligible_for_installment_plans": true,
+      "allow_installment_plan": false,
+      "installment_plan": null,
+      "is_legacy_subscription": false,
+      "is_tiered_membership": false,
+      "is_physical": false,
+      "custom_view_content_button_text": "Download MacWhisper",
+      "is_multiseat_license": false,
+      "hide_sold_out_variants": false,
+      "native_type": "digital",
+      "preorder": null,
+      "duration_in_months": null,
+      "rental": null,
+      "is_quantity_enabled": false,
+      "free_trial": null,
+      "recurrences": null,
+      "options": [
+        {
+          "id": "7VLW8xWW34vC6JAnun60aA==",
+          "name": "MacWhisper Free",
+          "quantity_left": null,
+          "description": "Native macOS app to use Whisper for transcriptions",
+          "price_difference_cents": 0,
+          "recurrence_price_values": null,
+          "is_pwyw": false,
+          "duration_in_minutes": null
+        },
+        {
+          "id": "duE2Y0PPtsMe1X92D7QNrg==",
+          "name": "MacWhisper Pro",
+          "quantity_left": null,
+          "description": "1  MacWhisper Pro License (Personal Use)",
+          "price_difference_cents": 6400,
+          "recurrence_price_values": null,
+          "is_pwyw": false,
+          "duration_in_minutes": null
+        },
+        {
+          "id": "sfZav9rqXfwhPagz4f6LMQ==",
+          "name": "5 licenses (Pro)",
+          "quantity_left": null,
+          "description": "5 MacWhisper Pro Licenses (€54 / license)",
+          "price_difference_cents": 26900,
+          "recurrence_price_values": null,
+          "is_pwyw": false,
+          "duration_in_minutes": null
+        },
+        {
+          "id": "ifLhpWABdTzeOfvbD4I-eg==",
+          "name": "10 licenses (Pro)",
+          "quantity_left": null,
+          "description": "10 MacWhisper Pro Licenses (€49 / license)",
+          "price_difference_cents": 49000,
+          "recurrence_price_values": null,
+          "is_pwyw": false,
+          "duration_in_minutes": null
+        },
+        {
+          "id": "8N_iRN_bC0RXApiYH809oA==",
+          "name": "20 licenses (Pro)",
+          "quantity_left": null,
+          "description": "20 MacWhisper Pro Licenses  (€45 / license)",
+          "price_difference_cents": 89900,
+          "recurrence_price_values": null,
+          "is_pwyw": false,
+          "duration_in_minutes": null
+        },
+        {
+          "id": "rFNShu6uwk3s3F7hEb8Ajg==",
+          "name": "50 licenses (Pro)",
+          "quantity_left": null,
+          "description": "50 MacWhisper Pro Licenses  (€44 / license)",
+          "price_difference_cents": 219900,
+          "recurrence_price_values": null,
+          "is_pwyw": false,
+          "duration_in_minutes": null
+        }
+      ],
+      "analytics": {
+        "google_analytics_id": null,
+        "facebook_pixel_id": "",
+        "free_sales": true
+      },
+      "has_third_party_analytics": true,
+      "ppp_details": null,
+      "can_edit": false,
+      "refund_policy": null,
+      "bundle_products": [],
+      "public_files": [],
+      "audio_previews_enabled": true
+    }
+  }
+]

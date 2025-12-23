@@ -1,0 +1,19 @@
+{
+  "productName": "Nexus OS: The Ultimate Life Operating System",
+  "category": "NOTION_TEMPLATES",
+  "gumroad": {
+    "recommendedVersions": [
+      "Starter",
+      "Pro",
+      "Ultimate"
+    ],
+    "includeZipForDownloadAll": true
+  },
+  "folderStructure": [
+    "01_START_HERE/README.txt",
+    "02_MAIN_DELIVERABLES/",
+    "03_BONUSES/",
+    "04_LICENSE/license.txt",
+    "05_SUPPORT/support.txt"
+  ]
+}

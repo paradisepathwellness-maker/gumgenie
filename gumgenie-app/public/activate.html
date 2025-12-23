@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GumGenie — Activate</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Activation Portal</h1>
+        <p class="sub">Enter your Gumroad license key to unlock the builder.</p>
+      </header>
+
+      <section class="card" id="step-verify">
+        <h2>Step 1 — Verify License Key</h2>
+        <label class="label">License key</label>
+        <input id="licenseKey" class="input" placeholder="XXXX-XXXX-XXXX" autocomplete="off" />
+        <button id="verifyBtn" class="btn" type="button">Verify</button>
+        <pre id="verifyStatus" class="status"></pre>
+      </section>
+
+      <section class="card" id="step-connect" style="display:none;">
+        <h2>Step 2 — Connect Notion</h2>
+        <p class="muted">
+          Next, you will connect your Notion workspace. (OAuth + MCP build will be wired here.)
+        </p>
+        <button id="connectNotionBtn" class="btn secondary" type="button">Connect Notion</button>
+        <pre id="notionStatus" class="status"></pre>
+      </section>
+
+      <section class="card" id="step-generate" style="display:none;">
+        <h2>Step 3 — Generate Template</h2>
+        <p class="muted">Once connected, we will build your template directly in your Notion workspace.</p>
+        <button id="generateBtn" class="btn" type="button" disabled>Generate</button>
+        <pre id="generateStatus" class="status"></pre>
+      </section>
+
+      <footer class="footer">
+        <a class="link" href="/">Back to home</a>
+      </footer>
+    </main>
+
+    <script src="/notionStatusPoll.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

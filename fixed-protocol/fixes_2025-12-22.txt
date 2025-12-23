@@ -1,0 +1,91 @@
+Fixed Protocol — 2025-12-22
+
+Scope
+- Deep-dive competitor extraction (npm run validate:deep)
+- Apify/EasyApi actor input schema alignment
+- Robustness fixes so runs complete even when some batches fail
+
+Summary of changes
+1) ESLint Next.js pages rule disabled (already applied)
+- File: .eslintrc.json
+- Change: "@next/next/no-html-link-for-pages": "off"
+- Why: This repo is Vite-based (no Next pages/), so the rule caused a hard lint failure.
+
+2) Deep-dive merge crash fixed
+- File: scripts/deepDiveGumroadValidation.ts
+- Problem: merge step attempted JSON.parse() on *.error.txt files
+- Fix: only parse files ending in .json when merging batches
+
+3) EasyApi actor input schema confirmed via official actor docs
+- Search actor: https://apify.com/easyapi/gumroad-search-scraper/input-schema
+  - expects: keywords: string[] (required), maxItems
+- Reviews actor: https://apify.com/easyapi/gumroad-reviews-scraper/input-schema
+  - expects: productUrls: string[] (required), maxItems (optional)
+- Apify API run endpoint behavior confirmed:
+  - https://docs.apify.com/api/v2/act-runs-post
+
+4) Actor input compatibility updates (already applied)
+- File: scripts/apifyMarketSnapshot.ts
+  - send both keywords and queries (+ maxItems) to tolerate different actor schemas
+- File: scripts/deepDiveGumroadValidation.ts
+  - send both productUrls and urls to detail/reviews actors
+
+Observed runtime constraint
+- easyapi/gumroad-reviews-scraper returned HTTP 403 actor-is-not-rented (trial expired)
+  - This is not a schema bug; review extraction cannot succeed unless the actor is rented or replaced.
+
+Additional hardening (implemented in this session)
+- SerpAPI discovery now paginates using `start` offsets (0,10,20,...) to reach best-effort up to 30 competitor URLs/category.
+- Deep-dive detail scraping now uses `muhammetakkurtt/gumroad-scraper` (default) with its expected input shape (category/sort/maxProducts/productUrls/proxyConfiguration).
+- Reviews stage now preflights the reviews actor once and skips the entire review stage if it is not rented (403 actor-is-not-rented).
+  - This avoids wasting calls and still produces the competitor URL + detail datasets.
+  - To enable reviews: set `APIFY_GUMROAD_REVIEWS_ACTOR_ID` to a rented reviews actor (example: `muhammetakkurtt/gumroad-review-scraper`).
+
+How to run
+- npm run validate:deep
+- Outputs: production-test/raw/<timestamp>/
+
+Notes
+- Best-effort requirement: "up to 30" competitors/category.
+- Reviews may remain empty until a rented/working reviews actor ID is supplied via APIFY_GUMROAD_REVIEWS_ACTOR_ID.
+
+Significant fixes (app runtime)
+1) Agent Squad output quality + timing accuracy
+- File: backend/agents/runners/dailySwarm.ts
+  - Fix: per-agent durationMs measured correctly even when specialists run in parallel.
+- File: backend/agents/utils/merger.ts
+  - Fix: product.contentBlocks now populated deterministically (text, feature-grid, faq, pricing, bonuses, guarantee).
+
+2) Deterministic research snapshot generation
+- File: backend/agents/runners/researcher.ts
+  - Fix: /api/agents/research now builds backend/data/snapshots/<category>.json from latest production-test/raw/<run>/merged/<CATEGORY>.detail.json.
+
+3) Standard smoke endpoints implemented + version made deterministic
+- File: backend/server.ts
+  - Fix: added GET /api/health and GET /api/version.
+  - Fix: /api/version reads metadata.json/package.json via fs.readFile + JSON.parse (cached), no require() variability.
+
+4) Pricing content block rendering (no duplicate pricing section)
+- File: components/ProductPreview.tsx
+  - Fix: pricing blocks render using PricingTiersSection; the global pricing section is suppressed when a pricing block exists.
+
+5) Chat dashboard manual collapse/expand persisted
+- Files: components/ui/chat-with-ai.tsx, store.ts, types.ts
+  - Fix: persisted collapsed state (localStorage key: gg_chatDashboardCollapsed) with an explicit Expand/Collapse control.
+
+6) Notion MCP (Streamable HTTP) + full OAuth (dev-only token storage)
+- Files: backend/notion.ts, backend/mcpHttpClient.ts, backend/mcpHttpServers.ts, backend/server.ts, .env.example
+  - Fix: Added Notion OAuth connect/status endpoints:
+    - GET /api/notion/oauth/start
+    - GET /api/notion/oauth/callback
+    - GET /api/notion/status
+  - Fix: Added remote MCP HTTP endpoints:
+    - GET /api/mcp-http/servers
+    - POST /api/mcp-http/tools (401 until connected)
+    - POST /api/mcp-http/call
+  - Notes: Notion MCP URL is https://mcp.notion.com/mcp. OAuth tokens are stored in-memory for local dev; production should persist tokens in DB.
+
+7) Notion template blueprint generators (prep for Notion MCP build runner)
+- Files: backend/agents/runners/notionBlueprint.ts, backend/agents/runners/dailySwarm.ts, backend/agents/definitions/schemas.ts
+  - Fix: Added deterministic baseline blueprint generator (Solopreneur OS) and optional Gemini blueprint generator with strict schema + fallback.
+  - Fix: NOTION_TEMPLATES generation now returns blueprint in meta (notionBlueprint + notionBlueprintMode) to drive the upcoming Notion MCP build step.

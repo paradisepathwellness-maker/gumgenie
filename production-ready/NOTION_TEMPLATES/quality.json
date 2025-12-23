@@ -1,0 +1,15 @@
+{
+  "total": 68,
+  "per": {
+    "conversion": 13,
+    "visual": 21,
+    "monetization": 15,
+    "completeness": 19
+  },
+  "notes": [
+    "Pricing tiers not exactly 3.",
+    "Missing FAQ block.",
+    "Missing proof (testimonial/stat) block.",
+    "Below launch threshold (80)."
+  ]
+}

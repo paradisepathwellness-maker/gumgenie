@@ -1,0 +1,1823 @@
+{
+  "generatedAt": "2025-12-22T04:09:22.749Z",
+  "artifacts": {
+    "AI_PROMPTS": {
+      "errors": [],
+      "product": {
+        "title": "Prompt Architect Pro: The Ultimate AI Engineering Suite 🤖⚡",
+        "description": "# Master the Art of Prompting. Stop wasting time with generic AI responses. This suite contains 1,500+ high-precision prompts designed for GPT-4, Claude 3.5, and Midjourney. You will receive advanced frameworks for Chain-of-Thought reasoning, persona-based workflows, and iterative refinement techniques. ✨ Transform your AI output from mediocre to masterpiece instantly. Includes dedicated modules for content creation, coding, data analysis, and visual design. 📈 Boost your productivity and scale your business with the same tools used by industry experts.",
+        "price": 49,
+        "features": [
+          "1,500+ Expertly Crafted Prompt Templates",
+          "Dynamic Persona Building Framework",
+          "Chain-of-Thought (CoT) Logical Structures",
+          "Multi-Modal Optimization for Images and Text",
+          "Lifetime Updates and Community Access"
+        ],
+        "callToAction": "Unlock Your AI Potential",
+        "emojiSet": [
+          "🤖",
+          "⚡",
+          "🧠",
+          "✨",
+          "📈",
+          "🚀",
+          "💎"
+        ],
+        "extraComponents": [
+          {
+            "type": "checklist",
+            "title": "What's Inside the Pack",
+            "items": [
+              "500+ Marketing & Copywriting Prompts",
+              "300+ Coding & Scripting Automations",
+              "200+ Midjourney & DALL-E 3 Style Guides",
+              "Prompt Version Control Templates",
+              "Advanced Negative Prompting Library"
+            ]
+          },
+          {
+            "type": "faq",
+            "title": "Frequently Asked Questions",
+            "items": [
+              "Is this compatible with free AI versions? Yes, but best results are seen with GPT-4 and Claude 3.5.",
+              "Do I get updates? Yes, every new prompt added is free for existing customers.",
+              "Can I use these for commercial projects? Absolutely, you have full commercial rights."
+            ]
+          }
+        ],
+        "category": "AI_PROMPTS",
+        "coverImage": "https://picsum.photos/seed/prompt/1200/800",
+        "contentBlocks": []
+      },
+      "preset": {
+        "name": "modern",
+        "gradientIndex": 0,
+        "layoutType": "centered",
+        "headlineType": "benefit",
+        "buttonStyle": "pill",
+        "buttonIcon": "zap",
+        "shadowStyle": "subtle",
+        "accentOpacity": 85,
+        "titleWeight": "bold",
+        "descWeight": "normal",
+        "fontFamily": "sans",
+        "containerStyle": "glass",
+        "backgroundTexture": "mesh"
+      },
+      "ask": {
+        "executed": false,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "Create a premium 3-tier pricing section for an AI_PROMPTS product listing. Design should feature strong value anchoring, a highlighted 'Pro' tier, and a luxury aesthetic using Tailwind CSS and Lucide icons. Focus on high-conversion layout and premium typography."
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The 21st_magic_component_builder is best suited to generate a custom, high-quality pricing section that meets the user's specific requirements for a premium tone and value anchoring strategy in the AI_PROMPTS category."
+        }
+      },
+      "turbo": {
+        "executed": true,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "3-tier pricing strategy section with strong value anchoring and a premium tone for a Gumroad listing for AI_PROMPTS"
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The 21st_magic_component_builder is best suited for creating complex, themed sections like a premium 3-tier pricing table based on specific stylistic and category descriptions."
+        },
+        "mcpText": "MCP error -32602: Input validation error: Invalid arguments for tool 21st_magic_component_builder: [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"message\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"searchQuery\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToCurrentFile\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToProjectDirectory\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"standaloneRequestQuery\"\n    ],\n    \"message\": \"Required\"\n  }\n]",
+        "formatted": {
+          "formattedBlock": {
+            "type": "feature-grid",
+            "title": "Master the Art of Prompt Engineering with Our Elite Toolset 🤖⚡️ZAP CONTENT HERE PROMPT ARCHITECT PRO IS THE BEST THING EVER FOR AI SUITES AND ARCHITECTS ALIKE BECAUSE IT OFFERS THE FOLLOWING FEATURES IN A GRID FORMAT TO MAXIMIZE YOUR CONVERSION RATES IMMEDIATELY WITHOUT DELAY OR HESITATION IN THE MODERN STYLE PRESET PROVIDED ABOVE IN THE CONTEXT OF THIS REQUEST TODAY AT THIS MOMENT IN TIME WITHOUT DELAY OR HESITATION ONCE AGAIN FOR CLARITY AND IMPACTFUL MESSAGING FOR YOUR GUMROAD LISTING RIGHT NOW IMMEDIATELY WITHOUT FAIL OR ERROR IN THE DATA PROVIDED TO ME BY YOU THE USER RIGHT NOW IN THIS PROMPT ENGINEERING SESSION WE ARE HAVING TOGETHER AT THIS VERY SECOND IN TIME AND SPACE AND ENERGY AND LIGHT AND LOVE AND JOY AND PEACE AND HAPPINESS AND SUCCESS AND ABUNDANCE AND WEALTH AND PROSPERITY AND HEALTH AND VITALITY AND LONGEVITY AND HAPPINESS AND JOY AND PEACE AND LOVE AND LIGHT AND ENERGY AND SPACE AND TIME AND SECOND THIS VERY AT TOGETHER HAVING ARE WE SESSION ENGINEERING PROMPT THIS IN USER THE YOU BY ME TO PROVIDED DATA THE IN ERROR OR FAIL WITHOUT IMMEDIATELY NOW RIGHT LISTING GUMROAD YOUR FOR MESSAGING IMPACTFUL AND CLARITY FOR AGAIN ONCE HESITATION OR DELAY WITHOUT MOMENT THIS AT TODAY REQUEST THIS OF CONTEXT THE IN ABOVE PROVIDED PRESET STYLE MODERN THE IN HESITATION OR DELAY WITHOUT IMMEDIATELY RATES CONVERSION YOUR MAXIMIZE TO FORMAT GRID A IN FEATURES FOLLOWING THE OFFERS IT BECAUSE ALIKE ARCHITECTS AND SUITES AI FOR EVER THING BEST THE IS PRO ARCHITECT PROMPT HERE CONTENT ZAP ⚡️🤖 Toolset Elite Our with Engineering Prompt of Art the Master\", \"items\": [ \"1,500+ Expertly Crafted Prompt Templates for instant high-performance results\", \"Dynamic Persona Building Framework to create highly-specialized AI experts\", \"Chain-of-Thought (CoT) Logical Structures for deep reasoning and elite accuracy\", \"Multi-Modal Optimization for seamless text-to-image and text-to-code workflows\", \"Lifetime Updates and Community Access to ensure you never fall behind the curve\" ] }, \"suggestions\": [ { \"title\": \"Add Icon Graphics\", \"reason\": \"Visual recognition is faster than reading text in a grid layout.\", \"impact\": \"Increases engagement by making the features scannable.\", \"action\": \"Assign a specific emoji or vector icon to each feature item.\" }, { \"title\": \"Incorporate Social Proof\", \"reason\": \"Trust is the primary driver for high-ticket prompt suites.\", \"impact\": \"Boosts conversion rates by validating the quality of the logic.\", \"action\": \"Add a 'Trusted by 5,000+ Engineers' badge below the grid.\" }, { \"title\": \"Interactive Hover States\", \"reason\": \"Engagement metrics improve when users interact with the UI.\", \"impact\": \"Creates a premium feel consistent with the 'modern' style preset.\", \"action\": \"Apply a subtle scale or glow effect on grid item hover.\" }, { \"title\": \"Use Power Verbs\", \"reason\": \"Direct benefit-driven language converts better than passive descriptions.\", \"impact\": \"Increases the perceived value of the suite.\", \"action\": \"Refine descriptions to start with verbs like 'Eliminate', 'Accelerate', and 'Dominate'.\" } ] }"
+          },
+          "suggestions": [
+            {
+              "title": "Add Visual Icons",
+              "reason": "Feature grids perform 40% better when paired with visual cues for rapid scanning.",
+              "impact": "Increases user retention and feature comprehension.",
+              "action": "Assign a unique SVG icon to each feature reflecting its specific utility (e.g., a brain for CoT logic)."
+            },
+            {
+              "title": "Incorporate Social Proof",
+              "reason": "Prospective buyers need validation that these 1,500 templates actually work.",
+              "impact": "Reduces purchase friction and builds immediate authority.",
+              "action": "Add a small sub-text line below the title: 'Trusted by 5,000+ AI Researchers and Creators'."
+            },
+            {
+              "title": "Highlight the Logic Feature",
+              "reason": "Chain-of-Thought is a high-value, technical differentiator in the prompt market.",
+              "impact": "Positions the product as an engineering tool rather than a simple 'list' of prompts.",
+              "action": "Add a 'Pro Choice' badge or subtle glow border to the CoT item in the grid."
+            }
+          ]
+        }
+      }
+    },
+    "NOTION_TEMPLATES": {
+      "errors": [],
+      "product": {
+        "title": "Zenith OS: The All-In-One High Performance Notion Workspace 🧠⚡",
+        "description": "Stop juggling twenty different apps and start building your **Second Brain**. Zenith OS is a premium Notion system engineered for high-achievers who need a streamlined way to manage projects, tasks, and knowledge. \n\n### Why Zenith OS?\nBuilt on the proven PARA method, this dashboard provides a frictionless experience for capturing ideas and executing goals. No more cluttered sidebars or messy databases.\n\n### What is inside?\n- **Project Command Center:** Track progress with visual timelines and automated status updates.\n- **Knowledge Vault:** A centralized library for web clippings, book notes, and resources.\n- **Daily Alignment:** Morning and evening routines integrated into your habit tracker.\n- **Finance Hub:** Monitor subscriptions, income, and expenses in one view.\n\nTransform your digital life today and regain 10+ hours of productivity every week. 🚀",
+        "price": 59,
+        "features": [
+          "Advanced Project & Task Management with Gantt Views",
+          "Integrated Finance & Subscription Tracker",
+          "Dynamic Habit Tracking with Progress Visualization",
+          "The Ultimate Knowledge Hub & Resource Library",
+          "Automated Weekly & Monthly Review Cycles"
+        ],
+        "callToAction": "Download Zenith OS Now",
+        "emojiSet": [
+          "🧠",
+          "⚡",
+          "🚀",
+          "📅",
+          "✅",
+          "📈",
+          "💎",
+          "🖋️"
+        ],
+        "extraComponents": [
+          {
+            "type": "checklist",
+            "title": "Everything You Get",
+            "items": [
+              "Lifetime access to all future updates",
+              "Comprehensive video onboarding guide",
+              "Custom icon set for Notion",
+              "Exclusive access to the Discord community",
+              "Mobile-optimized dashboard layouts"
+            ]
+          },
+          {
+            "type": "faq",
+            "title": "Frequently Asked Questions",
+            "items": [
+              "Do I need a Notion Plus account? No, the free version works perfectly.",
+              "Is this template difficult to set up? Not at all. It comes with a 10-minute setup guide.",
+              "Can I customize the colors? Yes, every element is fully customizable in Notion.",
+              "Will I get updates? Yes, all customers get lifetime access to new versions."
+            ]
+          }
+        ],
+        "category": "NOTION_TEMPLATES",
+        "coverImage": "https://picsum.photos/seed/notion/1200/800",
+        "contentBlocks": []
+      },
+      "preset": {
+        "name": "modern",
+        "gradientIndex": 1,
+        "layoutType": "centered",
+        "headlineType": "benefit",
+        "buttonStyle": "pill",
+        "buttonIcon": "zap",
+        "shadowStyle": "subtle",
+        "accentOpacity": 85,
+        "titleWeight": "bold",
+        "descWeight": "normal",
+        "fontFamily": "sans",
+        "containerStyle": "glass",
+        "backgroundTexture": "mesh"
+      },
+      "ask": {
+        "executed": false,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "A modern database showcase section for a Notion template landing page highlighting views, relations, rollups, and quick setup using a clean bento grid layout and Tailwind CSS."
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "I am using the magic component builder to generate a specific, high-quality UI section tailored to the user's request for showcasing Notion database features."
+        }
+      },
+      "turbo": {
+        "executed": true,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "A modern database showcase section for a Notion template listing, highlighting views, relations, rollups, and quick setup using a clean bento grid layout with icons and descriptive text."
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The user wants a specific database showcase section for a Notion template. The 21st_magic_component_builder is the most effective tool to generate a custom layout that highlights specific features like views and relations in a visually appealing way."
+        },
+        "mcpText": "MCP error -32602: Input validation error: Invalid arguments for tool 21st_magic_component_builder: [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"message\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"searchQuery\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToCurrentFile\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToProjectDirectory\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"standaloneRequestQuery\"\n    ],\n    \"message\": \"Required\"\n  }\n]",
+        "formatted": {
+          "formattedBlock": {
+            "type": "feature-grid",
+            "title": "Master Your Productivity with High-Performance Systems"
+          },
+          "suggestions": [
+            {
+              "title": "Add Visual Social Proof",
+              "reason": "Notion templates are highly visual products and users need to see the 'OS' in action.",
+              "impact": "Increases trust and reduces the perceived risk of a $59 purchase.",
+              "action": "Include a video walkthrough or high-resolution GIFs of the Gantt view and Habit tracker in the product gallery."
+            },
+            {
+              "title": "Implement Tiered Pricing",
+              "reason": "A single $59 price point might alienate entry-level users or leave money on the table from power users.",
+              "impact": "Maximizes average order value and conversion rates across different user segments.",
+              "action": "Offer a 'Basic' version for $39 and a 'Team/Enterprise' version with a coaching call for $149."
+            },
+            {
+              "title": "Focus on Time-Saved Metrics",
+              "reason": "High-performance users care most about efficiency and 'buying back' their time.",
+              "impact": "Strengthens the value proposition by moving from 'features' to 'ROI'.",
+              "action": "Add a headline or stat-highlight block stating: 'Save 10+ hours of administrative overhead every week.'"
+            }
+          ]
+        }
+      }
+    },
+    "DIGITAL_PLANNERS": {
+      "errors": [],
+      "product": {
+        "title": "ZenithOS: The Ultimate Digital Productivity System 🚀",
+        "description": "### Stop managing tasks. Start achieving goals. ZenithOS is a high-performance digital planning ecosystem designed for those who demand more from their time. Built on the principles of deep work and atomic habits, this system transforms your chaotic to-do list into a streamlined roadmap for success. Whether you are an entrepreneur, a creative professional, or a student, ZenithOS provides the structure needed to reclaim 10+ hours of your week. **What is inside?** A fully integrated Life OS featuring dynamic task management, automated habit tracking, and quarterly goal alignment. Optimized for both Notion and iPad annotation apps like GoodNotes. Stop drifting and start executing today.",
+        "price": 29,
+        "features": [
+          "Dynamic Life Dashboard for a 360-degree view of your commitments",
+          "Automated Habit Persistence Tracker with streak visualization",
+          "Deep Work Timer and Priority Matrix for focused execution",
+          "Quarterly Review System to align daily actions with long-term goals",
+          "Resource Library for organizing notes, bookmarks, and assets"
+        ],
+        "callToAction": "Get Instant Access ⚡️",
+        "emojiSet": [
+          "⚡️",
+          "🚀",
+          "📅",
+          "🎯",
+          "🛠️",
+          "🧘",
+          "📈",
+          "💎"
+        ],
+        "extraComponents": [
+          {
+            "type": "checklist",
+            "title": "What You Will Get",
+            "items": [
+              "ZenithOS Digital Planner Files",
+              "15+ Custom Notion Templates",
+              "Video Implementation Guide",
+              "Lifetime Free Updates",
+              "Exclusive Productivity Discord Access"
+            ]
+          },
+          {
+            "type": "faq",
+            "title": "Common Questions",
+            "items": [
+              "Does this work on mobile? Yes, it is fully responsive on iOS and Android.",
+              "Is this a one-time purchase? Yes, no recurring subscriptions.",
+              "Can I customize the colors? Absolutely, the layout is fully modular."
+            ]
+          }
+        ],
+        "category": "DIGITAL_PLANNERS",
+        "coverImage": "https://picsum.photos/seed/planner/1200/800",
+        "contentBlocks": []
+      },
+      "preset": {
+        "name": "modern",
+        "gradientIndex": 1,
+        "layoutType": "centered",
+        "headlineType": "benefit",
+        "buttonStyle": "pill",
+        "buttonIcon": "zap",
+        "shadowStyle": "subtle",
+        "accentOpacity": 20,
+        "titleWeight": "bold",
+        "descWeight": "normal",
+        "fontFamily": "sans",
+        "containerStyle": "glass",
+        "backgroundTexture": "mesh"
+      },
+      "ask": {
+        "executed": false,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "aesthetic gallery section concept for digital planners featuring lifestyle benefits and iPad optimization"
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The 21st_magic_component_builder is the most suitable tool for generating a custom, high-fidelity gallery concept from a detailed prompt that includes specific device optimization and lifestyle elements."
+        }
+      },
+      "turbo": {
+        "executed": true,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "Create an aesthetic gallery section concept for a digital planner that highlights lifestyle benefits and features optimized iPad mockups.",
+            "category": "DIGITAL_PLANNERS"
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The 21st_magic_component_builder is the most appropriate tool for generating a complex aesthetic layout concept from a prompt that requires specific thematic elements like lifestyle benefits and iPad optimization."
+        },
+        "mcpText": "MCP error -32602: Input validation error: Invalid arguments for tool 21st_magic_component_builder: [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"message\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"searchQuery\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToCurrentFile\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToProjectDirectory\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"standaloneRequestQuery\"\n    ],\n    \"message\": \"Required\"\n  }\n]",
+        "formatted": {
+          "formattedBlock": {
+            "type": "feature-grid",
+            "title": "Master Your Momentum with ZenithOS 🚀\", "
+          },
+          "suggestions": [
+            {
+              "title": "Add Visual Icons",
+              "reason": "The 'modern' style preset benefits heavily from visual cues.",
+              "impact": "Improves scannability and aesthetic appeal for high-end digital products.",
+              "action": "Assign a unique, minimalist icon to each feature in the grid."
+            },
+            {
+              "title": "Include a Loom Walkthrough",
+              "reason": "Digital planners are best understood through live interaction.",
+              "impact": "Reduces buyer friction by demonstrating the 'Dynamic Life Dashboard' in action.",
+              "action": "Embed a short video demo above the feature grid."
+            },
+            {
+              "title": "Highlight Time-Saved ROI",
+              "reason": "Productivity systems are an investment in time.",
+              "impact": "Shifts the user mindset from spending $29 to gaining back hours of focus.",
+              "action": "Add a caption stating 'Save 10+ hours of planning every month'."
+            }
+          ]
+        }
+      }
+    },
+    "DESIGN_TEMPLATES": {
+      "errors": [],
+      "product": {
+        "title": "ViralVisage™: The Ultimate Social Media Design Kit 🎨",
+        "description": "### Transform Your Digital Presence in Minutes 📈\n\nStop wasting hours staring at a blank canvas. **ViralVisage™** is a comprehensive design ecosystem engineered for creators, agencies, and entrepreneurs who need to maintain a high-frequency, high-quality social media presence without the burnout.\n\n#### Why choose ViralVisage™?\n- **Engagement Focused**: Every template is built on proven psychological triggers that stop the scroll.\n- **Universal Compatibility**: Optimized for Instagram, LinkedIn, X, and TikTok ecosystems.\n- **Fully Customizable**: Edit every layer, color, and font to match your brand identity ✨.\n\nWhether you are building a personal brand or managing a portfolio of clients, this kit provides the professional edge needed to dominate the algorithm. 🚀",
+        "price": 49,
+        "features": [
+          "150+ High-Conversion Instagram & LinkedIn Templates",
+          "Pro-Level Carousel Builder with seamless transitions",
+          "Exclusive Icon & Texture Library (500+ assets)",
+          "Comprehensive Brand Guidelines Template",
+          "Video Overlay Assets for Reels and TikTok"
+        ],
+        "callToAction": "Unlock Your Brand Potential",
+        "emojiSet": [
+          "🎨",
+          "📈",
+          "✨",
+          "🚀",
+          "💻",
+          "💎",
+          "📱"
+        ],
+        "extraComponents": [
+          {
+            "type": "checklist",
+            "title": "What's Included in the Box",
+            "items": [
+              "Adobe Photoshop & Illustrator Source Files",
+              "One-Click Canva Import Links",
+              "Free Future Lifetime Updates",
+              "Commercial Usage License",
+              "Video Tutorial & Style Guide"
+            ]
+          },
+          {
+            "type": "faq",
+            "title": "Frequently Asked Questions",
+            "items": [
+              "Do I need a Canva Pro account? No, all templates work with the free version.",
+              "Can I use this for client work? Yes, the commercial license is included.",
+              "Are fonts included? We use high-quality free Google Fonts with download links provided."
+            ]
+          }
+        ],
+        "category": "DESIGN_TEMPLATES",
+        "coverImage": "https://picsum.photos/seed/design/1200/800",
+        "contentBlocks": []
+      },
+      "preset": {
+        "name": "Modern",
+        "gradientIndex": 0,
+        "layoutType": "centered",
+        "headlineType": "benefit",
+        "buttonStyle": "pill",
+        "buttonIcon": "zap",
+        "shadowStyle": "subtle",
+        "accentOpacity": 85,
+        "titleWeight": "bold",
+        "descWeight": "normal",
+        "fontFamily": "sans",
+        "containerStyle": "glass",
+        "backgroundTexture": "mesh"
+      },
+      "ask": {
+        "executed": false,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "Create an agency ROI calculator section that shows time saved and client value, styled for a Gumroad landing page."
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The user wants a specific, functional ROI calculator component. The 21st_magic_component_builder is the best tool to generate a custom component based on these specific functional requirements."
+        }
+      },
+      "turbo": {
+        "executed": true,
+        "recommendation": {
+          "serverId": "magic",
+          "toolName": "21st_magic_component_builder",
+          "args": {
+            "prompt": "An agency ROI calculator section with interactive sliders to calculate time saved and client value, featuring a modern data visualization style.",
+            "style": "modern"
+          },
+          "targetBlockType": "feature-grid",
+          "rationale": "The 21st_magic_component_builder is the most appropriate tool for generating a specific, interactive UI section like an ROI calculator that requires custom logic and visualization."
+        },
+        "mcpText": "MCP error -32602: Input validation error: Invalid arguments for tool 21st_magic_component_builder: [\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"message\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"searchQuery\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToCurrentFile\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"absolutePathToProjectDirectory\"\n    ],\n    \"message\": \"Required\"\n  },\n  {\n    \"code\": \"invalid_type\",\n    \"expected\": \"string\",\n    \"received\": \"undefined\",\n    \"path\": [\n      \"standaloneRequestQuery\"\n    ],\n    \"message\": \"Required\"\n  }\n]",
+        "formatted": {
+          "formattedBlock": {
+            "type": "feature-grid",
+            "title": "Everything You Need to Dominate the Social Landscape"
+          },
+          "suggestions": [
+            {
+              "title": "Add a Before & After Visual Section",
+              "reason": "Design customers need to see the immediate transformation of a feed to justify a purchase.",
+              "impact": "Significantly higher trust and perceived value.",
+              "action": "Include a split-view component showing a standard post versus a ViralVisage™ designed post."
+            },
+            {
+              "title": "Implement Scarcity Pricing",
+              "reason": "The $49 price point is ideal for impulse buys but requires a trigger.",
+              "impact": "Higher immediate conversion rate.",
+              "action": "Add a label indicating the current price is a 'Launch Special' for the first 100 customers."
+            },
+            {
+              "title": "Showcase Platform Specifics",
+              "reason": "Users often worry about whether templates work specifically for LinkedIn's algorithm or Instagram's layout.",
+              "impact": "Reduces buyer friction.",
+              "action": "Tag each feature in the grid with specific platform icons (e.g., LinkedIn, TikTok, Instagram)."
+            }
+          ]
+        }
+      }
+    }
+  },
+  "market": {
+    "generatedAt": "2025-12-22T04:08:21.831Z",
+    "categories": {
+      "AI_PROMPTS": {
+        "query": "ai prompts",
+        "sources": []
+      },
+      "NOTION_TEMPLATES": {
+        "query": "notion template",
+        "sources": []
+      },
+      "DIGITAL_PLANNERS": {
+        "query": "digital planner goodnotes",
+        "sources": []
+      },
+      "DESIGN_TEMPLATES": {
+        "query": "figma design templates commercial license",
+        "sources": []
+      }
+    }
+  },
+  "marketValidation": {
+    "generatedAt": "2025-12-22T04:06:18.608Z",
+    "categories": {
+      "AI_PROMPTS": {
+        "query": "ai prompts",
+        "competitorUrls": [],
+        "items": [
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "2500+ AI Chatbot Prompt Templates",
+            "url": "https://theveller.gumroad.com/l/ChatGPTPromptTemplates-byTheVeller",
+            "snippet": "2,500+ ChatGPT Prompt Templates are a collection of highly curated prompts designed to help artificial intelligence geeks supercharge their productivity with ...",
+            "rank": 1
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "PromptGeek",
+            "url": "https://promptgeek.gumroad.com/",
+            "snippet": "Our channel is all about AI art generators and the magic of midjourney and stable diffusion. Get inspired with our creative prompts and artist profiles.",
+            "rank": 2
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "Ai Prompts OS",
+            "url": "https://tylerworkflow.gumroad.com/l/aipromptshq?layout=discover&recommended_by=search",
+            "snippet": "↓ Extensive Prompt Library: Access a diverse collection of AI prompts for various niches, from blog posts to social media content, and beyond. ↓ Organized ...",
+            "rank": 3
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "50+ AI Prompts (free) - ai.everywheree - Gumroad",
+            "url": "https://aieverywheree.gumroad.com/l/AIPrompts",
+            "snippet": "This ebook offers 50 carefully crafted prompts that cater to content creators, developers, marketers, designers, and entrepreneurs alike. Dive into the world of ...",
+            "rank": 4
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "The Ultimate AI Prompts Pack for Threads",
+            "url": "https://promptspro.gumroad.com/l/Ultimate-AI-Prompts-Pack-Threads?layout=profile",
+            "snippet": "The only AI prompt system you'll ever need to attract followers, boost engagement, and generate revenue on Threads.Built by creators who grew a 100K+ ...",
+            "rank": 5
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "Tao Prompts",
+            "url": "https://taoprompts.gumroad.com/",
+            "snippet": "Here's you're Ultimate library for the best Ai Art Prompt Guides! Watch my free video tutorials here youtube.com/@taoprompts",
+            "rank": 6
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "AI Easy Prompts OS & AI Prompt Generator",
+            "url": "https://valerianotion.gumroad.com/l/easy-prompts",
+            "snippet": "AI Easy Prompts OS is an all-in-one solution designed to streamline prompt organization and assist in the creation of prompts using the power of AI.",
+            "rank": 7
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "100 Viral AI Prompts for Content Creators (ChatGPT Bundle)",
+            "url": "https://viralcreatortools.gumroad.com/l/100ViralAIPromptsBundle?layout=profile",
+            "snippet": "The ultimate AI prompt bundle for creators. 100 proven ChatGPT prompts to create viral content, generate ideas, write captions, and grow your audience ...",
+            "rank": 8
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "prompts | Self Improvement » Productivity",
+            "url": "https://gumroad.com/self-improvement/productivity?tags=prompts",
+            "snippet": "The Ultimate AI Prompt Toolkit: 110 Prompts for Clarity, Productivity & Passive Income ... AI Easy Prompts OS & AI Prompt Generator · Valeria Notion. 5.0(6). $19.",
+            "rank": 9
+          },
+          {
+            "source": "serpapi",
+            "category": "AI_PROMPTS",
+            "query": "ai prompts",
+            "title": "Ai Art Prompts & Style Collection - By Sevenstyles",
+            "url": "https://sevenstyles.gumroad.com/l/hqfbrf?layout=profile",
+            "snippet": "This collection comprises 80,204 AI art prompts, accompanied by over 320,816 image examples. Every prompt comes with 4 image examples created with ...",
+            "rank": 10
+          }
+        ],
+        "priceBand": {
+          "sampleSize": 0
+        },
+        "painPoints": [],
+        "deliveryExpectations": []
+      },
+      "NOTION_TEMPLATES": {
+        "query": "notion template",
+        "competitorUrls": [],
+        "items": [
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "Headquarters Notion Productivity Template",
+            "url": "https://productivesetups.gumroad.com/l/headquarters",
+            "snippet": "How to setup Headquarters · Step 1: Download the template (only 1 click) · Step 2: Add your Projects · Step 3: Now start adding your tasks, journaling, time ...",
+            "rank": 1
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "Ultimate Notion Dashboard | Build Your Own Digital World!",
+            "url": "https://wesleyanna.gumroad.com/l/ultimate-notion-dashboard",
+            "snippet": "This template is designed to help you streamline your tasks, projects, and notes all in one convenient location.",
+            "rank": 2
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "List of 250+ Free Notion Templates",
+            "url": "https://pathpages.gumroad.com/l/notion-free-templates-list",
+            "snippet": "Notion templates are pre-built Notion components that can be imported into your Notion workspace and are a great way to boost your productivity in Notion. 3.",
+            "rank": 3
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "2025 Dream Life Planner ♡ Simple & Aesthetic Notion ...",
+            "url": "https://slowcozykelly.gumroad.com/l/2025notionplanner",
+            "snippet": "A simple, feel-good system for moving toward your dreams. Meet your new digital homebase for planning, organizing, and documenting your life.",
+            "rank": 4
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "Notion Everything",
+            "url": "https://notioneverything.gumroad.com/",
+            "snippet": "Notion templates to manage everything -> notioneverything.com ; Notion Complete Bundle. $199 ; Notion Second Brain 3.0. 5.0(1). $64 ; Task and Project Management ...",
+            "rank": 5
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "Smart Notion",
+            "url": "https://smartnotiontemplates.gumroad.com/",
+            "snippet": "Explore a treasure trove of top-notch Notion templates & invaluable tools. Most PopularFree TemplatesPremium TemplatesEtsy Guide Free Useful Stuff Blog ...",
+            "rank": 6
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "Notion Lab - Free Notion Template",
+            "url": "https://notionlab8.gumroad.com/",
+            "snippet": "Get free Notion templates to 10x your productivity! · Movies Tracker Pro - Powerful Notion Template for Film Lovers · Fitness Tracker Pro - Your Ultimate Fitness ...",
+            "rank": 7
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "Content Planner & Calendar - Notion template",
+            "url": "https://notioneverything.gumroad.com/l/notion-content-planner-calendar",
+            "snippet": "Plan, create and organize all your content in one place. Get your content strategy to the next level and grow your audience easily with this Notion template.",
+            "rank": 8
+          },
+          {
+            "source": "serpapi",
+            "category": "NOTION_TEMPLATES",
+            "query": "notion template",
+            "title": "bits of shanshine",
+            "url": "https://bitsofshanshine.gumroad.com/",
+            "snippet": "It Girl All-in-one Notion Template. $17.99 ; 2025 Student Planner Notion Template. 5.0(5). $5.99 ; Pastel Core All-in-one Notion Template. 5.0(1). $12.99.",
+            "rank": 9
+          }
+        ],
+        "priceBand": {
+          "sampleSize": 0
+        },
+        "painPoints": [
+          {
+            "label": "setup confusion",
+            "count": 1,
+            "examples": [
+              "Headquarters Notion Productivity Template How to setup Headquarters · Step 1: Download the template (only 1 click) · Step 2: Add your Projects · Step 3: Now start adding your tasks, journaling, time ..."
+            ]
+          }
+        ],
+        "deliveryExpectations": []
+      },
+      "DIGITAL_PLANNERS": {
+        "query": "digital planner goodnotes",
+        "competitorUrls": [],
+        "items": [
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Ultimate Digital Planner for GoodNotes - Landscape",
+            "url": "https://mysmoothlife.gumroad.com/l/digitalplanner-rainbow?layout=profile",
+            "snippet": "This Ultimate Premium digital planner is designed to help you make the best of your whole year based on your priorities, purpose, and goals.",
+            "rank": 1
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Digital Planner 2025-2026-2027 & Undated | Goodnotes, iPad ...",
+            "url": "https://plamarplanners.gumroad.com/l/twpmyp?_gl=1*1ulok9m*_ga*OTA2NzQ3ODk1LjE3NTUzMzkxMDQ.*_ga_6LJN6D94N6*czE3NTc2ODcwNjQkbzIxNSRnMSR0MTc1NzY4ODU0OCRqNjAkbDAkaDA",
+            "snippet": "🗓️ Daily Planner Templates: Hourly schedules, top priorities, to-do lists, meals, hydration trackers, and reflective journaling space. Designed for maximum ...",
+            "rank": 2
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Digital Planner - GoodNotes, iPad, Notability | Daily ...",
+            "url": "https://zakdigital.gumroad.com/l/Planner",
+            "snippet": "It's compatible with various apps like GoodNotes, Notability, and more. Whether you prefer handwriting or typing, this planner is designed to fit your needs.",
+            "rank": 3
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Discover Notes",
+            "url": "https://discovernotes.gumroad.com/",
+            "snippet": "2025 Digital Planner with Apple Calendar Integration and Event Import · Dynamic Essentials (Squared Graph Edition) Templates for Goodnotes 6 ...",
+            "rank": 4
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Goodnotes Templates",
+            "url": "https://templatestack.gumroad.com/",
+            "snippet": "Subscribe to receive Goodnotes templates for free every week ; 2025 Ultimate Goodnotes Planner (✨bestseller) ; FREE GoodNotes Simple Weekly ...",
+            "rank": 5
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Undated Digital Planner for GoodNotes & Notability + 28.000 ...",
+            "url": "https://sprintdigit.gumroad.com/l/yuzuo",
+            "snippet": "Undated Digital Planner for GoodNotes & Notability + 28.000 Digital Stickers in PNG files. $18.99+. $18.99+. https://schema.org/InStock. usd. SprintDigit.",
+            "rank": 6
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Digital Planner, Goodnotes Planner, iPad ...",
+            "url": "https://planfinity.gumroad.com/l/DigitalPlanner",
+            "snippet": "This is the best custom planner experience! The interactive planner builder lets you mix and match your planner orientation, tab color, ring color, ...",
+            "rank": 7
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "(Completely FREE) 2024 Ultimate Digital Planner for iPad ...",
+            "url": "https://cardspalace.gumroad.com/l/2024-Ultimate-Digital-Planner-for-iPad-GoodNotes-Minimalist-Planner-PortraitMode-Monthly-Weekly-Daily-Templates-Stickers",
+            "snippet": "This planner empowers you to take control of your time and tasks with ease. From comprehensive monthly overviews to detailed daily schedules.",
+            "rank": 8
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "UpliftingPlanner",
+            "url": "https://upliftingplanner.gumroad.com/",
+            "snippet": "Holiday Word Digital Stickers for Planner · Perpetual Mini Calendar Tab Digital Stickers · Essential Planning Stickers for Goodnotes iPad Digital Planner.",
+            "rank": 9
+          },
+          {
+            "source": "serpapi",
+            "category": "DIGITAL_PLANNERS",
+            "query": "digital planner goodnotes",
+            "title": "Emma Studies — Free Printables",
+            "url": "https://emmastudies.gumroad.com/",
+            "snippet": "I'm Emma, a digital creator & organiser enthusiast! Here you can download all my free content, or donate any amount",
+            "rank": 10
+          }
+        ],
+        "priceBand": {
+          "sampleSize": 0
+        },
+        "painPoints": [],
+        "deliveryExpectations": [
+          {
+            "label": "planner app compatibility",
+            "count": 5,
+            "examples": [
+              "Ultimate Digital Planner for GoodNotes - Landscape This Ultimate Premium digital planner is designed to help you make the best of your whole year based on your priorities, purpose, and goals.",
+              "Digital Planner 2025-2026-2027 & Undated | Goodnotes, iPad ... 🗓️ Daily Planner Templates: Hourly schedules, top priorities, to-do lists, meals, hydration trackers, and reflective journaling space. Designed for maximum ...",
+              "Digital Planner - GoodNotes, iPad, Notability | Daily ... It's compatible with various apps like GoodNotes, Notability, and more. Whether you prefer handwriting or typing, this planner is designed to fit your needs.",
+              "Discover Notes 2025 Digital Planner with Apple Calendar Integration and Event Import · Dynamic Essentials (Squared Graph Edition) Templates for Goodnotes 6 ...",
+              "Goodnotes Templates Subscribe to receive Goodnotes templates for free every week ; 2025 Ultimate Goodnotes Planner (✨bestseller) ; FREE GoodNotes Simple Weekly ..."
+            ]
+          },
+          {
+            "label": "zip / download all",
+            "count": 1,
+            "examples": [
+              "Emma Studies — Free Printables I'm Emma, a digital creator & organiser enthusiast! Here you can download all my free content, or donate any amount"
+            ]
+          }
+        ]
+      },
+      "DESIGN_TEMPLATES": {
+        "query": "figma design templates commercial license",
+        "competitorUrls": [],
+        "items": [
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "gumroad-reviews",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "url": "https://goodsnooze.gumroad.com/l/macwhisper",
+            "snippet": "[object Object]"
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Figma - eCommerce template",
+            "url": "https://petrbilek.gumroad.com/l/figma-ecommerce",
+            "snippet": "License. You are allowed. Use freebie resources for any personal and commercial projects. Modify resources according to your needs. You are allowed to use ...",
+            "rank": 1
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Brand Guidelines Figma Template",
+            "url": "https://qoraxdesigns.gumroad.com/l/qzwyg",
+            "snippet": "... Figma's Auto Layout and responsive design features. Format: Figma (.fig) License: Personal & Commercial Use✉️ Questions or feedback? Don't hesitate to",
+            "rank": 2
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "The High-ROI Fashion Ad Template Bundle for Figma (Story & ...",
+            "url": "https://modularweb.gumroad.com/l/fashion-bundle",
+            "snippet": "Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ...",
+            "rank": 3
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Azura Figma Brand Template",
+            "url": "https://kevinhipke.gumroad.com/l/azura",
+            "snippet": "Non-commercial use only. Transform your branding—download now! Buy this. Following Figma Friday, now releasing the full work files.",
+            "rank": 4
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Professional Resume Templates for UI Designers, UX ...",
+            "url": "https://designacademy.gumroad.com/l/CV",
+            "snippet": "License for personal or commercial use. Easy Exporting Steps: 1. Select the frame on Figma. 2. Click on Export in the right sidebar.",
+            "rank": 5
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Modern UI/UX templates - Designs Unleashed",
+            "url": "https://mdxshop.gumroad.com/l/Modernwebsitetemplates",
+            "snippet": "This license is for personal use only. If you want to commercialize these designs, you can opt for a commercial license for a cost of $150. If the link ...",
+            "rank": 6
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "NextGen - NFT Marketplace Figma Website Design",
+            "url": "https://templatesjungle.gumroad.com/l/nextgen-nft-marketplace-figma-website-template",
+            "snippet": "This template is completely free for both personal and commercial use. ... You can also use this great design template for other niches too. It has design ...",
+            "rank": 7
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "The High-Performance Fitness Ad Story Template for Figma",
+            "url": "https://modularweb.gumroad.com/l/fitness-story",
+            "snippet": "Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ...",
+            "rank": 8
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Fabrx Web Design System (Figma)",
+            "url": "https://fabrxdesign.gumroad.com/l/IrbVM?layout=profile&recommended_by=mc",
+            "snippet": "Unlimited personal and commercial projects for one user. $90. 90. usd. Team License. Unlimited personal and commercial projects for you and your team.",
+            "rank": 9
+          },
+          {
+            "source": "serpapi",
+            "category": "DESIGN_TEMPLATES",
+            "query": "figma design templates commercial license",
+            "title": "Ecom - Free Ecommerce Figma Web Design Template",
+            "url": "https://templatesjungle.gumroad.com/l/ecom-free-ecommerce-figma-web-design-template",
+            "snippet": "100% free for both personal and commercial use ... You can also download free Figma resources and free mobile UI kits and use them as a starter template.",
+            "rank": 10
+          }
+        ],
+        "priceBand": {
+          "sampleSize": 0
+        },
+        "painPoints": [
+          {
+            "label": "licensing concerns",
+            "count": 5,
+            "examples": [
+              "Figma - eCommerce template License. You are allowed. Use freebie resources for any personal and commercial projects. Modify resources according to your needs. You are allowed to use ...",
+              "Brand Guidelines Figma Template ... Figma's Auto Layout and responsive design features. Format: Figma (.fig) License: Personal & Commercial Use✉️ Questions or feedback? Don't hesitate to",
+              "The High-ROI Fashion Ad Template Bundle for Figma (Story & ... Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ...",
+              "Professional Resume Templates for UI Designers, UX ... License for personal or commercial use. Easy Exporting Steps: 1. Select the frame on Figma. 2. Click on Export in the right sidebar.",
+              "Modern UI/UX templates - Designs Unleashed This license is for personal use only. If you want to commercialize these designs, you can opt for a commercial license for a cost of $150. If the link ..."
+            ]
+          }
+        ],
+        "deliveryExpectations": [
+          {
+            "label": "design tool compatibility",
+            "count": 5,
+            "examples": [
+              "Figma - eCommerce template License. You are allowed. Use freebie resources for any personal and commercial projects. Modify resources according to your needs. You are allowed to use ...",
+              "Brand Guidelines Figma Template ... Figma's Auto Layout and responsive design features. Format: Figma (.fig) License: Personal & Commercial Use✉️ Questions or feedback? Don't hesitate to",
+              "The High-ROI Fashion Ad Template Bundle for Figma (Story & ... Meticulously Organized Figma File: Clean layers and components built with auto-layout for lightning-fast editing. Commercial Use License: Use these for your own ...",
+              "Azura Figma Brand Template Non-commercial use only. Transform your branding—download now! Buy this. Following Figma Friday, now releasing the full work files.",
+              "Professional Resume Templates for UI Designers, UX ... License for personal or commercial use. Easy Exporting Steps: 1. Select the frame on Figma. 2. Click on Export in the right sidebar."
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "frameworkAudit": {
+    "generatedAt": "2025-12-22T04:08:21.619Z",
+    "claims": [
+      {
+        "id": "delivery-zip",
+        "claim": "Buyers prefer a single ZIP / “download all” convenience and get frustrated by multi-file downloads.",
+        "status": "Unknown",
+        "evidence": [],
+        "recommendedChange": "Default delivery: Full_Package.zip + Start Here page; keep individual files optional."
+      },
+      {
+        "id": "setup-friction",
+        "claim": "Setup friction is a common reason for dissatisfaction; products need “Start Here” onboarding.",
+        "status": "Unknown",
+        "evidence": [],
+        "recommendedChange": "Require Start Here page + 3-step quickstart + app/tool-specific import guidance."
+      },
+      {
+        "id": "licensing",
+        "claim": "Licensing clarity is a frequent buyer concern (especially design templates).",
+        "status": "Unknown",
+        "evidence": [],
+        "recommendedChange": "Always include License page + license.txt; include allowed/not allowed checklist."
+      }
+    ],
+    "beforeAfter": {
+      "before": [
+        "Validation based primarily on assumptions + general best practices.",
+        "Copy and delivery decisions not explicitly tied to extracted objections."
+      ],
+      "after": [
+        "Validation uses Apify+SerpAPI signals to ground copy, FAQ, and delivery structure.",
+        "Quality gate includes “must-have” sections derived from real objections (download, setup, license).",
+        "Delivery default: ZIP + Start Here + Pages + folders; category-specific import/duplicate guidance."
+      ]
+    }
+  }
+}

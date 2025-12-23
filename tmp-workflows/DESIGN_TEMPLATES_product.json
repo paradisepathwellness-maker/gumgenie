@@ -1,0 +1,47 @@
+{
+  "title": "ViralVisage™: The Ultimate Social Media Design Kit 🎨",
+  "description": "### Transform Your Digital Presence in Minutes 📈\n\nStop wasting hours staring at a blank canvas. **ViralVisage™** is a comprehensive design ecosystem engineered for creators, agencies, and entrepreneurs who need to maintain a high-frequency, high-quality social media presence without the burnout.\n\n#### Why choose ViralVisage™?\n- **Engagement Focused**: Every template is built on proven psychological triggers that stop the scroll.\n- **Universal Compatibility**: Optimized for Instagram, LinkedIn, X, and TikTok ecosystems.\n- **Fully Customizable**: Edit every layer, color, and font to match your brand identity ✨.\n\nWhether you are building a personal brand or managing a portfolio of clients, this kit provides the professional edge needed to dominate the algorithm. 🚀",
+  "price": 49,
+  "features": [
+    "150+ High-Conversion Instagram & LinkedIn Templates",
+    "Pro-Level Carousel Builder with seamless transitions",
+    "Exclusive Icon & Texture Library (500+ assets)",
+    "Comprehensive Brand Guidelines Template",
+    "Video Overlay Assets for Reels and TikTok"
+  ],
+  "callToAction": "Unlock Your Brand Potential",
+  "emojiSet": [
+    "🎨",
+    "📈",
+    "✨",
+    "🚀",
+    "💻",
+    "💎",
+    "📱"
+  ],
+  "extraComponents": [
+    {
+      "type": "checklist",
+      "title": "What's Included in the Box",
+      "items": [
+        "Adobe Photoshop & Illustrator Source Files",
+        "One-Click Canva Import Links",
+        "Free Future Lifetime Updates",
+        "Commercial Usage License",
+        "Video Tutorial & Style Guide"
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Frequently Asked Questions",
+      "items": [
+        "Do I need a Canva Pro account? No, all templates work with the free version.",
+        "Can I use this for client work? Yes, the commercial license is included.",
+        "Are fonts included? We use high-quality free Google Fonts with download links provided."
+      ]
+    }
+  ],
+  "category": "DESIGN_TEMPLATES",
+  "coverImage": "https://picsum.photos/seed/design/1200/800",
+  "contentBlocks": []
+}

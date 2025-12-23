@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2025-12-22T07:02:51.824Z",
+  "maxCompetitors": 30,
+  "concurrency": 10,
+  "chunkSize": 10,
+  "actors": {
+    "search": "easyapi/gumroad-search-scraper",
+    "detail": "muhammetakkurtt/gumroad-scraper",
+    "reviews": "easyapi/gumroad-reviews-scraper"
+  },
+  "detailResults": [
+    {
+      "category": "AI_PROMPTS",
+      "batch": 1,
+      "count": 8,
+      "datasetId": "ozbiSQuVZW622lOsf"
+    },
+    {
+      "category": "AI_PROMPTS",
+      "batch": 2,
+      "count": 8,
+      "datasetId": "NrTuqVhy0gGLmnlMF"
+    },
+    {
+      "category": "AI_PROMPTS",
+      "batch": 3,
+      "count": 6,
+      "datasetId": "8jebsAWr6id5acuOV"
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "batch": 1,
+      "count": 5,
+      "datasetId": "mQOpXcQbKJtmbGlqQ"
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "batch": 2,
+      "count": 6,
+      "datasetId": "54RDz6ERy2TLzUbvb"
+    },
+    {
+      "category": "NOTION_TEMPLATES",
+      "batch": 3,
+      "count": 3,
+      "datasetId": "sLPHdYotnExiRnf5K"
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "batch": 1,
+      "count": 10,
+      "datasetId": "cZLCKCulOdCD5EDWe"
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "batch": 2,
+      "count": 10,
+      "datasetId": "t9VQH0hyoYqyEF3IA"
+    },
+    {
+      "category": "DIGITAL_PLANNERS",
+      "batch": 3,
+      "count": 6,
+      "datasetId": "FgP96KyA1Foi6Az39"
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "batch": 1,
+      "count": 4,
+      "datasetId": "I4QJ3FcUMjHj9wR1B"
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "batch": 2,
+      "count": 5,
+      "datasetId": "SZa2Qh3iZreNCCxPa"
+    },
+    {
+      "category": "DESIGN_TEMPLATES",
+      "batch": 3,
+      "count": 4,
+      "datasetId": "A5anIjQLkJ0F5xLA6"
+    }
+  ],
+  "reviewResults": [],
+  "reviewsEnabled": false,
+  "reviewsDisabledReason": "Apify run failed (403) for easyapi/gumroad-reviews-scraper: {\n  \"error\": {\n    \"type\": \"actor-is-not-rented\",\n    \"message\": \"You must rent a paid Actor in order to run it after its free trial has expired. To rent this Actor, go to https://console.apify.com/actors/b56mefOrTveFWVYjx\"\n  }\n}"
+}

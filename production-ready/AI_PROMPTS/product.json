@@ -1,0 +1,46 @@
+{
+  "title": "PromptMaster AI Toolkit: The Ultimate Engineering Framework 🚀",
+  "description": "Stop guessing and start generating high-impact results. This comprehensive pack contains over 500+ battle-tested prompts designed for ChatGPT, Claude, and Midjourney. 💎 Whether you are a developer looking to automate code or a marketer crafting viral copy, our Triple-A Framework (Act, Analyze, Achieve) ensures your AI interactions are precise, professional, and powerful. Unlock the full potential of LLMs with structural templates and role-play personas that save you hours of trial and error. 🛠️ Join 5,000+ creators who have leveled up their workflow today. ⚡",
+  "price": 49,
+  "features": [
+    "500+ Master-Level Prompts for Work & Creativity",
+    "Multi-Model Compatibility (GPT-4, Claude 3.5, Gemini)",
+    "The Triple-A Structural Prompting Framework",
+    "Advanced Image Generation Guide for Midjourney & DALL-E",
+    "Lifetime Access & Weekly Prompt Updates"
+  ],
+  "callToAction": "Get Instant Access to PromptMaster ⚡",
+  "emojiSet": [
+    "🤖",
+    "🚀",
+    "💎",
+    "⚡",
+    "🧠",
+    "🎨",
+    "🛠️"
+  ],
+  "extraComponents": [
+    {
+      "type": "checklist",
+      "title": "What You Get Inside",
+      "items": [
+        "Full Prompt Library (CSV & PDF)",
+        "Persona Role-Play Frameworks",
+        "Iterative Refinement Cheat Sheet",
+        "Commercial Use License Included"
+      ]
+    },
+    {
+      "type": "faq",
+      "title": "Frequent Questions",
+      "items": [
+        "Does this work with free AI versions? Yes, all prompts are optimized for both free and paid models.",
+        "Are updates included? Absolutely, you get all future prompt expansions at no extra cost.",
+        "Can I use this for client work? Yes, a full commercial license is bundled with your purchase."
+      ]
+    }
+  ],
+  "category": "AI_PROMPTS",
+  "coverImage": "https://picsum.photos/seed/prompt/1200/800",
+  "contentBlocks": []
+}
