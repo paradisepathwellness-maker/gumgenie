@@ -833,6 +833,45 @@ For **each category** (NOTION_TEMPLATES, AI_PROMPTS, DIGITAL_PLANNERS, DESIGN_TE
 ### P1.7 Local Cloudflare deploy automation (Option B: Wrangler-first)
 Use this path to perfect output locally before moving to CI (Option A: GitHub Actions). Keep config/script-driven so B → A is copy/paste.
 
+### gumgenie-app (Cloudflare Pages Functions) — Source of Truth (Phase 1)
+**Important:** The deployed `*.pages.dev` endpoints come from **Cloudflare Pages Functions** under `gumgenie-app/functions/`, not the local Express backend (`backend/server.ts`).
+
+**Authoritative Pages endpoints (gumgenie-app):**
+- `GET /api/notion/status` → `gumgenie-app/functions/api/notion/status.ts`
+- `GET /api/notion/oauth/start` → `gumgenie-app/functions/api/notion/oauth/start.ts`
+- `GET /api/notion/oauth/callback` → `gumgenie-app/functions/api/notion/oauth/callback.ts`
+- `POST /api/verify` → `gumgenie-app/functions/api/verify.ts`
+- `POST /api/generate` → `gumgenie-app/functions/api/generate.ts`
+
+**Required Cloudflare bindings (must be KV namespaces, not D1):**
+- `GG_SESSION_KV` — KV namespace binding used to store OAuth session → Notion token (`sid:<sid>:notionToken`)
+- `GG_LICENSE_KV` — KV namespace binding used for one-time redemption (`used:<licenseKey>`)
+
+**Required Cloudflare env vars:**
+- Notion OAuth:
+  - `NOTION_CLIENT_ID`
+  - `NOTION_CLIENT_SECRET`
+  - `NOTION_REDIRECT_URI` (must exactly match Notion integration settings + deployed domain callback)
+- Gumroad verification:
+  - `GUMROAD_PRODUCT_PERMALINK`
+  - (optional) `GUMROAD_ACCESS_TOKEN`
+
+**Current implementation scope (Phase 1 reality):**
+- `POST /api/generate` currently implements **NOTION_TEMPLATES only**.
+- Other `templateType` values (`AI_PROMPTS`, `DIGITAL_PLANNERS`, `DESIGN_TEMPLATES`) return `501 not_implemented` until deliverable generators are implemented.
+
+**E2E smoke sequence (NOTION_TEMPLATES standard + premium):**
+1) Confirm status JSON:
+   - `GET <BASE_URL>/api/notion/status` → `{ connected: false }`
+2) OAuth connect (one-time):
+   - open `<BASE_URL>/api/notion/oauth/start` in browser → approve → returns to callback
+3) Confirm connected:
+   - `GET <BASE_URL>/api/notion/status` → `{ connected: true }`
+4) Generate standard:
+   - `POST <BASE_URL>/api/generate` body: `{ "templateType":"NOTION_TEMPLATES", "variant":"standard", "licenseKey":"..." }`
+5) Generate premium:
+   - `POST <BASE_URL>/api/generate` body: `{ "templateType":"NOTION_TEMPLATES", "variant":"premium", "licenseKey":"..." }`
+
 **Official docs (canonical):**
 - Wrangler overview: https://developers.cloudflare.com/workers/wrangler/
 - Wrangler commands reference (includes `pages` subcommands): https://developers.cloudflare.com/workers/wrangler/commands/
@@ -912,6 +951,7 @@ latform/limits/ ; https://developers.cloudflare.com/d1/platform/pricing/
 - Debug Trace: backend returns `meta.traceId` from `/api/chat/orchestrate` when `AGENT_TRACE_ENABLED=true`, traces stored under `production-test/logs/`.
 - Docker MCP Toolkit enabled servers (local): `ast-grep`, `semgrep`, `git` (in addition to existing core servers like `fetch`, `filesystem`, `playwright`).
 - Git repo initialized locally: `git init`.
+- GitHub CLI installed and accessible on the local machine: `gh`.
 
 ### Recent work completed (this session)
 1) **NOTION_TEMPLATES generation variants (gumgenie-app)**

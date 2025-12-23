@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .env.local
 tmp_rovodev_pages_deploy/
+tmp_rovodev_pages_bundle/
 
 # Editor directories and files
 .vscode/*
