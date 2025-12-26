@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notion Template (Interactive HTML) — GumGenie-style</title>
+  <style>
+    :root{
+      --bg:#0b0f17;--panel:rgba(255,255,255,.06);--border:rgba(255,255,255,.12);
+      --text:#e9eefb;--muted:rgba(233,238,251,.72);--accent:#7c5cff;--good:#22c55e;
+      --warn:#f59e0b;--bad:#ef4444;--shadow:0 20px 60px rgba(0,0,0,.45);
+      --r:18px;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--sans);color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(124,92,255,.28), transparent 60%),
+        radial-gradient(900px 600px at 70% 30%, rgba(34,197,94,.16), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(59,130,246,.10), transparent 60%),
+        var(--bg);
+      min-height:100vh;
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 70px}
+    .top{position:sticky;top:0;z-index:10;padding:12px 0;
+      backdrop-filter:blur(12px);
+      background:linear-gradient(to bottom, rgba(11,15,23,.78), rgba(11,15,23,.35));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .card{background:linear-gradient(180deg,var(--panel),rgba(255,255,255,.03));border:1px solid var(--border);
+      border-radius:var(--r);box-shadow:var(--shadow)}
+    .pad{padding:16px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;
+      background:rgba(124,92,255,.16);border:1px solid rgba(124,92,255,.26);font-size:12px;color:rgba(233,238,251,.92)}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 5px rgba(124,92,255,.12)}
+    .pill{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);color:rgba(233,238,251,.85)}
+    .btn{appearance:none;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.06);
+      color:var(--text);padding:9px 12px;font-weight:700;cursor:pointer}
+    .btn:hover{background:rgba(255,255,255,.10)}
+    .btn.primary{border-color:rgba(124,92,255,.45);background:linear-gradient(180deg,rgba(124,92,255,.26),rgba(124,92,255,.14))}
+    .btn.good{border-color:rgba(34,197,94,.45);background:linear-gradient(180deg,rgba(34,197,94,.22),rgba(34,197,94,.10))}
+    h1{margin:10px 0 0;font-size:30px;letter-spacing:-.5px}
+    p{margin:10px 0 0;color:var(--muted);line-height:1.5}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:14px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    .section{border-radius:var(--r);border:1px solid var(--border);background:rgba(255,255,255,.05);overflow:hidden}
+    .section header{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+      background:rgba(255,255,255,.04);cursor:pointer;user-select:none}
+    .section header:hover{background:rgba(255,255,255,.06)}
+    .left{display:flex;align-items:center;gap:10px}
+    .icon{width:34px;height:34px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;
+      background:rgba(124,92,255,.16);border:1px solid rgba(124,92,255,.28)}
+    .meta{display:grid;gap:2px}
+    .name{font-weight:900}
+    .desc{font-size:12px;color:var(--muted)}
+    .chev{width:28px;height:28px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.10);color:rgba(233,238,251,.78);font-family:var(--mono);transition:120ms ease}
+    .body{padding:14px;display:none}
+    .open .body{display:block}
+    .open .chev{transform:rotate(90deg)}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+    @media (max-width:650px){.kpi{grid-template-columns:1fr}}
+    .kbox{padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05)}
+    .klabel{font-size:12px;color:var(--muted)}
+    .kval{margin-top:4px;font-size:20px;font-weight:950}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+    input,select{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text);
+      padding:9px 10px;border-radius:12px;outline:none;min-width:220px}
+    table{width:100%;border-collapse:collapse;margin-top:10px;border-radius:14px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.10)}
+    th,td{padding:10px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px}
+    th{background:rgba(255,255,255,.05);color:rgba(233,238,251,.86)}
+    tr:hover td{background:rgba(255,255,255,.04)}
+    tr:last-child td{border-bottom:none}
+    .tag{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);font-size:12px}
+    .tg{background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.25)}
+    .tp{background:rgba(124,92,255,.14);border-color:rgba(124,92,255,.25)}
+    .tw{background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.25)}
+    .tr{background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.25)}
+    .mono{font-family:var(--mono)}
+    .toast{position:fixed;right:14px;bottom:14px;background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.12);
+      padding:10px 12px;border-radius:12px;color:rgba(233,238,251,.92);display:none;max-width:min(520px,calc(100vw - 28px))}
+    .toast.show{display:block}
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wrap" style="padding:0 16px">
+      <div class="row" style="justify-content:space-between">
+        <div class="row">
+          <span class="badge"><span class="dot"></span> Notion Template Preview</span>
+          <span class="pill">Interactive HTML</span>
+          <span class="pill mono" id="modePill">Mode: Standard</span>
+        </div>
+        <div class="row">
+          <button class="btn" id="toggleAllBtn">Toggle all</button>
+          <button class="btn primary" id="modeBtn">Switch to Premium</button>
+          <button class="btn good" id="resetBtn">Reset demo data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="card pad">
+      <div class="badge"><span class="dot"></span> GumGenie Notion Template</div>
+      <h1>Second Brain OS — Dashboard + 5 Databases</h1>
+      <p>
+        A deterministic, host-anywhere preview that mimics a Notion template structure: <b>Start Here</b>, <b>Dashboard</b>, and 5 “databases”.
+        Use the controls to filter tasks, add demo rows, and switch Standard/Premium onboarding.
+      </p>
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" id="openStartHereBtn">Open “Start Here”</button>
+        <button class="btn" id="openDashboardBtn">Open “Dashboard”</button>
+        <button class="btn" id="expandDBsBtn">Expand databases</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card pad">
+        <h2 style="margin:0;font-size:16px">Dashboard KPIs (demo)</h2>
+        <p style="margin-top:8px">These update as you change statuses and add items.</p>
+        <div class="kpi">
+          <div class="kbox"><div class="klabel">Open Tasks</div><div class="kval" id="kOpen">—</div></div>
+          <div class="kbox"><div class="klabel">Active Projects</div><div class="kval" id="kProjects">—</div></div>
+          <div class="kbox"><div class="klabel">Notes (7 days)</div><div class="kval" id="kNotes">—</div></div>
+        </div>
+      </div>
+
+      <div class="card pad">
+        <h2 style="margin:0;font-size:16px">Databases included</h2>
+        <p style="margin-top:8px">Tasks, Projects, Notes, Resources, Habits</p>
+        <p style="margin-top:10px" class="mono">This is a front-end only demo; no network calls.</p>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:14px">
+      <section class="section open" data-section="start-here">
+        <header><div class="left"><div class="icon">📌</div><div class="meta"><div class="name">Start Here</div><div class="desc">Setup steps + (Premium) Quick Wins/Troubleshooting/Rules</div></div></div><div class="chev">›</div></header>
+        <div class="body">
+          <h3 style="margin:0;font-size:14px">Setup checklist</h3>
+          <ol style="margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.6">
+            <li>Duplicate the template into your workspace.</li>
+            <li>Create 1 active project you care about.</li>
+            <li>Add 3 tasks and assign them to that project.</li>
+            <li>Use the Dashboard daily: capture → clarify → commit.</li>
+          </ol>
+          <div id="premiumBlocks" style="display:none;margin-top:12px">
+            <h3 style="margin:0;font-size:14px">Premium additions</h3>
+            <ul style="margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.6">
+              <li><b>Quick Wins</b>: set one Top Outcome for the week + a 10-minute review ritual.</li>
+              <li><b>Troubleshooting</b>: hide everything except Today/Inbox when overwhelmed.</li>
+              <li><b>Operating Rules</b>: nothing stays in Inbox past 48 hours.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section open" data-section="dashboard">
+        <header><div class="left"><div class="icon">🧭</div><div class="meta"><div class="name">Dashboard</div><div class="desc">Today / Inbox / Next Actions / All tasks</div></div></div><div class="chev">›</div></header>
+        <div class="body">
+          <div class="toolbar">
+            <span class="pill">Focus</span>
+            <select id="taskView">
+              <option value="today">Today</option>
+              <option value="inbox">Inbox</option>
+              <option value="next">Next Actions</option>
+              <option value="all">All tasks</option>
+            </select>
+            <input id="taskSearch" placeholder="Search tasks..." />
+            <button class="btn" id="addTaskBtn">+ Add demo task</button>
+          </div>
+          <table id="tasksTable">
+            <thead><tr><th style="width:34%">Task</th><th>Status</th><th>Priority</th><th>Due</th><th>Project</th><th style="width:128px">Actions</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <p style="margin-top:10px" class="mono">Click “Status” to cycle Inbox → Next → Today → Done.</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="card pad" style="margin-top:14px">
+      <h2 style="margin:0;font-size:16px">Databases (5)</h2>
+      <p style="margin-top:8px">Expand each section to preview schema + sample rows.</p>
+
+      <div style="display:grid;gap:12px;margin-top:12px">
+        <section class="section" data-section="projects">
+          <header><div class="left"><div class="icon" style="background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.24)">📁</div><div class="meta"><div class="name">Projects</div><div class="desc">Status, due date, owner</div></div></div><div class="chev">›</div></header>
+          <div class="body"><table id="projectsTable"><thead><tr><th>Project</th><th>Status</th><th>Due</th><th>Owner</th></tr></thead><tbody></tbody></table></div>
+        </section>
+
+        <section class="section" data-section="notes">
+          <header><div class="left"><div class="icon">📝</div><div class="meta"><div class="name">Notes</div><div class="desc">Ideas, decisions, meeting notes</div></div></div><div class="chev">›</div></header>
+          <div class="body">
+            <div class="toolbar"><input id="noteSearch" placeholder="Search notes..." /><button class="btn" id="addNoteBtn">+ Add demo note</button></div>
+            <table id="notesTable"><thead><tr><th>Title</th><th>Type</th><th>Date</th><th>Linked Project</th></tr></thead><tbody></tbody></table>
+          </div>
+        </section>
+
+        <section class="section" data-section="resources">
+          <header><div class="left"><div class="icon" style="background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.24)">🔖</div><div class="meta"><div class="name">Resources</div><div class="desc">Links, tools, references</div></div></div><div class="chev">›</div></header>
+          <div class="body"><table id="resourcesTable"><thead><tr><th>Resource</th><th>Category</th><th>URL</th><th>Rating</th></tr></thead><tbody></tbody></table></div>
+        </section>
+
+        <section class="section" data-section="habits">
+          <header><div class="left"><div class="icon" style="background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.24)">📆</div><div class="meta"><div class="name">Habits</div><div class="desc">Schedule, streak, last done</div></div></div><div class="chev">›</div></header>
+          <div class="body">
+            <div class="toolbar"><button class="btn" id="logHabitBtn">Log “Daily Review”</button></div>
+            <table id="habitsTable"><thead><tr><th>Habit</th><th>Schedule</th><th>Streak</th><th>Last Done</th></tr></thead><tbody></tbody></table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const $$ = (s) => Array.from(document.querySelectorAll(s));
+
+    const now = new Date();
+    const iso = (d) => d.toISOString().slice(0,10);
+    const addDays = (d,n) => { const x = new Date(d.getTime()); x.setDate(x.getDate()+n); return x; };
+
+    const defaultState = () => ({
+      mode: "standard",
+      projects: [
+        { id: "p1", name: "Launch Gumroad Listing", status: "Active", due: iso(addDays(now,5)), owner: "You" },
+        { id: "p2", name: "Build Notion Template V1", status: "Active", due: iso(addDays(now,12)), owner: "You" }
+      ],
+      tasks: [
+        { id: "t1", title: "Write Start Here onboarding", status: "Inbox", priority: "High", due: iso(now), projectId: "p2" },
+        { id: "t2", title: "Create 5 database schemas", status: "Next", priority: "Med", due: iso(addDays(now,2)), projectId: "p2" },
+        { id: "t3", title: "Draft product description + FAQs", status: "Next", priority: "Low", due: iso(addDays(now,4)), projectId: "p1" },
+        { id: "t4", title: "Review tasks (10 min)", status: "Today", priority: "Med", due: iso(now), projectId: "p2" }
+      ],
+      notes: [
+        { id: "n1", title: "Launch Notes: Positioning", type: "Decision", date: iso(addDays(now,-1)), projectId: "p1" },
+        { id: "n2", title: "Template Spec Ideas", type: "Idea", date: iso(now), projectId: "p2" },
+      ],
+      resources: [
+        { id: "r1", name: "Notion Templates", category: "Research", url: "https://www.notion.so/templates", rating: 5 },
+        { id: "r2", name: "Gumroad", category: "Marketing", url: "https://gumroad.com", rating: 4 },
+      ],
+      habits: [
+        { id: "h1", name: "Daily Review", schedule: "Daily", streak: 3, lastDone: iso(addDays(now,-1)) }
+      ]
+    });
+
+    let state = defaultState();
+
+    function esc(s){
+      return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    }
+
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+    }
+
+    function projectName(id){
+      const p = state.projects.find(x => x.id === id);
+      return p ? p.name : "—";
+    }
+
+    function statusTag(s){
+      const k = String(s).toLowerCase();
+      if (k === "done") return `<span class="tag tg">● Done</span>`;
+      if (k === "today") return `<span class="tag tp">● Today</span>`;
+      if (k === "next") return `<span class="tag tw">● Next</span>`;
+      if (k === "inbox") return `<span class="tag tr">● Inbox</span>`;
+      return `<span class="tag">● ${esc(s)}</span>`;
+    }
+
+    function priorityTag(p){
+      const k = String(p).toLowerCase();
+      if (k === "high") return `<span class="tag tr">High</span>`;
+      if (k === "med") return `<span class="tag tw">Med</span>`;
+      if (k === "low") return `<span class="tag tg">Low</span>`;
+      return `<span class="tag">${esc(p)}</span>`;
+    }
+
+    function renderMode(){
+      const premium = state.mode === "premium";
+      $("#modePill").textContent = `Mode: ${premium ? "Premium" : "Standard"}`;
+      $("#modeBtn").textContent = premium ? "Switch to Standard" : "Switch to Premium";
+      $("#premiumBlocks").style.display = premium ? "block" : "none";
+    }
+
+    function renderKPIs(){
+      const open = state.tasks.filter(t => t.status !== "Done").length;
+      const activeProjects = state.projects.filter(p => p.status === "Active").length;
+      const weekAgo = addDays(now, -7);
+      const notesWeek = state.notes.filter(n => new Date(n.date) >= weekAgo).length;
+      $("#kOpen").textContent = String(open);
+      $("#kProjects").textContent = String(activeProjects);
+      $("#kNotes").textContent = String(notesWeek);
+    }
+
+    function renderProjects(){
+      const tbody = $("#projectsTable tbody");
+      tbody.innerHTML = state.projects.map(p => {
+        const st = p.status === "Active" ? `<span class="tag tg">● Active</span>` : `<span class="tag">● ${esc(p.status)}</span>`;
+        return `<tr><td><b>${esc(p.name)}</b></td><td>${st}</td><td class="mono">${esc(p.due)}</td><td>${esc(p.owner)}</td></tr>`;
+      }).join("");
+    }
+
+    function taskFilterFn(){
+      const v = $("#taskView").value;
+      if (v === "today") return (t) => t.status === "Today";
+      if (v === "inbox") return (t) => t.status === "Inbox";
+      if (v === "next") return (t) => t.status === "Next";
+      return () => true;
+    }
+
+    function renderTasks(){
+      const q = $("#taskSearch").value.trim().toLowerCase();
+      const filter = taskFilterFn();
+      const rows = state.tasks
+        .filter(filter)
+        .filter(t => !q || t.title.toLowerCase().includes(q) || projectName(t.projectId).toLowerCase().includes(q));
+
+      const tbody = $("#tasksTable tbody");
+      tbody.innerHTML = rows.map(t => {
+        return `<tr>
+          <td><b>${esc(t.title)}</b></td>
+          <td>${statusTag(t.status)}</td>
+          <td>${priorityTag(t.priority)}</td>
+          <td class="mono">${esc(t.due)}</td>
+          <td>${esc(projectName(t.projectId))}</td>
+          <td>
+            <button class="btn" data-action="cycle" data-id="${t.id}">Status</button>
+            <button class="btn" data-action="done" data-id="${t.id}">Done</button>
+          </td>
+        </tr>`;
+      }).join("");
+
+      tbody.querySelectorAll("button[data-action]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          const action = btn.getAttribute("data-action");
+          if (action === "cycle") cycleTaskStatus(id);
+          if (action === "done") setTaskStatus(id, "Done");
+        });
+      });
+    }
+
+    function renderNotes(){
+      const q = $("#noteSearch").value.trim().toLowerCase();
+      const tbody = $("#notesTable tbody");
+      const rows = state.notes.filter(n => !q || n.title.toLowerCase().includes(q));
+      tbody.innerHTML = rows.map(n => {
+        const tag = n.type === "Decision" ? `<span class="tag tg">Decision</span>` : (n.type === "Idea" ? `<span class="tag tp">Idea</span>` : `<span class="tag">${esc(n.type)}</span>`);
+        return `<tr><td><b>${esc(n.title)}</b></td><td>${tag}</td><td class="mono">${esc(n.date)}</td><td>${esc(projectName(n.projectId))}</td></tr>`;
+      }).join("");
+    }
+
+    function renderResources(){
+      const tbody = $("#resourcesTable tbody");
+      tbody.innerHTML = state.resources.map(r => {
+        const stars = "★".repeat(r.rating) + "☆".repeat(Math.max(0, 5 - r.rating));
+        return `<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.category)}</td><td><a href="${esc(r.url)}" target="_blank" rel="noreferrer">${esc(r.url)}</a></td><td>${stars}</td></tr>`;
+      }).join("");
+    }
+
+    function renderHabits(){
+      const tbody = $("#habitsTable tbody");
+      tbody.innerHTML = state.habits.map(h => {
+        return `<tr><td><b>${esc(h.name)}</b></td><td>${esc(h.schedule)}</td><td><span class="tag tg">${h.streak} day(s)</span></td><td class="mono">${esc(h.lastDone)}</td></tr>`;
+      }).join("");
+    }
+
+    function renderAll(){
+      renderMode();
+      renderKPIs();
+      renderProjects();
+      renderTasks();
+      renderNotes();
+      renderResources();
+      renderHabits();
+    }
+
+    function setTaskStatus(taskId, status){
+      const t = state.tasks.find(x => x.id === taskId);
+      if (!t) return;
+      t.status = status;
+      renderAll();
+    }
+
+    function cycleTaskStatus(taskId){
+      const order = ["Inbox","Next","Today","Done"];
+      const t = state.tasks.find(x => x.id === taskId);
+      if (!t) return;
+      const idx = Math.max(0, order.indexOf(t.status));
+      t.status = order[(idx + 1) % order.length];
+      renderAll();
+    }
+
+    function addDemoTask(){
+      const id = "t" + Math.random().toString(16).slice(2,8);
+      const priorities = ["Low","Med","High"];
+      const p = priorities[Math.floor(Math.random()*priorities.length)];
+      state.tasks.unshift({
+        id,
+        title: "New task: " + ["Clarify","Draft","Ship","Review"][Math.floor(Math.random()*4)],
+        status: "Inbox",
+        priority: p,
+        due: iso(addDays(now, Math.floor(Math.random()*5))),
+        projectId: state.projects[Math.floor(Math.random()*state.projects.length)].id
+      });
+      toast("Added a demo task.");
+      renderAll();
+    }
+
+    function addDemoNote(){
+      const id = "n" + Math.random().toString(16).slice(2,8);
+      const type = ["Idea","Decision","Reference"][Math.floor(Math.random()*3)];
+      state.notes.unshift({ id, title: "New note: " + type, type, date: iso(now), projectId: state.projects[0].id });
+      toast("Added a demo note.");
+      renderAll();
+    }
+
+    function logHabit(){
+      const h = state.habits[0];
+      if (!h) return;
+      h.streak += 1;
+      h.lastDone = iso(now);
+      toast("Habit logged.");
+      renderAll();
+    }
+
+    function toggleSection(sectionName, open){
+      const el = document.querySelector(`[data-section="${sectionName}"]`);
+      if (!el) return;
+      if (open === undefined) el.classList.toggle("open");
+      else el.classList.toggle("open", open);
+    }
+
+    // accordion behavior
+    $$(".section > header").forEach(h => {
+      h.addEventListener("click", () => h.parentElement.classList.toggle("open"));
+    });
+
+    $("#modeBtn").addEventListener("click", () => {
+      state.mode = state.mode === "premium" ? "standard" : "premium";
+      toast(`Switched to ${state.mode}.`);
+      renderAll();
+    });
+
+    $("#resetBtn").addEventListener("click", () => {
+      state = defaultState();
+      toast("Reset demo data.");
+      renderAll();
+    });
+
+    $("#toggleAllBtn").addEventListener("click", () => {
+      const sections = $$(".section");
+      const anyClosed = sections.some(s => !s.classList.contains("open"));
+      sections.forEach(s => s.classList.toggle("open", anyClosed));
+    });
+
+    $("#openStartHereBtn").addEventListener("click", () => { toggleSection("start-here", true); window.scrollTo({top: 0, behavior:"smooth"}); });
+    $("#openDashboardBtn").addEventListener("click", () => { toggleSection("dashboard", true); window.scrollTo({top: 0, behavior:"smooth"}); });
+    $("#expandDBsBtn").addEventListener("click", () => {
+      ["projects","notes","resources","habits"].forEach(s => toggleSection(s, true));
+      toast("Expanded databases.");
+    });
+
+    $("#taskView").addEventListener("change", renderTasks);
+    $("#taskSearch").addEventListener("input", renderTasks);
+    $("#addTaskBtn").addEventListener("click", addDemoTask);
+    $("#noteSearch").addEventListener("input", renderNotes);
+    $("#addNoteBtn").addEventListener("click", addDemoNote);
+    $("#logHabitBtn").addEventListener("click", logHabit);
+
+    renderAll();
+  </script>
+</body>
+</html>

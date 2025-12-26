@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Button } from '@/components/ui/button';
 
 export type PricingTier = {
   name: string;
@@ -31,7 +32,7 @@ export function ThreeTierPricingGuide(props: ThreeTierPricingGuideProps) {
     tiers,
     highlightTierIndex = 1,
     ctaText = 'Get Instant Access',
-    gradientClass = 'from-purple-500 to-pink-500',
+    gradientClass = 'from-slate-200 via-slate-400 to-slate-200',
   } = props;
 
   const normalized = useMemo(() => {
@@ -43,20 +44,37 @@ export function ThreeTierPricingGuide(props: ThreeTierPricingGuideProps) {
   }, [tiers, highlightTierIndex]);
 
   return (
-    <section className="w-full">
+    <section className="w-full max-w-none">
+      <style>{`
+        @keyframes gg-tier-float {
+          0%, 100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -6px, 0); }
+        }
+        @keyframes gg-tier-glow {
+          0%, 100% { filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+          50% { filter: drop-shadow(0 18px 26px rgba(167, 139, 250, 0.22)); }
+        }
+        .gg-tier-highlight-anim {
+          animation: gg-tier-float 3.6s ease-in-out infinite, gg-tier-glow 3.6s ease-in-out infinite;
+          will-change: transform, filter;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .gg-tier-highlight-anim { animation: none !important; }
+        }
+      `}</style>
       <div className="mb-6">
         <h3 className="text-2xl font-black tracking-tighter">{title}</h3>
         {subtitle ? <p className="text-sm font-bold italic text-slate-600 mt-1">{subtitle}</p> : null}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5">
         {normalized.map((tier, idx) => (
           <div
             key={idx}
             className={
-              "relative rounded-[2rem] border-2 border-black bg-white p-6 transition-all " +
+              "relative rounded-[2rem] border-2 border-black bg-white p-6 transition-all transform-gpu " +
               (tier.isHighlight
-                ? `shadow-[10px_10px_0px_0px_rgba(0,0,0,1)]`
+                ? `shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] gg-tier-highlight-anim`
                 : `hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]`)
             }
           >
@@ -86,17 +104,17 @@ export function ThreeTierPricingGuide(props: ThreeTierPricingGuideProps) {
               ))}
             </div>
 
-            <button
+            <Button
               type="button"
               className={
                 "mt-6 w-full px-4 py-3 rounded-2xl border-2 border-black font-black uppercase tracking-widest text-xs transition-all " +
                 (tier.isHighlight
-                  ? `bg-gradient-to-r ${gradientClass} text-white hover:opacity-95`
-                  : `bg-white hover:bg-slate-50`)
+                  ? `bg-gradient-to-r ${gradientClass} text-slate-900 hover:opacity-95`
+                  : `bg-white hover:bg-slate-50 text-slate-900`)
               }
             >
               {ctaText}
-            </button>
+            </Button>
           </div>
         ))}
       </div>

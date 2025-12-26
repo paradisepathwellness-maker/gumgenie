@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-          --gumroad-pink: #ff90e8;
+          --gumroad-pink: #94a3b8; /* repurposed as platinum accent */
         }
         body { 
           font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -44,6 +44,28 @@
         .premium-blur {
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Platinum shimmer (app-wide utility) */
+        @keyframes gg-platinum-shimmer {
+          0% { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+          10% { opacity: 1; }
+          50% { opacity: 1; }
+          100% { transform: translateX(120%) skewX(-12deg); opacity: 0; }
+        }
+        .gg-platinum-shimmer { position: relative; overflow: hidden; }
+        .gg-platinum-shimmer::after {
+          content: '';
+          position: absolute;
+          inset: -40% -60%;
+          background: linear-gradient(90deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0) 60%);
+          transform: translateX(-120%) skewX(-12deg);
+          animation: gg-platinum-shimmer 4.2s ease-in-out infinite;
+          pointer-events: none;
+          opacity: 0.55;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .gg-platinum-shimmer::after { animation: none !important; }
         }
     </style>
 <script type="importmap">

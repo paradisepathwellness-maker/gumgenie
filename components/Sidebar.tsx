@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useStore } from '../store';
 import { TemplateCategory, LayoutType, HeadlineType, ButtonStyle, ShadowStyle, FontWeight, ButtonIconType, FontFamily, ContainerStyle, BackgroundTexture, StylePreset, ContentBlock } from '../types';
 import { Brain, FileText, Calendar, Layout, Sparkles, HelpCircle, Layers, Type, Palette, MousePointer2, Box, Sun, Wand2, Plus, Smile, Package, Save, Download, Rocket, Zap, Check, Monitor, Grid, CircleDot, ShoppingCart, LockOpen, DownloadCloud, Globe, Code2, Link, Image as ImageIcon, User, Trash2, ExternalLink, Sliders, Component, Terminal, Type as FontIcon, Droplets, Target } from 'lucide-react';
 import { agentsResearch, aiFormatMcpOutputServer, gumroadConnectUrl, gumroadStatus, mcpSseListTools, mcpSseServers, mcpStdioCall, mcpStdioListTools, mcpStdioServers } from '../services/apiClient';
+import { Button as Button3D } from '@/components/ui/3d-button';
 
 const STATIC_PRESETS: StylePreset[] = [
   { name: "Midnight Cyber", gradientIndex: 3, layoutType: 'split', headlineType: 'problem', buttonStyle: 'square', buttonIcon: 'zap', shadowStyle: 'deep', accentOpacity: 100, titleWeight: 'black', descWeight: 'bold', fontFamily: 'mono', containerStyle: 'brutalist', backgroundTexture: 'grid' },
@@ -34,7 +36,7 @@ const Sidebar: React.FC = () => {
   } = useStore();
 
   type TabId = 'presets' | 'identity' | 'theme' | 'components' | 'library' | 'forge';
-  const [activeTab, setActiveTab] = useState<TabId>('presets');
+  const [activeTab, setActiveTab] = useState<TabId>('theme');
   const [newMcpName, setNewMcpName] = useState('');
   const [newMcpUrl, setNewMcpUrl] = useState('');
 
@@ -490,8 +492,13 @@ const Sidebar: React.FC = () => {
     <aside className="w-80 h-screen fixed left-0 top-0 bg-white border-r-2 border-black overflow-y-auto z-40 flex flex-col scrollbar-hide">
       <div className="p-6 border-b-2 border-black bg-white sticky top-0 z-10">
         <div className="flex items-center gap-2 mb-4">
-          <div className="bg-black p-2 rounded-lg shadow-lg">
-            <Sparkles className="w-5 h-5 text-[#ff90e8]" />
+          <div className="gg-platinum-shimmer bg-white/75 backdrop-blur-xl border border-slate-900/10 rounded-xl shadow-[0_18px_50px_rgba(2,6,23,0.14)] w-10 h-10 flex items-center justify-center overflow-hidden">
+            {/* Brand logo (preferred). Place file at: public/brand_logo/brand-logo.png */}
+            {brandLogo ? (
+              <img src={brandLogo} alt="Brand logo" className="w-full h-full object-contain p-1" />
+            ) : (
+              <img src="/brand_logo/brand-logo.png" alt="Brand logo" className="w-full h-full object-contain p-1" />
+            )}
           </div>
           <h2 className="font-black text-xl tracking-tight uppercase">Architect Panel</h2>
         </div>
@@ -505,38 +512,73 @@ const Sidebar: React.FC = () => {
             { id: 'library', icon: Component, label: 'Assets' },
             { id: 'forge', icon: Link, label: 'Forge' }
           ].map((tab) => (
-            <button 
+            <Button3D
               key={tab.id}
               onClick={() => setActiveTab(tab.id as TabId)}
               title={tab.label}
-              className={`flex-1 flex flex-col items-center justify-center py-2 rounded-lg transition-all ${activeTab === tab.id ? 'bg-white text-black shadow-sm' : 'text-slate-400 hover:text-slate-600'}`}
+              size="xs"
+              variant={activeTab === tab.id ? 'chrome' : 'outline'}
+              className={
+                "flex-1 flex flex-col items-center justify-center py-2 rounded-lg transition-all border-black/20 " +
+                (activeTab === tab.id ? '' : 'text-slate-600')
+              }
+              aria-pressed={activeTab === tab.id}
             >
               <tab.icon className="w-4 h-4 mb-0.5" />
               <span className="text-[7px] font-black uppercase tracking-tighter">{tab.label}</span>
-            </button>
+            </Button3D>
           ))}
         </div>
       </div>
 
       <div className="flex-1 p-6 space-y-8 pb-32">
-        {/* Market Data (Agent Squad snapshots) */}
-        <section className="space-y-3 border-2 border-black rounded-xl p-4 bg-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-          <div className="flex items-center justify-between gap-3">
+        {/* START HERE (always visible, top of sidebar content) */}
+        <section className="space-y-4 gg-platinum-shimmer bg-white/70 backdrop-blur-xl border border-slate-900/10 rounded-2xl p-4 shadow-[0_18px_50px_rgba(2,6,23,0.14)]">
+          <h3 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">START HERE!</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {[TemplateCategory.AI_PROMPTS, TemplateCategory.NOTION_TEMPLATES, TemplateCategory.DIGITAL_PLANNERS, TemplateCategory.DESIGN_TEMPLATES].map((cat) => (
+              <Button3D
+                key={cat}
+                onClick={() => setCategory(cat)}
+                variant={currentCategory === cat ? 'chrome' : 'outline'}
+                size="default"
+                className={
+                  "p-3 rounded-xl border-2 text-[9px] font-black uppercase tracking-widest w-full " +
+                  (currentCategory === cat ? 'border-black' : 'border-black/20 bg-white')
+                }
+                aria-pressed={currentCategory === cat}
+              >
+                {cat.replace('_', ' ')}
+              </Button3D>
+            ))}
+          </div>
+        </section>
+
+        {/* Advanced (collapsed by default): market snapshots and system operations */}
+        <details className="rounded-2xl border-2 border-black bg-white shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+          <summary className="cursor-pointer select-none p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Target className="w-4 h-4" />
-              <div className="text-[10px] font-black uppercase tracking-widest text-slate-700">Market Data</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-slate-700">Advanced</div>
             </div>
-            <button
-              onClick={() => refreshMarketSnapshot({ force: true })}
-              disabled={!currentCategory || marketSnapshotBusy}
-              className={`text-[9px] font-black uppercase px-3 py-1 rounded-lg border-2 border-black ${
-                !currentCategory || marketSnapshotBusy ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-50'
-              }`}
-              title="Refresh snapshot status"
-            >
-              {marketSnapshotBusy ? 'Refreshing…' : 'Refresh'}
-            </button>
-          </div>
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">Market Data</span>
+          </summary>
+          <div className="p-4 pt-0 space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <div className="text-[10px] font-black uppercase tracking-widest text-slate-700">Market Data</div>
+              </div>
+              <Button3D
+                onClick={() => refreshMarketSnapshot({ force: true })}
+                disabled={!currentCategory || marketSnapshotBusy}
+                variant="outline"
+                size="xs"
+                className="border-black/20"
+                title="Refresh snapshot status"
+              >
+                {marketSnapshotBusy ? 'Refreshing…' : 'Refresh'}
+              </Button3D>
+            </div>
 
           <div className="flex items-center justify-between text-[10px] font-bold">
             <span className="text-slate-500">Status</span>
@@ -566,7 +608,8 @@ const Sidebar: React.FC = () => {
           <div className="text-[9px] text-slate-500 leading-snug">
             Snapshots power the V2.3 Agent Squad (when available). Missing means no snapshot file exists yet.
           </div>
-        </section>
+          </div>
+        </details>
 
         {/* PANEL 1: PRESETS */}
         {activeTab === 'presets' && (
@@ -601,7 +644,7 @@ const Sidebar: React.FC = () => {
                       key={i}
                       onClick={() => applyPreset(i)}
                       className={`text-left p-3 rounded-xl border-2 transition-all group ${
-                        activePresetIndex === i ? 'border-[#ff90e8] bg-[#ff90e8]/10 text-[#ff90e8]' : 'border-slate-100 bg-white hover:border-slate-300'
+                        activePresetIndex === i ? 'border-slate-400 bg-slate-200/40 text-slate-800' : 'border-slate-100 bg-white hover:border-slate-300'
                       }`}
                     >
                       <div className="text-[9px] font-black uppercase leading-tight line-clamp-1">{preset.name}</div>
@@ -611,20 +654,6 @@ const Sidebar: React.FC = () => {
               </section>
             )}
 
-            <section className="space-y-4 pt-4 border-t border-slate-100">
-              <h3 className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Foundation</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {[TemplateCategory.AI_PROMPTS, TemplateCategory.NOTION_TEMPLATES, TemplateCategory.DIGITAL_PLANNERS, TemplateCategory.DESIGN_TEMPLATES].map((cat) => (
-                   <button
-                    key={cat}
-                    onClick={() => setCategory(cat)}
-                    className={`p-3 rounded-xl border-2 text-[9px] font-bold uppercase transition-all ${currentCategory === cat ? 'bg-[#ff90e8] border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]' : 'bg-slate-50 border-slate-100'}`}
-                  >
-                    {cat.replace('_', ' ')}
-                  </button>
-                ))}
-              </div>
-            </section>
           </div>
         )}
 
@@ -673,7 +702,7 @@ const Sidebar: React.FC = () => {
                 <div className="bg-slate-900 rounded-2xl p-4 font-mono text-[8px] text-slate-400 space-y-2">
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span>Title</span>
-                    <span className="text-[#ff90e8] truncate ml-4">{generatedProduct.title}</span>
+                    <span className="text-slate-200 truncate ml-4">{generatedProduct.title}</span>
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span>Price</span>
@@ -796,7 +825,7 @@ const Sidebar: React.FC = () => {
                   className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-all ${heroGradientTitleEnabled ? 'border-black bg-black text-white' : 'border-slate-200 bg-white text-slate-900 hover:border-black'}`}
                 >
                   <span className="text-[10px] font-black uppercase tracking-widest">Gradient Title</span>
-                  <span className={`text-[9px] font-black uppercase tracking-widest ${heroGradientTitleEnabled ? 'text-[#ff90e8]' : 'text-slate-400'}`}>{heroGradientTitleEnabled ? 'ON' : 'OFF'}</span>
+                  <span className={`text-[9px] font-black uppercase tracking-widest ${heroGradientTitleEnabled ? 'text-slate-200' : 'text-slate-400'}`}>{heroGradientTitleEnabled ? 'ON' : 'OFF'}</span>
                 </button>
 
                 <button
@@ -805,7 +834,7 @@ const Sidebar: React.FC = () => {
                   className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-all ${heroSplitTitleEnabled ? 'border-black bg-black text-white' : 'border-slate-200 bg-white text-slate-900 hover:border-black'}`}
                 >
                   <span className="text-[10px] font-black uppercase tracking-widest">Split Title (animation)</span>
-                  <span className={`text-[9px] font-black uppercase tracking-widest ${heroSplitTitleEnabled ? 'text-[#ff90e8]' : 'text-slate-400'}`}>{heroSplitTitleEnabled ? 'ON' : 'OFF'}</span>
+                  <span className={`text-[9px] font-black uppercase tracking-widest ${heroSplitTitleEnabled ? 'text-slate-200' : 'text-slate-400'}`}>{heroSplitTitleEnabled ? 'ON' : 'OFF'}</span>
                 </button>
 
                 <button
@@ -814,7 +843,7 @@ const Sidebar: React.FC = () => {
                   className={`w-full flex items-center justify-between p-3 rounded-xl border-2 transition-all ${heroGlareCtaEnabled ? 'border-black bg-black text-white' : 'border-slate-200 bg-white text-slate-900 hover:border-black'}`}
                 >
                   <span className="text-[10px] font-black uppercase tracking-widest">CTA Glare Hover</span>
-                  <span className={`text-[9px] font-black uppercase tracking-widest ${heroGlareCtaEnabled ? 'text-[#ff90e8]' : 'text-slate-400'}`}>{heroGlareCtaEnabled ? 'ON' : 'OFF'}</span>
+                  <span className={`text-[9px] font-black uppercase tracking-widest ${heroGlareCtaEnabled ? 'text-slate-200' : 'text-slate-400'}`}>{heroGlareCtaEnabled ? 'ON' : 'OFF'}</span>
                 </button>
               </div>
             </section>
@@ -861,8 +890,8 @@ const Sidebar: React.FC = () => {
                   <label className="text-[9px] font-bold uppercase text-slate-500">Accent Spectrum</label>
                   <div className="flex gap-2">
                     {[
-                      'from-blue-500 to-purple-600',
-                      'from-pink-500 to-orange-500',
+                      'from-slate-200 via-slate-400 to-slate-200',
+                      'from-slate-200 via-slate-400 to-slate-200',
                       'from-emerald-400 to-teal-600',
                       'from-indigo-600 to-violet-700'
                     ].map((grad, i) => (
@@ -1440,12 +1469,12 @@ const Sidebar: React.FC = () => {
 
                   const pillClass =
                     st === 'ready' ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' :
-                    st === 'testing' ? 'bg-[#ff90e8]/15 text-[#ff90e8] border-[#ff90e8]/30' :
+                    st === 'testing' ? 'bg-slate-200/30 text-slate-200 border-slate-400/30' :
                     st === 'failed' ? 'bg-red-500/15 text-red-300 border-red-500/30' :
                     'bg-slate-700/40 text-slate-300 border-slate-600/40';
 
                   return (
-                    <div key={s.id} className="p-4 bg-slate-900 text-white rounded-2xl border-2 border-transparent hover:border-[#ff90e8] transition-all">
+                    <div key={s.id} className="p-4 bg-slate-900 text-white rounded-2xl border-2 border-transparent hover:border-slate-400 transition-all">
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
@@ -1501,12 +1530,12 @@ const Sidebar: React.FC = () => {
 
                   const statusClass =
                     status === 'connected' ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' :
-                    status === 'testing' ? 'bg-[#ff90e8]/15 text-[#ff90e8] border-[#ff90e8]/30' :
+                    status === 'testing' ? 'bg-slate-200/30 text-slate-200 border-slate-400/30' :
                     status === 'failed' ? 'bg-red-500/15 text-red-300 border-red-500/30' :
                     'bg-slate-700/40 text-slate-300 border-slate-600/40';
 
                   return (
-                    <div key={mcp.id} className="p-4 bg-slate-900 text-white rounded-2xl border-2 border-transparent hover:border-[#ff90e8] transition-all group">
+                    <div key={mcp.id} className="p-4 bg-slate-900 text-white rounded-2xl border-2 border-transparent hover:border-slate-400 transition-all group">
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
@@ -1532,7 +1561,7 @@ const Sidebar: React.FC = () => {
                             className="p-1.5 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700 transition-all disabled:opacity-50"
                             title="Test connection"
                           >
-                            <Zap className={`w-3 h-3 ${status === 'testing' ? 'animate-spin text-[#ff90e8]' : ''}`} />
+                            <Zap className={`w-3 h-3 ${status === 'testing' ? 'animate-spin text-slate-300' : ''}`} />
                           </button>
 
                           <button
@@ -1580,29 +1609,33 @@ const Sidebar: React.FC = () => {
       {/* Persistence Controls */}
       <div className="p-6 bg-slate-50 border-t-2 border-black sticky bottom-0 z-20 space-y-3">
         <div className="grid grid-cols-2 gap-3">
-          <button 
+          <Button3D
             onClick={saveToDrafts}
             disabled={!generatedProduct || isPublishing}
-            className="flex items-center justify-center gap-2 py-3 bg-white border-2 border-black rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-0.5 disabled:opacity-50"
+            variant="outline"
+            className="flex items-center justify-center gap-2 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest border-black/20 disabled:opacity-50"
           >
             <Save className="w-3.5 h-3.5" /> Save
-          </button>
-          <button 
+          </Button3D>
+          <Button3D
             onClick={downloadAsset}
             disabled={!generatedProduct || isPublishing}
-            className="flex items-center justify-center gap-2 py-3 bg-white border-2 border-black rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-50 transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-0.5 disabled:opacity-50"
+            variant="outline"
+            className="flex items-center justify-center gap-2 py-3 rounded-xl text-[9px] font-black uppercase tracking-widest border-black/20 disabled:opacity-50"
           >
             <Download className="w-3.5 h-3.5" /> Manifest
-          </button>
+          </Button3D>
         </div>
-        <button 
+        <Button3D
           onClick={publishToGumroad}
           disabled={!generatedProduct || isPublishing}
-          className={`w-full flex items-center justify-center gap-3 py-4 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all bg-black hover:bg-slate-800 shadow-[0_10px_30px_rgba(0,0,0,0.15)] disabled:opacity-50 group`}
+          variant="chrome"
+          stretch
+          className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] disabled:opacity-50"
         >
-          {isPublishing ? <Zap className="w-4 h-4 animate-spin text-[#ff90e8]" /> : <Rocket className="w-4 h-4 group-hover:scale-110 group-hover:text-[#ff90e8] transition-all" />}
+          {isPublishing ? <Zap className="w-4 h-4 animate-spin text-slate-300" /> : <Rocket className="w-4 h-4 group-hover:scale-110 group-hover:text-slate-700 transition-all" />}
           {generatedProduct?.publishedStatus === 'published' ? 'Update Gumroad' : 'Publish Product'}
-        </button>
+        </Button3D>
       </div>
     </aside>
   );

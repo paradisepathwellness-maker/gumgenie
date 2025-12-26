@@ -51,6 +51,9 @@ export const useStore = create<AppState>((set, get) => ({
   chatMode: 'ask',
   chatDashboardCollapsed: true,
 
+  // Notion template preview (local interactive HTML embed)
+  notionHtmlPreviewEnabled: false,
+
   // MCP tool discovery cache (for chat)
   mcpStdioServersCache: null,
   mcpStdioToolsCache: {},
@@ -117,6 +120,9 @@ export const useStore = create<AppState>((set, get) => ({
     chatDashboardHeightPx: 180,
     chatMode: 'ask',
     chatDashboardCollapsed: true,
+
+    // Reset Notion preview preference
+    notionHtmlPreviewEnabled: false,
 
     // Reset tool cache
     mcpStdioServersCache: null,
@@ -451,6 +457,18 @@ export const useStore = create<AppState>((set, get) => ({
     const next = !get().chatDashboardCollapsed;
     try { localStorage.setItem('gg_chatDashboardCollapsed', String(next)); } catch { /* ignore persistence errors */ }
     set({ chatDashboardCollapsed: next });
+  },
+
+  // Notion template preview actions
+  setNotionHtmlPreviewEnabled: (enabled) => {
+    try { localStorage.setItem('gg_notionHtmlPreviewEnabled', String(!!enabled)); } catch { /* ignore persistence errors */ }
+    set({ notionHtmlPreviewEnabled: !!enabled });
+  },
+
+  toggleNotionHtmlPreviewEnabled: () => {
+    const next = !get().notionHtmlPreviewEnabled;
+    try { localStorage.setItem('gg_notionHtmlPreviewEnabled', String(next)); } catch { /* ignore persistence errors */ }
+    set({ notionHtmlPreviewEnabled: next });
   },
 
   // MCP tool discovery actions

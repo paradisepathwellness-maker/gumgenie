@@ -1,15 +1,20 @@
 
 import React from 'react';
+import { cn } from '@/lib/utils';
 import { useStore } from './store';
 import { agentsGenerate } from './services/apiClient';
 import { SimulationLog } from './types';
 import Sidebar from './components/Sidebar';
 import TerminalWindow from './components/TerminalWindow';
 import ProductPreview from './components/ProductPreview';
+import LandingPage from './components/LandingPage';
 import { ChatWithAI, ChatControlDashboard } from './components/ui/chat-with-ai';
+import { OrchestratorCliConsole } from './components/OrchestratorCliConsole';
 import { Rocket, Trash2, Github, ExternalLink, Zap, MessageCircle } from 'lucide-react';
+import { Button as Button3D } from '@/components/ui/3d-button';
 
 const App: React.FC = () => {
+  const showLanding = typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('landing');
   const { 
     currentCategory, 
     isGenerating, 
@@ -23,9 +28,12 @@ const App: React.FC = () => {
     isChatOpen,
     openChat,
     closeChat,
-    chatContext,
-    chatDashboardHeightPx
+    chatContext
   } = useStore();
+
+  if (showLanding) {
+    return <LandingPage onPrimaryCta={() => window.location.assign('#pricing')} />;
+  }
 
   const handleGenerate = async () => {
     if (!currentCategory) return;
@@ -69,17 +77,25 @@ const App: React.FC = () => {
       
       log("Synthesis complete. Deployment ready.", "FINALIZING", "success");
       
-    } catch (error: any) {
-      console.error(error);
+    } catch (error: unknown) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      console.error(err);
       addLog({ 
         id: 'err', 
-        message: `Architectural failure in synthesis layer: ${error?.message || 'Unknown error'}`,
+        message: `Architectural failure in synthesis layer: ${err.message || 'Unknown error'}`,
         timestamp: timestamp(), 
         phase: 'FINALIZING', 
         type: 'error' 
       });
     }
   };
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const showOrchestratorCli = urlParams.has('orchestratorCli');
+
+  if (showOrchestratorCli) {
+    return <OrchestratorCliConsole />;
+  }
 
   return (
     <div className="flex bg-[#f8f8f4] text-[#1a1a1a] min-h-screen">
@@ -96,11 +112,11 @@ const App: React.FC = () => {
             <div className="flex items-center gap-8">
               <div>
                 <div className="inline-flex items-center gap-2 bg-black text-white px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.3em] mb-2">
-                  <Zap className="w-3 h-3 text-[#ff90e8] fill-current" />
+                  <Zap className="w-3 h-3 text-slate-300 fill-current" />
                   Neural Architect v3.5
                 </div>
                 <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none">
-                  Gum<span className="text-[#ff90e8]">Genie</span>
+                  Gum<span className="bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200 bg-clip-text text-transparent gg-platinum-shimmer">Genie</span>
                 </h1>
               </div>
               <p className="hidden md:block text-sm text-slate-400 font-bold max-w-sm leading-tight italic tracking-tight border-l-2 border-slate-200 pl-6">
@@ -109,34 +125,48 @@ const App: React.FC = () => {
             </div>
             
             <div className="flex gap-4">
-              <button 
-                onClick={() => openChat({
-                  category: currentCategory,
-                  contentArea: 'general',
-                  currentContent: generatedProduct?.title || ''
-                })}
+              <Button3D
+                variant="chrome"
+                size="icon"
+                onClick={() =>
+                  openChat({
+                    category: currentCategory,
+                    contentArea: 'general',
+                    currentContent: generatedProduct?.title || '',
+                  })
+                }
                 title="Chat with AI"
-                className="p-3 border-2 border-purple-300 bg-purple-50 text-purple-600 rounded-xl hover:bg-purple-100 transition-all shadow-[3px_3px_0px_0px_rgba(147,51,234,0.3)] active:translate-y-0.5 active:shadow-none"
+                aria-label="Chat with AI"
               >
-                <MessageCircle className="w-5 h-5" />
-              </button>
-              <button 
+                <MessageCircle className="w-5 h-5 text-slate-900" />
+              </Button3D>
+              <Button3D
+                variant="outline"
+                size="icon"
                 onClick={reset}
                 title="Reset Workspace"
-                className="p-3 border-2 border-black rounded-xl hover:bg-white transition-all shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none bg-slate-50"
+                aria-label="Reset Workspace"
+                className="border-black/20"
               >
                 <Trash2 className="w-5 h-5" />
-              </button>
-              <button 
+              </Button3D>
+              <Button3D
+                variant="chrome"
+                size="lg"
                 onClick={handleGenerate}
                 disabled={!currentCategory || isGenerating}
-                className={`px-8 py-3 bg-black text-white rounded-xl font-black text-lg flex items-center gap-4 transition-all group ${
-                  !currentCategory || isGenerating ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-800 shadow-[6px_6px_0px_0px_rgba(255,144,232,1)] active:translate-y-0.5 active:shadow-none'
-                }`}
+                className={cn(
+                  "px-8 py-3 font-black text-lg flex items-center gap-4 transition-all group",
+                  !currentCategory || isGenerating
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:opacity-95 active:translate-y-0.5"
+                )}
               >
-                <Rocket className={`w-5 h-5 group-hover:rotate-12 transition-transform ${isGenerating ? 'animate-bounce' : ''}`} />
+                <Rocket
+                  className={`w-5 h-5 group-hover:rotate-12 transition-transform ${isGenerating ? 'animate-bounce' : ''}`}
+                />
                 {isGenerating ? 'SYNTHESIZING...' : 'ARCHITECT'}
-              </button>
+              </Button3D>
             </div>
           </div>
 
@@ -157,10 +187,10 @@ const App: React.FC = () => {
                   </div>
                   <div className="flex justify-between text-[10px] font-bold">
                     <span>Sync Progress</span>
-                    <span className="text-[#ff90e8]">{isGenerating ? '45%' : '100%'}</span>
+                    <span className="text-slate-600">{isGenerating ? '45%' : '100%'}</span>
                   </div>
                   <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
-                    <div className={`bg-[#ff90e8] h-full transition-all duration-1000 ${isGenerating ? 'w-[45%]' : 'w-full'}`} />
+                    <div className={`bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200 h-full transition-all duration-1000 ${isGenerating ? 'w-[45%]' : 'w-full'}`} />
                   </div>
                 </div>
               </div>
@@ -176,7 +206,7 @@ const App: React.FC = () => {
                 </div>
               ) : (
                 <div className="h-[700px] border-4 border-dashed border-slate-200 rounded-[3rem] flex flex-col items-center justify-center text-slate-400 p-12 text-center bg-white/40 group hover:border-black/20 transition-all">
-                  <div className="w-32 h-32 bg-white rounded-3xl border-2 border-slate-50 flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 transition-transform group-hover:border-black group-hover:shadow-[10px_10px_0px_0px_rgba(255,144,232,0.5)]">
+                  <div className="w-32 h-32 bg-white rounded-3xl border-2 border-slate-50 flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 transition-transform group-hover:border-black group-hover:shadow-[10px_10px_0px_0px_rgba(148,163,184,0.35)]">
                     <ExternalLink className="w-12 h-12 text-slate-100 group-hover:text-black transition-colors" />
                   </div>
                   <h3 className="text-3xl font-black text-black uppercase mb-4 tracking-tighter italic">Awaiting Architecture</h3>
@@ -194,8 +224,8 @@ const App: React.FC = () => {
                <span className="text-[10px] font-black uppercase tracking-[0.3em]">Neural Synthesis Node v2.4.9</span>
             </div>
             <div className="flex gap-10 text-[9px] font-black uppercase tracking-[0.2em] italic">
-              <a href="#" className="hover:text-[#ff90e8] transition-colors">Neural Assets</a>
-              <a href="#" className="hover:text-[#ff90e8] transition-colors">Agent Security</a>
+              <a href="#" className="hover:text-slate-700 transition-colors">Neural Assets</a>
+              <a href="#" className="hover:text-slate-700 transition-colors">Agent Security</a>
             </div>
           </footer>
         </div>

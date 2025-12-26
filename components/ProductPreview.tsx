@@ -1,5 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { Check, Star, ShoppingCart, Download, LockOpen, Zap, ChevronDown, HelpCircle, Trophy, ListChecks, Trash2, GripVertical, Plus, ExternalLink, Info, Layers, Layout, Package, Smile, Sparkles, DownloadCloud, Wand2, RefreshCw } from 'lucide-react';
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Check, ShoppingCart, LockOpen, Zap, ChevronDown, Trash2, Plus, Layers, Sparkles, Wand2, RefreshCw, Download } from 'lucide-react';
 import { AiSuggestion, Product, HeadlineType, ButtonIconType, ContentBlock, ShadowStyle, ButtonStyle, StylePreset } from '../types';
 import { useStore } from '../store';
 import { enhanceContent, regenerateSection } from '../services/geminiService';
@@ -13,6 +14,7 @@ import SplitText from './reactbits/SplitText';
 import DitherBackground from './reactbits/DitherBackground';
 import PricingTiersSection from './canvas/PricingTiersSection';
 import ThreeTierPricingGuide from './canvas/ThreeTierPricingGuide';
+import notionTemplateHtml from '../notion-template-html/index.html?raw';
 
 interface Props {
   product: Product;
@@ -31,6 +33,9 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
     heroSplitTitleEnabled,
     heroGradientTitleEnabled,
     heroGlareCtaEnabled,
+    notionHtmlPreviewEnabled,
+    setNotionHtmlPreviewEnabled,
+    toggleNotionHtmlPreviewEnabled,
     addContentBlock, removeContentBlock, updateContentBlock, updateProduct, addLog
   } = useStore();
   
@@ -56,6 +61,16 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
 
   const [aiSuggestions, setAiSuggestions] = useState<AiSuggestion[]>([]);
   const [showRecommendations, setShowRecommendations] = useState<string | null>(null);
+
+  // Hydrate persisted Notion HTML preview preference (client-only)
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('gg_notionHtmlPreviewEnabled');
+      if (raw === 'true' || raw === 'false') setNotionHtmlPreviewEnabled(raw === 'true');
+    } catch {
+      // ignore
+    }
+  }, [setNotionHtmlPreviewEnabled]);
 
   const currentPresetForAi: StylePreset = useMemo(() => ({
     name: 'Current',
@@ -246,18 +261,19 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
     }
   };
 
+  // Platinum / silver gradients (application theme)
   const gradients = [
-    'from-[#0066FF] via-[#7B61FF] to-[#FF33CC]',
-    'from-[#FF1F7D] via-[#FF4D4D] to-[#FF8C00]',
-    'from-[#00D4FF] via-[#00FFA3] to-[#00E5FF]',
-    'from-[#6366F1] via-[#A855F7] to-[#EC4899]'
+    'from-[#f8fafc] via-[#e5e7eb] to-[#cbd5e1]',
+    'from-[#ffffff] via-[#e2e8f0] to-[#94a3b8]',
+    'from-[#f1f5f9] via-[#e5e7eb] to-[#a1a1aa]',
+    'from-[#f8fafc] via-[#e2e8f0] to-[#64748b]'
   ];
 
   const borderGradients = [
-    'border-[#7B61FF]',
-    'border-[#FF4D4D]',
-    'border-[#00FFA3]',
-    'border-[#A855F7]'
+    'border-slate-200',
+    'border-slate-300',
+    'border-zinc-200',
+    'border-slate-400'
   ];
 
   const shadowClasses = { subtle: 'shadow-[0_4px_12px_rgba(0,0,0,0.05)]', deep: 'shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)]', neumorphic: 'shadow-[10px_10px_20px_#d1d1d1,-10px_-10px_20px_#ffffff]' };
@@ -275,7 +291,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
   const opacityStyle = { opacity: accentOpacity / 100 };
 
   const SelectedIcon = ({ className }: { className?: string }) => {
-    const Icon = { cart: ShoppingCart, download: DownloadCloud, unlock: LockOpen, zap: Zap }[buttonIcon] || ShoppingCart;
+    const Icon = ({ cart: ShoppingCart, download: Download, unlock: LockOpen, zap: Zap } as const)[buttonIcon] || ShoppingCart;
     return <Icon className={className} />;
   };
 
@@ -410,7 +426,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
         className="p-2 bg-white/90 premium-blur border border-slate-200 rounded-lg shadow-sm hover:border-black transition-all flex items-center gap-2"
         title="AI Recommendations"
       >
-        <Sparkles className="w-3.5 h-3.5 text-purple-500" />
+        <Sparkles className="w-3.5 h-3.5 text-slate-500" />
         <span className="text-[8px] font-black uppercase">Ideas</span>
       </button>
       <button 
@@ -419,7 +435,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
         className="p-2 bg-white/90 premium-blur border border-slate-200 rounded-lg shadow-sm hover:border-black transition-all flex items-center gap-2"
         title="Enhance with AI"
       >
-        <Wand2 className={`w-3.5 h-3.5 ${aiLoading === (id || target) ? 'animate-pulse text-[#ff90e8]' : 'text-slate-600'}`} />
+        <Wand2 className={`w-3.5 h-3.5 ${aiLoading === (id || target) ? 'animate-pulse text-slate-400' : 'text-slate-600'}`} />
         <span className="text-[8px] font-black uppercase">Enhance</span>
       </button>
       {id && (
@@ -459,7 +475,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
       return (
         <div
           key={block.id}
-          className="p-8 rounded-[2rem] border-2 border-black relative group transition-all hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white"
+          className="p-8 rounded-[2rem] border-2 border-black relative group transition-all hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white w-full"
         >
           <SectionControls target="block" id={block.id} />
           <h4 className="font-black text-lg mb-4 uppercase tracking-tighter flex items-center gap-3">
@@ -537,7 +553,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
   };
 
   const isOutline = buttonStyle === 'outline';
-  const ctaClasses = `w-full py-4 font-black uppercase tracking-widest text-lg shadow-lg flex items-center justify-center gap-3 transition-all ${buttonShapeClasses[buttonStyle]} ${isOutline ? `border-black text-black hover:bg-slate-50` : `bg-gradient-to-r ${currentGradient} text-white hover:scale-[1.02] hover:shadow-xl`}`;
+  const ctaClasses = `w-full py-4 font-black uppercase tracking-widest text-lg shadow-lg flex items-center justify-center gap-3 transition-all ${buttonShapeClasses[buttonStyle]} ${isOutline ? `border-black text-black hover:bg-slate-50` : `gg-platinum-shimmer bg-gradient-to-r ${currentGradient} text-slate-900 border border-black/10 hover:scale-[1.02] hover:shadow-xl`}`;
 
   return (
     <div className={`rounded-[2.5rem] border-[4px] border-black overflow-hidden bg-white ${shadowClasses[shadowStyle as ShadowStyle] || shadowClasses.subtle} transition-all ${fontFamily === 'mono' ? 'font-mono' : fontFamily === 'serif' ? 'font-serif' : 'font-sans'}`}>
@@ -545,7 +561,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
       {product.brandLogo && (
         <div className="p-6 bg-slate-50 border-b-2 border-black flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img src={product.brandLogo} className="w-10 h-10 rounded-lg object-cover border-2 border-black" />
+            <img src={product.brandLogo} alt="Brand logo" className="w-10 h-10 rounded-lg object-cover border-2 border-black" />
             <span className="font-inter font-black uppercase text-xs tracking-widest">{product.authorName}</span>
           </div>
           <div className="flex gap-2">
@@ -594,7 +610,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
                 animationSpeed={6}
                 showBorder={false}
                 className="!m-0"
-                colors={["#40ffaa", "#4079ff", "#40ffaa", "#ff90e8", "#40ffaa"]}
+                colors={["#f8fafc", "#e5e7eb", "#cbd5e1", "#94a3b8", "#f8fafc"]}
               >
                 {heroSplitTitleEnabled ? (
                   <SplitText text={product.title} />
@@ -618,7 +634,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
           </p>
           <div className="flex items-center gap-4 mb-10">
             <div className="text-6xl font-black italic tracking-tighter">${product.price}</div>
-            <div className="bg-[#ff90e8] text-black px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 border-black">Early Bird Access</div>
+            <div className="gg-platinum-shimmer bg-gradient-to-r from-slate-100 via-slate-200 to-slate-300 text-slate-900 px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border-2 border-black">Platinum Access</div>
           </div>
           <div className="flex flex-col gap-3 max-w-sm">
             {heroGlareCtaEnabled ? (
@@ -654,7 +670,7 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
         <div className="relative">
           <div className={`absolute -inset-10 bg-gradient-to-br ${currentGradient} opacity-20 blur-[80px] rounded-full animate-pulse`} />
           <div className="relative p-2 bg-black rounded-[2.5rem] shadow-2xl">
-            <img src={product.coverImage} className="w-full rounded-[2rem] border-2 border-white/20" />
+            <img src={product.coverImage} alt="Product cover" className="w-full rounded-[2rem] border-2 border-white/20" />
           </div>
         </div>
       </div>
@@ -857,10 +873,37 @@ const ProductPreview: React.FC<Props> = ({ product }) => {
             <h3 className="text-3xl font-black uppercase tracking-tighter italic flex items-center gap-4 text-slate-300">
               <Layers className="w-8 h-8" /> Content Topology
             </h3>
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
+              <button
+                type="button"
+                onClick={toggleNotionHtmlPreviewEnabled}
+                className={`px-3 py-2 rounded-xl border-2 border-black text-[9px] font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-colors ${
+                  notionHtmlPreviewEnabled ? 'bg-black text-white' : 'bg-white text-black'
+                }`}
+                title="Toggle embedded Notion HTML preview"
+              >
+                {notionHtmlPreviewEnabled ? 'Hide Notion Preview' : 'Show Notion Preview'}
+              </button>
               <div className="bg-white border-2 border-black p-2 rounded-xl text-[9px] font-black uppercase tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">Asset Node v4.1</div>
             </div>
           </div>
+
+          {notionHtmlPreviewEnabled && (
+            <div className="p-4 md:p-6 bg-white border-2 border-black rounded-[2rem] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Notion Template Preview (HTML)</div>
+              <div className="rounded-2xl overflow-hidden border-2 border-black">
+                <iframe
+                  title="Notion Template Preview"
+                  className="w-full h-[680px] bg-white"
+                  srcDoc={notionTemplateHtml}
+                  sandbox="allow-scripts allow-forms"
+                />
+              </div>
+              <div className="mt-3 text-[10px] font-bold text-slate-500">
+                This is an in-app preview only. The real deliverable is built in Notion via OAuth + API.
+              </div>
+            </div>
+          )}
 
           {/* AI Suggestions (from last MCP insert) */}
           {aiSuggestions.length > 0 && (

@@ -1,0 +1,123 @@
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+
+import { cn } from "@/lib/utils";
+import type { TablerIcon } from "@tabler/icons-react";
+import { IconLoader2 } from "@tabler/icons-react";
+
+import type { MotionProps } from "framer-motion";
+import { motion } from "framer-motion";
+
+const TABLER_ICON_SIZE = 14;
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-semibold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 gap-2 border",
+  {
+    variants: {
+      variant: {
+        // Added: chrome/platinum variant to match GumGenie theme
+        chrome:
+          "gg-platinum-shimmer bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200 text-slate-900 border-black/20 border-b-4 border-b-black/10 shadow-[0_18px_50px_rgba(2,6,23,0.14)] hover:opacity-95",
+
+        ai: "bg-indigo-500 text-white hover:bg-indigo-600 border-indigo-700 border-b-4 border-b-indigo-600 shadow-md",
+        default:
+          "bg-blue-500 text-primary-foreground hover:bg-blue-600 border-blue-700 border-b-4 border-b-blue-600 shadow-md",
+        destructive:
+          "bg-red-500 text-destructive-foreground hover:bg-red-600 border-red-700 border-b-4 border-b-red-600 shadow-md",
+        outline:
+          "gg-platinum-shimmer bg-white/70 text-slate-900 border-black/20 border-b-4 border-b-black/10 shadow-[0_12px_40px_rgba(2,6,23,0.10)] hover:bg-white/80", 
+        outline_destructive:
+          "border text-red-500 bg-white hover:bg-red-50 border-red-600 border-b-4 border-b-red-500",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost_destructive: "bg-transparent text-red-500 hover:bg-red-100",
+        link: "text-primary underline-offset-4 hover:underline",
+        solid: "bg-zinc-800 text-white hover:bg-zinc-700",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-lg px-3",
+        lg: "h-11 rounded-xl px-8",
+        xs: "h-8 rounded-md px-4 text-sm",
+        icon: "h-10 w-10 border-b border-transparent",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+);
+
+type MotionButtonPropsType = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof buttonVariants> &
+  MotionProps;
+
+export interface ButtonProps extends MotionButtonPropsType {
+  asChild?: boolean;
+  supportIcon?: TablerIcon;
+  leadingIcon?: TablerIcon;
+  isLoading?: boolean;
+  stretch?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      size,
+      children,
+      stretch = false,
+      supportIcon = undefined,
+      leadingIcon = undefined,
+      isLoading = false,
+      asChild = false,
+      ...props
+    },
+    ref
+  ) => {
+    // NOTE: asChild is included for API compatibility with shadcn patterns,
+    // but this repo is not Next.js and we don't implement Slot here.
+    void asChild;
+
+    const SupportIconRender = supportIcon;
+    const LeadingIconRender = leadingIcon;
+
+    return (
+      <motion.button
+        className={cn(buttonVariants({ variant, size, className }), stretch && "w-full")}
+        ref={ref}
+        {...props}
+      >
+        {isLoading ? <IconLoader2 size={TABLER_ICON_SIZE} className="animate-spin" /> : null}
+        {!isLoading && SupportIconRender ? <SupportIconRender size={TABLER_ICON_SIZE} /> : null}
+        {children}
+        {LeadingIconRender ? <LeadingIconRender size={TABLER_ICON_SIZE} /> : null}
+      </motion.button>
+    );
+  }
+);
+Button.displayName = "Button";
+
+export interface ButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "button-group flex flex-row overflow-hidden rounded-lg border w-fit divide-x",
+          "*:rounded-none *:border-none",
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+
+ButtonGroup.displayName = "ButtonGroup";
+
+export { Button, buttonVariants };

@@ -14,6 +14,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Button as Button3D } from "@/components/ui/3d-button";
 import { PromptSuggestion } from "@/components/ui/prompt-suggestion";
 import { PromptInput, PromptInputActions, PromptInputTextarea } from "@/components/ui/prompt-input";
 import { useStore } from "@/store";
@@ -159,6 +160,14 @@ function useChatController() {
         product: generatedProduct || undefined,
         preset: typeof activePresetIndex === 'number' ? presets?.[activePresetIndex] : undefined,
       });
+
+      // Defensive validation: never assume backend shape.
+      const rec = orchestrateRes?.recommendation;
+      const hasValidRecommendation =
+        rec && typeof rec === 'object' && typeof rec.serverId === 'string' && typeof rec.toolName === 'string' && typeof rec.rationale === 'string';
+      if (!hasValidRecommendation) {
+        throw new Error('Invalid orchestrate response: missing/invalid recommendation');
+      }
       const t1 = performance.now();
 
       // Update tool preview transparency
@@ -177,6 +186,12 @@ function useChatController() {
         const formattedBlock = orchestrateRes?.formatted?.formattedBlock;
         const suggestions = orchestrateRes?.formatted?.suggestions?.map((s: any) => s.action).filter(Boolean);
 
+        // Defensive: only accept formattedBlock if it looks like a ContentBlock.
+        const safeFormattedBlock =
+          formattedBlock && typeof formattedBlock === 'object' && typeof formattedBlock.type === 'string' && typeof formattedBlock.title === 'string'
+            ? formattedBlock
+            : null;
+
         const debugEnabled = (() => {
           try {
             return new URLSearchParams(window.location.search).has('debugChat');
@@ -192,7 +207,7 @@ function useChatController() {
           toolPreview: {
             ...toolPreview,
             serverLabel: orchestrateRes.recommendation?.serverId,
-            args: debugEnabled ? orchestrateRes.recommendation?.args : undefined,
+            args: debugEnabled && orchestrateRes.recommendation?.args && typeof orchestrateRes.recommendation?.args === 'object' ? orchestrateRes.recommendation?.args : undefined,
           },
         });
 
@@ -204,9 +219,9 @@ function useChatController() {
         }
 
         // Auto-push to canvas preview if we have a formatted block.
-        if (formattedBlock) {
+        if (safeFormattedBlock) {
           const setPreviewBlock = useStore.getState().setPreviewBlock;
-          setPreviewBlock(formattedBlock);
+          setPreviewBlock(safeFormattedBlock as any);
         }
 
         setChatPhase("completed");
@@ -272,7 +287,7 @@ function ChatTranscript({ onSuggestionClick, onOptionClick }: { onSuggestionClic
               message.type === "user"
                 ? "bg-black text-white"
                 : message.type === "system"
-                  ? "bg-purple-50 border border-purple-200"
+                  ? "bg-slate-100 border border-slate-200"
                   : "bg-gray-100"
             )}
           >
@@ -378,7 +393,7 @@ function AskTurboToggle({ mode, onChange }: { mode: ChatMode; onChange: (m: Chat
         className={cn(
           "px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-md",
           mode === "turbo"
-            ? "bg-purple-600 text-white shadow-[0_0_0_2px_rgba(147,51,234,0.25)]"
+            ? "bg-slate-900 text-white shadow-[0_0_0_2px_rgba(148,163,184,0.35)]"
             : "text-slate-600 hover:bg-slate-50"
         )}
         onClick={() => onChange("turbo")}
@@ -531,6 +546,7 @@ function WorkflowButtons({ category, onRun }: { category: WorkflowCategory; onRu
 export function ChatControlDashboard() {
   const [dockLeftPx, setDockLeftPx] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [manualExpanded, setManualExpanded] = useState<boolean | null>(null);
   const [activeRightTab, setActiveRightTab] = useState<'assistant' | 'debug'>('assistant');
   const {
     chatDashboardHeightPx,
@@ -598,13 +614,16 @@ export function ChatControlDashboard() {
     return () => window.removeEventListener('resize', update);
   }, []);
 
-  // Expand/collapse based on scroll threshold: expand only after user scrolls past the end of the main preview column.
+  // Expand/collapse based on scroll threshold, with a manual override.
+  // - Auto: expand only after user scrolls past the end of the main preview column.
+  // - Manual: clicking Expand/Collapse forces state regardless of scroll.
   useEffect(() => {
     const el = document.getElementById('chat-preview-sentinel');
     if (!el) return;
 
     const obs = new IntersectionObserver(
       (entries) => {
+        if (manualExpanded !== null) return;
         const entry = entries[0];
         // If sentinel is not intersecting and is above the viewport, we are past the preview.
         const past = !entry.isIntersecting && entry.boundingClientRect.top < 0;
@@ -616,7 +635,12 @@ export function ChatControlDashboard() {
 
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [manualExpanded]);
+
+  const setExpandedSmart = (open: boolean) => {
+    setManualExpanded(open);
+    setIsExpanded(open);
+  };
 
   // Resize handle (expanded only)
   const draggingRef = useRef(false);
@@ -646,7 +670,8 @@ export function ChatControlDashboard() {
   };
 
   const compactHeight = 72;
-  const isOpen = isExpanded && !chatDashboardCollapsed;
+  const effectiveExpanded = manualExpanded !== null ? manualExpanded : isExpanded;
+  const isOpen = effectiveExpanded && !chatDashboardCollapsed;
 
   return (
     <div
@@ -673,23 +698,27 @@ export function ChatControlDashboard() {
       {!isOpen ? (
         <div className="h-full flex items-center gap-3 px-4">
           <div className="flex items-center gap-2 min-w-0">
-            <MessageCircle className="w-4 h-4 text-purple-600" />
+            <MessageCircle className="w-4 h-4 text-slate-700" />
             <div className="text-[10px] font-black uppercase tracking-[0.25em] truncate">Chat</div>
           </div>
           <div className="flex-1">
             <ChatComposer onSend={sendUserText} disabled={isChatLoading} />
           </div>
           <AskTurboToggle mode={chatMode} onChange={setChatMode} />
-          <Button
+          <Button3D
             size="sm"
-            variant="secondary"
+            variant="chrome"
             type="button"
-            onClick={() => toggleChatDashboardCollapsed()}
-            className="text-[10px] font-black uppercase tracking-widest"
+            onClick={() => {
+              // Force open on Expand click even if user hasn't scrolled past sentinel.
+              setExpandedSmart(true);
+              setChatDashboardCollapsed(false);
+            }}
+            className="text-[10px] font-black uppercase tracking-widest border-black/20"
             title="Expand/collapse chat dashboard"
           >
             Expand
-          </Button>
+          </Button3D>
         </div>
       ) : (
         <div className="h-[calc(100%-12px)] grid grid-cols-1 lg:grid-cols-12 gap-3 px-4 pb-3">
@@ -697,23 +726,27 @@ export function ChatControlDashboard() {
           <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-3 overflow-hidden">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4 text-purple-600" />
+              <MessageCircle className="w-4 h-4 text-slate-700" />
               <div className="text-[10px] font-black uppercase tracking-[0.25em]">Chat Dashboard</div>
               <div className="text-[10px] font-bold text-slate-500">{categoryLabel(resolvedContext.category)}</div>
             </div>
 
             <div className="flex items-center gap-2">
               <AskTurboToggle mode={chatMode} onChange={setChatMode} />
-              <Button
+              <Button3D
                 size="sm"
-                variant="secondary"
+                variant="outline"
                 type="button"
-                onClick={() => toggleChatDashboardCollapsed()}
-                className="text-[10px] font-black uppercase tracking-widest"
+                onClick={() => {
+                  // Force collapse on click and keep it collapsed until user clears manual override (reload).
+                  setExpandedSmart(false);
+                  setChatDashboardCollapsed(true);
+                }}
+                className="text-[10px] font-black uppercase tracking-widest border-black/20"
                 title="Expand/collapse chat dashboard"
               >
                 Collapse
-              </Button>
+              </Button3D>
             </div>
           </div>
 
@@ -779,31 +812,29 @@ export function ChatControlDashboard() {
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col rounded-xl border-2 border-black overflow-hidden">
             <div className="flex items-center justify-between px-3 py-2 border-b border-gray-200 bg-white">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#ff90e8]" />
+                <Sparkles className="w-4 h-4 text-slate-500" />
                 <div className="text-[10px] font-black uppercase tracking-[0.25em]">Assistant</div>
               </div>
 
               <div className="flex items-center gap-2">
-                <button
+                <Button3D
                   type="button"
-                  className={cn(
-                    'text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md border',
-                    activeRightTab === 'assistant' ? 'bg-black text-white border-black' : 'border-black/20 text-slate-600 hover:bg-slate-50'
-                  )}
+                  size="xs"
+                  variant={activeRightTab === 'assistant' ? 'chrome' : 'outline'}
+                  className="text-[10px] font-black uppercase tracking-widest px-2 py-1 border-black/20"
                   onClick={() => setActiveRightTab('assistant')}
                 >
                   Chat
-                </button>
-                <button
+                </Button3D>
+                <Button3D
                   type="button"
-                  className={cn(
-                    'text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-md border',
-                    activeRightTab === 'debug' ? 'bg-black text-white border-black' : 'border-black/20 text-slate-600 hover:bg-slate-50'
-                  )}
+                  size="xs"
+                  variant={activeRightTab === 'debug' ? 'chrome' : 'outline'}
+                  className="text-[10px] font-black uppercase tracking-widest px-2 py-1 border-black/20"
                   onClick={() => setActiveRightTab('debug')}
                 >
                   Debug
-                </button>
+                </Button3D>
               </div>
             </div>
 
@@ -843,7 +874,7 @@ function ChatWithAI({ isOpen, onClose, context }: ChatWithAIProps) {
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
-            <MessageCircle className="h-5 w-5 text-purple-500" />
+            <MessageCircle className="h-5 w-5 text-slate-500" />
             <span className="font-bold text-sm">Chat with AI</span>
             {context?.category ? (
               <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">{context.category.replace(/_/g, " ")}</span>

@@ -69,6 +69,57 @@ These are the canonical agent roles used across the codebase and by collaboratin
 - **Trigger:** manual or scheduled
 - **Outputs:** `backend/data/snapshots/<category>.json` (ResearchData)
 
+### Rovo Dev Subagent Profiles (/1–/8) — Source of Truth
+In addition to the “Agent Squad (V2.3)” above, the repo maintains a set of **router-style subagent profiles** under `.rovodev/subagents/`.
+
+These are intended for deterministic orchestration and strict JSON contracts:
+- `/1` Master Orchestrator → `.rovodev/subagents/agent1.md`
+  - Fan-out allowed (exclusive).
+  - If fan-out occurred, output is a **single raw JSON envelope**:
+    - `{ orchestrator_id, timestamp (ISO8601), status, execution_plan[], final_deterministic_output }`
+  - Tools allowed (exact): `functions.open_files`, `functions.expand_code_chunks`, `functions.grep`, `functions.expand_folder`, `functions.find_and_replace_code`, `functions.create_file`, `functions.delete_file`, `functions.move_file`, `functions.powershell`, `multi_tool_use.parallel`
+
+- `/2` Unified Brief Director → `.rovodev/subagents/agent2.md`
+  - **Strict JSON only** (no markdown fences, no filler).
+  - Produces the “Unified Brief v1.0” JSON schema.
+  - Determinism: output MUST include a top-level `assumptions: string[]` array (empty if none); missing details must be inferred conservatively and recorded in `assumptions`.
+  - If input is empty/nonsensical, may add top-level `error`.
+
+- `/3` Direct Response Copywriter → `.rovodev/subagents/agent3.md`
+  - **Strict raw JSON only**: `{ headline, subheadline, body_copy, call_to_action, objection_handler, microcopy }`
+  - No fan-out; no fabricated proof.
+
+- `/4` Frontend Section Spec Architect → `.rovodev/subagents/agent4.md`
+  - **Strict JSON only** section spec schema with tooling allowlist.
+  - Tooling allowlist (exact): `functions.open_files`, `functions.expand_code_chunks`, `functions.grep`, `functions.expand_folder`, `functions.find_and_replace_code`, `functions.create_file`, `functions.delete_file`, `functions.move_file`, `functions.powershell`
+  - Determinism: stable `section_id` derivation (kebab-case); default responsive breakpoint rules; tool arguments must match real tool schemas or use `{}` with an explicit note.
+  - Handoff compatibility:
+    - outputs `section_id` AND `sectionId` (alias) to align with /5.
+
+- `/5` MCP Execution Planner → `.rovodev/subagents/agent5.md`
+  - Produces a **linear** execution plan (no fan-out): `callMcp|format|insert|fallback`
+  - Determinism: defaults to stdio transport (`/api/mcp-stdio/*`), one tool call per step, and `callMcp` must be followed by `format|insert` consuming the prior text output; otherwise fallback.
+  - References backend endpoints (for /1 to execute):
+    - `GET /api/mcp-stdio/servers`
+    - `POST /api/mcp-stdio/tools`
+    - `POST /api/mcp-stdio/call`
+    - `POST /api/ai/format-mcp-output`
+  - Handoff compatibility:
+    - `steps[].sectionId` matches input `section_id` OR `sectionId`.
+
+- `/6` Visual Stylist → `.rovodev/subagents/agent6.md`
+  - **Strict raw JSON only** style system output: `{ styled, style, notes, enforced }`
+  - Determinism: fixed effect selection rules (none default; keyword-gated dither/lightrays); fixed `heroDitherIntensity`; limited palette `{bg,text,primary}`.
+  - Enforces WCAG-oriented contrast checks + progressive enhancement.
+
+- `/7` QA Reviewer → `.rovodev/subagents/agent7.md`
+  - **Strict raw JSON only** detailed QA schema: `{ qa: { score (0–100), breakdown (0–25×4), notes, risks, quickFixes, quickFixApplied } }`
+
+- `/8` Publisher → `.rovodev/subagents/agent8.md`
+  - **Strict raw JSON only** publish-readiness manifest:
+    - `{ deliverablePreview, filesGenerated, links[], publishingChecklist, warnings }`
+  - `links[].url` is **nullable** when not explicitly available.
+
 ### Daily workflow (Mode B): “Specialist Swarm”
 - Run on every user “Generate” click.
 - Flow:
@@ -94,6 +145,10 @@ These are the canonical agent roles used across the codebase and by collaboratin
   - strict JSON schema validation
   - retry once
   - safe default fallback output
+- Runtime schema enforcement (backend + frontend):
+  - Backend validates `/api/chat/orchestrate` recommendations against the live tool catalog and retries once; deterministic fallback on repeated failure.
+  - Backend enforces minimal top-level schema keys in `dailySwarm.runJson` (purpose→required top-level key).
+  - Frontend defensively validates orchestrate responses before rendering/using formatted blocks.
 - Merge should record provenance metadata:
   - agent versions, fallback flags, timing
 
@@ -124,6 +179,22 @@ backend/
 - `POST /api/agents/research`
   - Body: `{ category: "NOTION_TEMPLATES" | ..., force?: boolean }`
   - Response: `{ status: "updated" | "cached", snapshotPath: string, snapshot: ResearchData }`
+
+- `POST /api/agents/orchestrate`
+  - Purpose: Server-side “/1” orchestration runner that executes /2–/8 prompts via Gemini with strict JSON validation, retry-once, and deterministic fallbacks.
+  - Body: `{ message: string, context?: object, mode?: "fast" | "full" }`
+    - `mode="fast"`:
+      - Runs /2, /3, /4, /6 in parallel
+      - Skips /5, /7, /8 (marked as skipped in `execution_plan`)
+      - Intended for quick smoke tests / dev iteration
+    - `mode="full"`:
+      - Runs /2, /3, /4, /6 in parallel
+      - Runs /5 sequentially after /4 (depends on `sectionId`)
+      - Runs /7 and /8 sequentially
+  - Response: `/1 envelope`:
+    - `{ orchestrator_id: "/1", timestamp: string(ISO8601), status: "success"|"partial_success"|"failure", execution_plan: [...], final_deterministic_output: {...} }`
+  - Timeouts:
+    - Uses bounded per-call timeouts and a global time budget; on timeout returns `partial_success` with fallbacks.
 
 ### Implementation checklist (V2.3)
 1) Finalize V2.3 architecture decisions (Orchestrator + optional final consistency pass)
@@ -212,6 +283,33 @@ backend/
 - **IDs:** ephemeral IDs are generated via `Math.random().toString(36)...` for UI-only entities (logs/content blocks).
 - **Styling:** Tailwind utility classes directly in JSX; no CSS modules in repo.
 
+### Visual Test Harness (tmp_rovodev_*)
+For rapid UX iteration and customer-style visual review, we sometimes generate **single-section** test artifacts as standalone HTML files.
+
+Rules:
+- File naming: MUST use `tmp_rovodev_` prefix.
+- Scope: one section per file (e.g., pricing-only), with multiple variants toggled via buttons/hash.
+- Dependencies: prefer Tailwind CDN only (no build).
+- Hygiene: these files are **temporary** and should be deleted after review.
+
+Examples:
+- `tmp_rovodev_pricing_variants.html` — pricing section with multiple visual/animation variants.
+- `tmp_rovodev_hero_variants.html` — hero section with lighting/motion variants.
+- `tmp_rovodev_background_shader_variants.html` — faux-shader background variants (Canvas + gradients).
+- `tmp_rovodev_chat_component_variants.html` — docked chat UI variants.
+- `tmp_rovodev_testimonial_variants.html` — testimonial layout variants.
+
+### 3D / Shader Components (Three.js)
+For in-app 3D/shader-style hero backgrounds, we keep components under `components/ui/` and follow these safety rules:
+- Dependency: `three` (installed via npm).
+- Must render as a background layer: `position: absolute; inset: 0; pointer-events: none`.
+- Must pause animation when the tab is hidden (`document.visibilitychange`) to reduce CPU/GPU usage.
+- Must clean up WebGL resources on unmount (`dispose()` geometry/material/renderer).
+- Texture prototyping: you may use a real Unsplash URL (known to exist) as a low-opacity overlay during development.
+
+Current example:
+- `components/ui/mountain-scene.tsx` — `GenerativeMountainScene` (Three.js shader plane + mouse light).
+
 ## AI prompting / response handling
 - `generateProductContent(category)` uses Gemini with a **JSON response schema** (via `responseMimeType: "application/json"` and `responseSchema`).
 - Keep the output aligned with `types.ts`:
@@ -264,12 +362,21 @@ backend/
 - `GUMROAD_CLIENT_SECRET`
 - `GUMROAD_REDIRECT_URI`
 - `GUMROAD_ACCESS_TOKEN` (optional)
+- `PEXELS_API_KEY` (optional; server-side only)
+- `PIXABAY_API_KEY` (optional; server-side only)
 - `MAGIC_API_KEY` (required for `@21st-dev/magic` MCP)
 - `MCP_UNFRAMER_SSE_URL` (required for Unframer SSE MCP)
 
 **Quick verification (PowerShell):**
 - Backend reachable:
   - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/mcp-stdio/servers" | ConvertTo-Json -Depth 5`
+- Stock image proxy (server-side only; uses API keys from `.env.local`):
+  - `GET /api/stock-image?provider=pexels|pixabay&query=<text>`
+  - Official docs:
+    - Pexels: https://www.pexels.com/api/documentation/
+    - Pixabay: https://pixabay.com/api/docs/
+  - Example (PowerShell):
+    - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/stock-image?provider=pexels&query=mountains" | ConvertTo-Json -Depth 5`
 - Gumroad auth status:
   - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/gumroad/status" | ConvertTo-Json`
 - MCP stdio tool listing (example):
@@ -493,6 +600,13 @@ If stdio calls fail, the API returns a `diagnostics.stderrTail` snippet (last ~1
 
 ##### Debugging the dashboard
 - Add `?debugChat` to the frontend URL to log orchestration timing + chosen args into the chat transcript.
+
+##### Orchestrator CLI Console (dev)
+- The app includes a developer-facing Orchestrator console (`components/OrchestratorCliConsole.tsx`).
+- It supports a command:
+  - `/orchestrate <message>`
+    - Sends `POST /api/agents/orchestrate` with `mode:"fast"` by default.
+    - Prints the returned `/1` envelope JSON into the console stream.
 
 ---
 
@@ -743,6 +857,184 @@ Enable **full visibility during development** into:
 ---
 
 ## Session Log
+- 2025-12-25: Visual R&D harnesses + shader + stock image proxy.
+  - Added smooth MeshGradient shader hero and scroll/parallax variants in the Vite app landing page (`?landing&variant=smoothshader*`).
+  - Added stock-image parallax gallery cards and reduced-motion-safe scroll transforms.
+  - Added `@paper-design/shaders-react` and new component `components/ui/hero-section-with-smooth-bg-shader.tsx`.
+
+- 2025-12-25: AI Prompt Packs pivot — PromptOptimizer Pro (freemium → optimizer → advanced export)
+  - PromptOptimizer Pro deliverables created under `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/`.
+  - ZIP ready for Gumroad upload: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro.zip`.
+  - Paste-ready listing: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro_GUMROAD_LISTING.txt`.
+  - Interactive listing preview (light glass + shimmer): `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro_listing_preview.html`.
+  - Specs exported as JSON:
+    - `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/SPECS_LANDING.json`
+    - `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/SPECS_GUMROAD.json`
+    - `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/SPECS_APP.json`
+  - Landing variants added/polished:
+    - `glass3d-light`, `glass3d-light2`, `glass3d-light3` (distinct neon/shimmer intensity; reduced-motion safe)
+    - `smoothshader*` variants supported
+  - Live Preview polish:
+    - Pricing content block full-width
+    - Highlighted pricing card animates (float + glow pulse; reduced-motion safe)
+    - Testimonials fixed via `GlassTestimonialCarousel tone="light"|"dark"`
+  - Chrome/platinum rebrand + shimmer:
+    - `.gg-platinum-shimmer` utility in `index.html`
+    - Removed remaining pink/purple accents across UI and updated title/CTAs
+  - New 3D button system:
+    - Added `components/ui/3d-button.tsx` (framer-motion + CVA + Tabler icons)
+    - Migrated top action buttons, Sidebar tabs and category selectors, Chat Expand/Collapse, and other key controls to `Button3D`
+  - Architect Panel UX:
+    - Category selector moved to top of Sidebar content as `START HERE!`
+    - Default tab now starts on `theme`
+    - Market Data moved into collapsed `Advanced` section
+  - App theme updated from pink accents to platinum/silver gradients + shimmer (CTA + title).
+  - Live Preview polish:
+    - Pricing cards now render full-width reliably in ProductPreview.
+    - Highlighted pricing card now animates (float + glow pulse), reduced-motion safe.
+    - Removed remaining pink/purple accents from Live Preview controls.
+  - Chat Dashboard behavior:
+    - Expand button now forces dashboard open regardless of scroll threshold (manual override).
+  - Added a 3D button component (`components/ui/3d-button.tsx`) using framer-motion + Tabler icons + CVA, and migrated top action buttons (Chat/Reset/Generate) to the new chrome variant.
+  - Architect Panel UX: moved category selector (AI Prompts / Notion Templates / Digital Planners / Design Templates) into the Styles tab and renamed header to "START HERE!".
+  - Created shippable deliverables bundle under `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/`.
+  - Includes: Full PRD (`00_PRD/`), Technical Spec (`01_TECH_SPEC/`), Freemium lessons (`02_FREEMIUM_LESSONS/`), and 10 prompt packs (`03_PROMPT_PACKS/`).
+  - Tier model:
+    - Tier 1 (Freemium): lessons + starter packs + examples + QA rubrics.
+    - Tier 2 (Paid): Prompt Optimizer app access (hosted quota + optional BYO key extension).
+    - Tier 3 (Premium): advanced workflows + export-first Social Packs (JSON/CSV/TXT) for TikTok/Instagram/Facebook/LinkedIn/YouTube; OAuth posting deferred.
+  - Prompt pack library (10 total):
+    - FREE (5): Hook_Generator, Caption_Enhancer, LinkedIn_Insight_Builder, Brand_Voice_Primer, YouTube_Title_Description_Optimizer
+    - OPTIMIZER (3): Prompt_Debugger, AB_Variant_Tester, Prompt_Token_Budget_Trimmer
+    - ADVANCED_EXPORT (2): Social_Pack_5_Platforms, Content_Repurposer_5_Platforms
+  - Gumroad listing assets generated (PromptOptimizer Pro):
+    - Upload ZIP: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro.zip`
+    - Paste-ready listing: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro_GUMROAD_LISTING.txt`
+    - Interactive listing preview (light glass/3D/shimmer): `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro_listing_preview.html`
+  - Specs exported as JSON (PromptOptimizer Pro):
+    - Landing spec: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/SPECS_LANDING.json`
+    - Gumroad spec: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/SPECS_GUMROAD.json`
+    - App spec: `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro/SPECS_APP.json`
+  - Chrome/platinum rebrand + shimmer standardization:
+    - Added `.gg-platinum-shimmer` utility in `index.html`.
+    - Updated app title “Genie” to platinum gradient; removed remaining pink/purple accents across UI (Sidebar, Chat dashboard, Terminal, DynamicIcon default gradients).
+  - New 3D button system:
+    - Added `components/ui/3d-button.tsx` (framer-motion + CVA + Tabler icons) with `variant="chrome"`.
+    - Installed deps: `framer-motion`, `@tabler/icons-react`, `class-variance-authority`.
+    - Migrated top action buttons (Chat/Reset/Generate), Sidebar category buttons, and Chat dashboard Expand/Collapse to `Button3D`.
+  - Live Preview fixes:
+    - Pricing cards in `ProductPreview` now render full-width reliably.
+    - Highlighted pricing card animates (float + glow pulse), reduced-motion safe.
+    - Testimonial carousel supports `tone="light"|"dark"` to prevent white-on-white.
+  - Landing page variants (light glass/3D/shimmer):
+    - Added `glass3d-light`, `glass3d-light2`, `glass3d-light3` variants with distinct neon/shimmer intensities and scroll effects.
+    - Fixed bottom CTA contrast for light variants.
+  - Branding:
+    - Architect Panel header now supports a brand logo at `public/brand_logo/brand-logo.png` (glass chrome badge + shimmer).
+
+  - Added temporary single-section visual test harness files (Tailwind CDN) for rapid customer-style review:
+    - `tmp_rovodev_pricing_variants.html` (pricing variants V1–V20; favorites noted: V2 glass, V3 neon, V5 comparison table, V7 neon glow, V9 shimmer)
+    - `tmp_rovodev_hero_variants.html` (hero variants V1–V5; favorites noted: V2 glass, V3 aurora, V4 neon)
+    - `tmp_rovodev_background_shader_variants.html` (background/shader-ish variants V1–V10; Canvas 2D overlays + gradient meshes)
+    - `tmp_rovodev_chat_component_variants.html` (docked chat UI variants V1–V8; resizable dock simulation)
+    - `tmp_rovodev_testimonial_variants.html` (testimonial layout variants V1–V8)
+  - Integrated a Three.js shader-style hero background component:
+    - New file: `components/ui/mountain-scene.tsx` (`GenerativeMountainScene`)
+    - Safety: runs as background layer; pauses when tab hidden; disposes WebGL resources on unmount.
+    - Wired into landing page for `variant=glass3d` only (`components/LandingPage.tsx`).
+  - Added server-side stock image proxy endpoint (no client key exposure):
+    - New route: `GET /api/stock-image?provider=pexels|pixabay&query=<text>` (Express backend)
+    - Uses `PEXELS_API_KEY` / `PIXABAY_API_KEY` from `.env.local`, returns `{ url, source, attribution?, reason? }`.
+    - Landing page glass shader overlay now requests Pexels image with fallback to a known Unsplash URL.
+  - Updated `.env.example` to include placeholders for `PEXELS_API_KEY` and `PIXABAY_API_KEY` (server-side only).
+  - Orchestration endpoint (server-side /1 envelope): `POST /api/agents/orchestrate` supports `mode:"fast"|"full"` with time budgets + deterministic fallbacks.
+
+### Agent handoff checklist (2025-12-25)
+1) Install + run
+- `npm install`
+- `npm run dev:full` (kills ports 3110/4000, starts frontend+backend)
+
+2) Theme/branding quick checks (frontend)
+- Verify app chrome/platinum theme:
+  - Top title “GumGenie” shows platinum gradient (no pink).
+  - Top action buttons use `Button3D` chrome (Chat/Reset/Generate).
+- Verify brand logo loads:
+  - Place file at: `public/brand_logo/brand-logo.png`
+  - Confirm Architect Panel header shows logo in a glass chrome badge.
+
+3) Landing page variant checks
+- Open:
+  - `http://localhost:3110/?landing&variant=glass3d-light`
+  - `http://localhost:3110/?landing&variant=glass3d-light2`
+  - `http://localhost:3110/?landing&variant=glass3d-light3`
+- Confirm:
+  - Distinct neon/shimmer intensity per variant.
+  - Reduced motion disables shimmer/tilt/parallax.
+  - Bottom CTA text is readable (no black-on-black).
+
+4) Live Preview checks (ProductPreview)
+- Generate any category and confirm:
+  - Pricing content block renders full width.
+  - Highlighted pricing tier card animates (reduced-motion safe).
+  - Testimonials render with correct contrast (light tone on light backgrounds).
+
+5) Chat dashboard behavior
+- Confirm Expand button forces open regardless of scroll threshold.
+
+6) Gumroad assets
+- Confirm PromptOptimizer Pro deliverables exist:
+  - `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro.zip`
+  - `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro_GUMROAD_LISTING.txt`
+  - `tmp_rovodev_deliverables_bundle/AI_PROMPTS_PromptOptimizerPro_listing_preview.html`
+- Optional: open the HTML preview locally to screenshot for Gumroad.
+
+7) Checks (required protocol)
+- `npm run lint`
+- `npm run typecheck`
+
+### Additional agent handoff notes (UI/Brand)
+- Button system:
+  - New 3D button component: `components/ui/3d-button.tsx` (`variant="chrome"`, `variant="outline"` now chrome-outline)
+  - Dependencies installed: `framer-motion`, `@tabler/icons-react`, `class-variance-authority`
+  - Major UI surfaces migrated to `Button3D`: top action buttons (Chat/Reset/Generate), Sidebar tabs and category selectors, Chat dashboard Expand/Collapse, Chat right-panel tab toggles.
+- Branding:
+  - App title “Genie” is platinum gradient + shimmer; remove remaining purple/pink accents via grep if regressions appear.
+  - Brand logo path: `public/brand_logo/brand-logo.png` renders in Architect Panel header in a glass chrome badge.
+- Architect Panel UX:
+  - START HERE category selector moved to the top of Sidebar content and default active tab is `theme`.
+  - Market Data moved into a collapsed `Advanced` `<details>` section.
+- Live Preview:
+  - Pricing cards render full width and highlighted tier animates (reduced-motion safe).
+  - Testimonials support `tone="light"|"dark"` to prevent contrast issues.
+
+2) Env requirements (local)
+- `.env.local` must include (values not to be logged):
+  - `GEMINI_API_KEY`
+  - `PEXELS_API_KEY` (optional)
+  - `PIXABAY_API_KEY` (optional)
+
+3) Smoke checks (PowerShell)
+- Health/version:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/health" | ConvertTo-Json`
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/version" | ConvertTo-Json`
+- Stock image proxy:
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/stock-image?provider=pexels&query=mountains" | ConvertTo-Json -Depth 5`
+  - `Invoke-RestMethod -Method Get -Uri "http://localhost:4000/api/stock-image?provider=pixabay&query=mountains" | ConvertTo-Json -Depth 5`
+
+4) Landing page verification
+- Open: `http://localhost:3110/?landing&variant=glass3d`
+  - Confirm Three.js shader background renders behind hero (mouse light reacts)
+  - Confirm it does not block clicks (`pointer-events: none`)
+
+5) Visual test harness files (temporary)
+- Open locally in browser (deep-link with `#vN`):
+  - `tmp_rovodev_pricing_variants.html`
+  - `tmp_rovodev_hero_variants.html`
+  - `tmp_rovodev_background_shader_variants.html`
+  - `tmp_rovodev_chat_component_variants.html`
+  - `tmp_rovodev_testimonial_variants.html`
+- Hygiene: delete tmp harness files after review.
+
 - 2025-12-22: Deep-dive extraction stabilized (SerpAPI discovery + muhammetakkurtt/gumroad-scraper detail; up to 30 competitors/category; reviews skipped unless APIFY_GUMROAD_REVIEWS_ACTOR_ID is rented).
 - 2025-12-22: V2.3 Agent Squad implemented: backend endpoints `/api/agents/generate` + `/api/agents/research` (snapshot placeholder initially).
 - 2025-12-22: Frontend wired to Agent Squad: generation uses `/api/agents/generate`; Sidebar includes Market Data status + Refresh.
