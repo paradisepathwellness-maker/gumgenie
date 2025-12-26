@@ -6,6 +6,24 @@ import { runResearch } from '../runners/researcher';
 
 export const agentRoutes = Router();
 
+agentRoutes.post('/orchestrate', async (req, res) => {
+  const { message, context, mode } = req.body as { message?: unknown; context?: unknown; mode?: unknown };
+  if (typeof message !== 'string' || !message.trim()) return res.status(400).json({ error: 'Invalid or missing field: message' });
+
+  try {
+    const { runOrchestrate18 } = await import('../runners/orchestrate18');
+    const result = await runOrchestrate18({
+      message: message.trim(),
+      context: typeof context === 'object' && context ? (context as any) : {},
+      mode: mode === 'fast' ? 'fast' : 'full',
+    });
+    return res.status(200).json(result);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : 'Orchestration failed';
+    return res.status(500).json({ error: msg });
+  }
+});
+
 agentRoutes.post('/generate', async (req, res) => {
   const { category } = req.body as { category?: unknown };
   if (!isTemplateCategory(category)) return res.status(400).json({ error: 'Invalid or missing field: category' });

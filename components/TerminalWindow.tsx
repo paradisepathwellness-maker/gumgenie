@@ -42,7 +42,7 @@ const TerminalWindow: React.FC = () => {
             <span className={`shrink-0 uppercase font-black text-[8px] pt-0.5 tracking-tighter ${
               log.phase === 'INITIALIZING' ? 'text-blue-500' :
               log.phase === 'SYNTHESIZING' ? 'text-amber-500' :
-              log.phase === 'OPTIMIZING' ? 'text-purple-500' :
+              log.phase === 'OPTIMIZING' ? 'text-slate-400' :
               'text-emerald-500'
             }`}>
               {log.phase}

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
+import { Button } from '@/components/ui/button';
 import { gsap } from 'gsap';
 
 type Tier = {
@@ -160,14 +161,14 @@ export default function PricingTiersSection({
 
   return (
     <section ref={rootRef} className="relative border-t-4 border-black bg-white">
-      <div className="max-w-5xl mx-auto px-8 md:px-16 py-16 md:py-20">
+      <div className="w-full max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-20">
         <div className="flex flex-col items-center text-center gap-4 mb-12">
           <div
             data-pt="kicker"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-black bg-slate-50 text-[9px] font-black uppercase tracking-[0.35em]"
           >
             Monetization Layer
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff90e8]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200" />
           </div>
 
           <h3 data-pt="title" className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
@@ -239,18 +240,18 @@ export default function PricingTiersSection({
                   </div>
                 )}
 
-                <button
+                <Button
                   type="button"
                   onClick={() => onCtaClick?.(t.name)}
                   className={
                     `mt-8 w-full py-4 rounded-2xl font-black uppercase tracking-widest border-2 border-black ` +
                     (t.highlight
-                      ? `bg-gradient-to-r ${gradientClass} text-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]`
-                      : `bg-white hover:bg-slate-50 text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`)
+                      ? `bg-gradient-to-r ${gradientClass} text-slate-900 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]`
+                      : `bg-white hover:bg-slate-50 text-slate-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`)
                   }
                 >
                   {ctaText}
-                </button>
+                </Button>
 
                 {t.highlight && (
                   <div className="mt-4 text-[10px] font-bold text-slate-400 italic">

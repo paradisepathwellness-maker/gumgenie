@@ -32,7 +32,7 @@ const emojiToIcon: Record<string, keyof typeof LucideIcons> = {
   '⭐': 'Star',
 };
 
-const DynamicIcon: React.FC<Props> = ({ iconName, size = 48, className = '', gradient = 'from-indigo-500 to-purple-600' }) => {
+const DynamicIcon: React.FC<Props> = ({ iconName, size = 48, className = '', gradient = 'from-slate-200 via-slate-400 to-slate-200' }) => {
   const mappedName = emojiToIcon[iconName] || iconName;
   const IconComponent = (LucideIcons[mappedName as keyof typeof LucideIcons] || LucideIcons.Box) as React.ElementType;
 

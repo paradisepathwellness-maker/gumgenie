@@ -3,6 +3,7 @@ import React from 'react';
 import { useStore } from '../store';
 import { TemplateCategory } from '../types';
 import { Brain, FileText, Calendar, Layout, Sparkles } from 'lucide-react';
+import { Button as Button3D } from '@/components/ui/3d-button';
 
 const TemplateGrid: React.FC = () => {
   const { currentCategory, setCategory, isGenerating } = useStore();
@@ -50,14 +51,16 @@ const TemplateGrid: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">Select Foundation</h2>
-        <button 
+        <h2 className="text-xl font-black">Select Foundation</h2>
+        <Button3D
           onClick={handleRandomize}
           disabled={isGenerating}
-          className="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-black transition-colors"
+          variant="outline"
+          size="sm"
+          className="border-black/20"
         >
           <Sparkles className="w-4 h-4" /> I&apos;m feeling lucky
-        </button>
+        </Button3D>
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -66,14 +69,13 @@ const TemplateGrid: React.FC = () => {
           const isSelected = currentCategory === template.id;
           
           return (
-            <button
+            <Button3D
               key={template.id}
               onClick={() => setCategory(template.id)}
               disabled={isGenerating}
-              className={`text-left p-6 rounded-2xl border-2 transition-all duration-300 ease-in-out group relative overflow-hidden ${
-                isSelected 
-                  ? 'border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]' 
-                  : 'border-slate-200 bg-slate-50/50 hover:border-slate-400'
+              variant={isSelected ? 'chrome' : 'outline'}
+              className={`text-left p-6 rounded-2xl border-2 transition-all duration-300 ease-in-out group relative overflow-hidden w-full ${
+                isSelected ? 'border-black' : 'border-black/20 bg-white'
               }`}
             >
               <div className={`${template.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -87,7 +89,7 @@ const TemplateGrid: React.FC = () => {
                   <Sparkles className="w-3 h-3" />
                 </div>
               )}
-            </button>
+            </Button3D>
           );
         })}
       </div>

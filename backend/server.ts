@@ -23,12 +23,23 @@ import { getNotionToken } from './notion.ts';
 import { callNotionMcpTool, listNotionMcpToolsCached } from './notionMcp';
 import { sseCallTool, sseListTools } from './mcpSseClient';
 import { agentRoutes } from './agents/routes/agentRoutes';
+import { agentStreamRoutes } from './agents/routes/agentRoutes.stream';
+import { rovodevRoutes } from './rovodevRoutes';
 import dotenv from 'dotenv';
 
 // Load environment variables at the start of the server.
 // Prefer root .env.local (dev) then fall back to .env.
 dotenv.config({ path: '.env.local' });
 dotenv.config();
+
+// Debug: confirm RovoDev env loaded (do NOT print full token)
+const __rovodevBaseUrl = process.env.ROVODEV_BASE_URL;
+const __rovodevToken = process.env.ROVODEV_API_TOKEN;
+console.log('[rovodev env]', {
+  baseUrl: __rovodevBaseUrl ?? null,
+  tokenPresent: Boolean(__rovodevToken),
+  tokenPrefix: __rovodevToken ? `${__rovodevToken.slice(0, 4)}…` : null,
+});
 
 const app = express();
 
@@ -64,6 +75,79 @@ app.get('/api/version', async (req, res) => {
   return res.status(200).json({ name, version });
 });
 
+// Stock image proxy (server-side only). Uses API keys from .env.local.
+// Sources (official docs):
+// - https://www.pexels.com/api/documentation/
+// - https://pixabay.com/api/docs/
+app.get('/api/stock-image', async (req, res) => {
+  const provider = String(req.query.provider || 'pexels');
+  const query = String(req.query.query || 'abstract gradient');
+
+  const fallbackUrl =
+    'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80';
+
+  const safeQuery = query.slice(0, 80).replace(/[^a-zA-Z0-9\s-]/g, '').trim() || 'abstract gradient';
+
+  try {
+    if (provider === 'pexels') {
+      const key = process.env.PEXELS_API_KEY;
+      if (!key) return res.status(200).json({ url: fallbackUrl, source: 'fallback', reason: 'PEXELS_API_KEY missing' });
+
+      const url = new URL('https://api.pexels.com/v1/search');
+      url.searchParams.set('query', safeQuery);
+      url.searchParams.set('per_page', '1');
+      url.searchParams.set('orientation', 'landscape');
+
+      const r = await fetch(url.toString(), { headers: { Authorization: key } });
+      const json: any = await r.json().catch(() => null);
+      const photo = json?.photos?.[0];
+      const imgUrl = photo?.src?.large2x || photo?.src?.large || photo?.src?.original;
+      if (r.ok && imgUrl) {
+        return res.status(200).json({
+          url: imgUrl,
+          source: 'pexels',
+          attribution: photo?.photographer ? `Photo by ${photo.photographer} (Pexels)` : 'Pexels',
+        });
+      }
+      return res.status(200).json({ url: fallbackUrl, source: 'fallback', reason: 'pexels no result' });
+    }
+
+    if (provider === 'pixabay') {
+      const key = process.env.PIXABAY_API_KEY;
+      if (!key) return res.status(200).json({ url: fallbackUrl, source: 'fallback', reason: 'PIXABAY_API_KEY missing' });
+
+      const url = new URL('https://pixabay.com/api/');
+      url.searchParams.set('key', key);
+      url.searchParams.set('q', safeQuery);
+      url.searchParams.set('image_type', 'photo');
+      url.searchParams.set('orientation', 'horizontal');
+      url.searchParams.set('safesearch', 'true');
+      url.searchParams.set('per_page', '3');
+
+      const r = await fetch(url.toString());
+      const json: any = await r.json().catch(() => null);
+      const hit = json?.hits?.[0];
+      const imgUrl = hit?.largeImageURL || hit?.webformatURL;
+      if (r.ok && imgUrl) {
+        return res.status(200).json({
+          url: imgUrl,
+          source: 'pixabay',
+          attribution: hit?.user ? `Image by ${hit.user} (Pixabay)` : 'Pixabay',
+        });
+      }
+      return res.status(200).json({ url: fallbackUrl, source: 'fallback', reason: 'pixabay no result' });
+    }
+
+    return res.status(400).json({ error: 'Invalid provider. Use pexels|pixabay.' });
+  } catch (e) {
+    return res.status(200).json({ url: fallbackUrl, source: 'fallback', reason: 'exception' });
+  }
+});
+
+// NOTE: /api/rovodev endpoints must accept raw text bodies for PowerShell/curl compatibility.
+// Mount a text body parser for this sub-tree BEFORE express.json.
+app.use('/api/rovodev', express.text({ type: '*/*', limit: '2mb' }));
+
 app.use(
   cors({
     // DEV MODE: Allow local and LAN origins for rapid iteration.
@@ -93,6 +177,8 @@ app.use(express.json());
 
 // V2.3 Agent Squad routes
 app.use('/api/agents', agentRoutes);
+app.use('/api/agents', agentStreamRoutes);
+app.use('/api/rovodev', rovodevRoutes);
 
 /**
  * AI Generation (server-side Gemini)
@@ -777,18 +863,41 @@ app.post('/api/chat/orchestrate', async (req, res) => {
     trace.add('catalog.loaded', { ms: Date.now() - t0, serverCount: catalog.servers.length });
 
     const t1 = Date.now();
-    const recommendation = await recommendTool({
-      message,
-      mode: resolvedMode,
-      context,
-      product,
-      preset,
-      toolCatalog: {
-        // cast is ok: ids are known stdio server ids
-        servers: catalog.servers as any,
-        toolsByServerId: catalog.toolsByServerId,
-      },
-    });
+    // 1) Recommend tool (retry once) then validate against live tool catalog.
+    const toolCatalog = {
+      // cast is ok: ids are known stdio server ids
+      servers: catalog.servers as any,
+      toolsByServerId: catalog.toolsByServerId,
+    };
+
+    const getValidatedRecommendation = async () => {
+      const raw = await recommendTool({
+        message,
+        mode: resolvedMode,
+        context,
+        product,
+        preset,
+        toolCatalog,
+      });
+
+      const { validateRecommendation } = await import('./chatOrchestrate');
+      const validated = validateRecommendation(raw as any, toolCatalog);
+      if (!validated.ok) throw new Error((validated as { ok: false; error: string }).error);
+      return (validated as { ok: true; value: any }).value;
+    };
+
+    let recommendation;
+    try {
+      recommendation = await getValidatedRecommendation();
+    } catch (e1) {
+      trace.add('recommendation.validation_failed', { error: e1 instanceof Error ? e1.message : String(e1) });
+      try {
+        recommendation = await getValidatedRecommendation();
+      } catch (e2) {
+        const { deterministicFallbackRecommendation } = await import('./chatOrchestrate');
+        recommendation = deterministicFallbackRecommendation(toolCatalog, e2 instanceof Error ? e2.message : String(e2));
+      }
+    }
 
     trace.add('recommendation.ready', { ms: Date.now() - t1, recommendation });
 
@@ -991,3 +1100,13 @@ function createFallbackComponentForAPI(implementation: string, context?: any) {
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 app.listen(PORT, () => console.log(`GumGenie Backend active on ${PORT}`));
+
+app.get('/api/rovodev/env-status', (req, res) => {
+  const baseUrl = process.env.ROVODEV_BASE_URL;
+  const token = process.env.ROVODEV_API_TOKEN;
+
+  res.json({
+    baseUrl: baseUrl ?? null,
+    tokenPresent: Boolean(token),
+  });
+});

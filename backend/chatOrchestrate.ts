@@ -43,6 +43,90 @@ function normalizeBlockType(t: string): ContentBlock['type'] {
   return (allowed as string[]).includes(v) ? (v as ContentBlock['type']) : 'feature-grid';
 }
 
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return Boolean(v) && typeof v === 'object' && !Array.isArray(v);
+}
+
+function safeJsonParseObject(input: string): Record<string, unknown> | null {
+  try {
+    const v = JSON.parse(input);
+    return isRecord(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+export function validateRecommendation(
+  rec: any,
+  toolCatalog: ChatOrchestrateRequest['toolCatalog']
+): { ok: true; value: ToolRecommendation } | { ok: false; error: string } {
+  const allowedServers = new Set(toolCatalog.servers.map((s) => s.id));
+  const allowedBlockTypes: ContentBlock['type'][] = ['text', 'feature-grid', 'faq', 'checklist', 'stat-highlight', 'emoji-row', 'testimonial', 'pricing', 'gallery'];
+
+  const serverId = String(rec?.serverId || '').trim();
+  const toolName = String(rec?.toolName || '').trim();
+  const targetBlockTypeRaw = String(rec?.targetBlockType || '').trim();
+  const rationale = String(rec?.rationale || '');
+
+  if (!serverId || !allowedServers.has(serverId as StdioMcpServerId)) {
+    return { ok: false, error: `Invalid serverId: ${serverId || '(empty)'}` };
+  }
+  if (!toolName) {
+    return { ok: false, error: 'Invalid toolName: empty' };
+  }
+
+  const tools = toolCatalog.toolsByServerId[serverId]?.tools || [];
+  const toolNames = new Set(tools.map((t) => t.name));
+  if (toolNames.size > 0 && !toolNames.has(toolName)) {
+    return { ok: false, error: `toolName not found on server ${serverId}: ${toolName}` };
+  }
+
+  const args = (() => {
+    // recommendTool returns args already parsed, but this validator is defensive.
+    if (isRecord(rec?.args)) return rec.args as Record<string, unknown>;
+    const maybe = safeJsonParseObject(String(rec?.argsJson || '{}'));
+    return maybe ?? {};
+  })();
+
+  const targetBlockType = (allowedBlockTypes as string[]).includes(targetBlockTypeRaw)
+    ? (targetBlockTypeRaw as ContentBlock['type'])
+    : 'feature-grid';
+
+  return {
+    ok: true,
+    value: {
+      serverId: serverId as StdioMcpServerId,
+      toolName,
+      args,
+      targetBlockType,
+      rationale,
+    },
+  };
+}
+
+export function deterministicFallbackRecommendation(
+  toolCatalog: ChatOrchestrateRequest['toolCatalog'],
+  reason: string
+): ToolRecommendation {
+  // Deterministic fallback: prefer magicui, then shadcn, then magic, else first available.
+  const preferred: StdioMcpServerId[] = ['magicui', 'shadcn', 'magic'];
+  const server =
+    preferred.find((id) => toolCatalog.servers.some((s) => s.id === id)) ||
+    toolCatalog.servers[0]?.id ||
+    ('shadcn' as StdioMcpServerId);
+
+  const tools = toolCatalog.toolsByServerId[server]?.tools || [];
+  const toolName = tools[0]?.name || 'tools/list';
+
+  return {
+    serverId: server as StdioMcpServerId,
+    toolName,
+    args: {},
+    targetBlockType: 'feature-grid',
+    rationale: `Fallback recommendation used: ${reason}`,
+  };
+}
+
 export async function recommendTool(req: ChatOrchestrateRequest): Promise<ToolRecommendation> {
   const ai = new GoogleGenAI({ apiKey: requireEnv('GEMINI_API_KEY') });
 

@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
   return {
     server: {
       port: DEV_PORT,
-      strictPort: true,
+      strictPort: false,
       host: '0.0.0.0',
       // Allow Playwright running from Docker (MCP) to access the dev server.
       // Vite 6 blocks unknown hosts by default.
